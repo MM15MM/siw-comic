@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>  <head>
+	   <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Nuovo prodotto</title>
+    <link rel="stylesheet" href="/stile.css?version=3" />
+  </head>
+  <body>
+    <div><a href="/"><img src="/logo-siw.png" width="50%"/></a></div>
+    <h1>Aggiungi un prodotto</h1>
+    <form th:action="@{/products}" method="POST" th:object="${product}">
+      <div>
+        <span th:text="${messaggioErrore}">Errore</span>
+      </div>
+      <div>
+        Nome: <span><input required type="text" th:field="${product.name}"/></span>
+      </div>
+      <div>
+        Prezzo: <span><input required type="text" th:field="${product.price}"/></span>
+      </div>
+      <div>
+        URL immagine: <span><input type="url" th:field="${product.urlImage}" /></span>
+      </div>
+      <div>
+        <span><button type="submit">Conferma</button></span>
+      </div>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+   
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+   
+  </body>
+</html>

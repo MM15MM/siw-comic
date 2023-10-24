@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Aggiornamento Prodotto
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${userDetails}">
+			<span th:text="${userDetails.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${user}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+	<h1>Aggiorna prodotto</h1>
+	<div th:if="${product}">
+		<div>
+			<span th:text="${product.name}">T-shirt oversize con stampa</span>
+			<span th:text="'(' + ${product.price} + ')'">15€</span>
+			 <div class="delete-product-text">
+        <span>Elimina: </span><span class="product-name" th:text="${product.name}"></span><span class="product-price" th:text="'(' + ${movie.price} + ')'"></span>
+		<form  class="delete-btn-box" th:action="@{'/admin/delete-product/' + ${product.id}}" method="post">
+			<button type="submit" class="delete-product-btn">Elimina</button>
+		</form>
+      </div>
+		</div>
+
+		<div>
+			<span>Fornitori: </span>
+			<div th:each="supplier: ${product.suppliers}">
+				<span th:text="${supplier.name} + ' ' + ${supplier.address} + '${supplier.email}'">Giuseppe Viale Marconi,13 giuse70@gmail.com </span>
+				<a th:href="@{'/admin/addSupplier/' + ${product.id}}">Modifica fornitore</a></span>
+		</div>
+		<div th:unless="${product.suppliers}">
+			<a th:href="@{'/admin/addSupplier/' + ${product.id}}">Aggiungi fornitore</a>
+		
+			</div>
+			<a th:href="@{'/admin/updateProducts/' + ${product.id}}">
+				<button type="button">Modifica</button>
+			</a>
+		</div>
+		<div th:unless="${product}">Prodotto non esistente</div>
+</body>
+
+</html>

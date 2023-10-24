@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Fumetto</title>
+        <link rel="stylesheet" href="../static/css/stile.css"/>
+        <body>
+          <div><a href="/"><img src = "../static/images/esplosione.png" width="30%"></a></div>
+          <div th:if="${comic}">
+            <h1 th:text ="${comic.title}">Dettagli Fumetto</h1>
+            <div>Anno: <span th:text "'(' + ${comic.year} + ')'">2021</span></div>
+            <span><img width="10%" th:src = ${comic.image}/></span>
+          </div>
+          <div th:unless="${comic}">Non Esiste</div>
+        </body>
+    </head>
+</html>
