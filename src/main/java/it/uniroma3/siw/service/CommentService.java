@@ -21,16 +21,25 @@ public class CommentService {
         public Comment save(Comment comment) {
         	return this.commentRepository.save(comment);
         }
-
+        @Transactional
 		public List<Comment> findByComic(Comic comic) {
-			// TODO Auto-generated method stub
-			return this.commentRepository.findByComicId(comic.getId());
+			return this.commentRepository.findAllByComicId(comic.getId());
 		}
+        @Transactional
+		public Comment findByComicId(Long comicId) {
+			return this.commentRepository.findByComicId(comicId);
+		}
+        @Transactional
 		public Comment findById(Long commentId) {
 			return this.commentRepository.findById(commentId).get();
 		}
+        @Transactional
 		public void delete(Comment comment) {
 			this.commentRepository.deleteById(comment.getCommentId());
+		}
+        @Transactional
+		public void addComment(Comment comment) {
+        	this.commentRepository.save(comment);
 		}
 
 }

@@ -24,25 +24,15 @@ public class Comment {
 	@Column(name = "comment")
 	private String comment;
 
-
-	//PER LA GESTIONE DEI COMMENTI
-
-	@Column(name = "ComicIdByComment")
-	private Long comicId;
-
-	@Column(name = "CommentedByUser")
-	private String comment_by_user;
-
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
     
     @ManyToOne
-    @JoinColumn(name = "comic_id")
+    @JoinColumn(name = "comicId")
     private Comic comic;
-
-	 
+    @Column(name = "username")
+	private String username;
     //setter e getter user
 	public void setUser(User user) {
 		this.user = user;
@@ -50,6 +40,15 @@ public class Comment {
 
 	public User getUser() {
 		return this.user;
+	}
+	
+	//setter e getter fumetto
+	public void setUsername(String user) {
+		this.username = user;
+	}
+
+	public String getUsername() {
+		return this.username;
 	}
 	
 	//setter e getter fumetto
@@ -81,6 +80,13 @@ public class Comment {
 
 	public String getComment() {
 		return this.comment;
+	}
+	public String getCommentUsername() {
+		return this.username;
+	}
+
+	public void setComment_by_user(String username) {
+		this.username = username;
 	}
 
 

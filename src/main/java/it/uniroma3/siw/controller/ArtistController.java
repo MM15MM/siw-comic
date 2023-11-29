@@ -2,6 +2,7 @@ package it.uniroma3.siw.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,23 +39,21 @@ public class ArtistController {
 	
 	/* RIMOZIONE ARTISTA */
 	
-	@GetMapping(value = "/admin/toRemoveArtist/{id}")
+/*	@GetMapping(value = "/admin/toRemoveArtist/{id}")
 	public String toRemoveArtist(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("artist", this.artistService.findById(id));
 		return "admin/confirmArtistDeletion";
-	}
-	
-	@GetMapping(value = "/admin/deleteArtist/{id}")
-	public String deleteArtist(@PathVariable("id") Long id, Model model) {
+	}*/
+
+	@PostMapping(value = "/admin/deleteArtist/{id}")
+	public String deleteArtist(@PathVariable("id") Long id) {
         this.artistService.deleteById(id);
-		model.addAttribute("artists", this.artistService.findAll());
-		return "admin/artists";
+		return "indexAdmin.htm";
 	}
 
-	
 	/*  AGGIUNGI ARTISTA */
 	
-	@PostMapping(value ="/admin/artists")
+	@PostMapping(value ="/admin/artist")
 	public String newArtist(@Valid @ModelAttribute("artist") Artist artist, 
 			                BindingResult bindingResult, Model model) {
 		
@@ -97,10 +96,10 @@ public class ArtistController {
 			List<Artist> artists = this.artistService.findAll();
 			model.addAttribute("artists", artists);
 			this.artistService.save(originalArtist);
-			return "admin/artists";
+			return "admin/indexArtist.html";
 		}
 		model.addAttribute("artist", this.artistService.findById(id));
-		return "admin/editartist";
+		return "admin/editartist.html";
 	}
 
 	/* CHIUNQUE VISUALIZZA I DETTAGLI DELL'ARTISTA E LA LISTA DEGLI ARTISTI*/
@@ -111,9 +110,15 @@ public class ArtistController {
 		return "artist.html";
 	}
 
-	@GetMapping(value = "/artists")
+	@GetMapping(value = "/artist")
 	public String getArtists(Model model) {
 		model.addAttribute("artists", this.artistService.findAll());
 		return "artists.html";
+	}
+	/*ADMIN VISUALIZZA DETTAGLI ARTISTA*/
+	@GetMapping (value="/admin/artist/{id}")
+	public String showArtistDetailsAdmin(@PathVariable("id") Long id ,Model model){
+		model.addAttribute("artist", this.artistService.findById(id));
+		return "admin/artist";
 	}
 }

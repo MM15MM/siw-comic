@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -20,9 +21,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+	@NotBlank
 	private String name;
+	@NotBlank
 	private String surname;
+	@NotBlank
 	private String email;
+	
+	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	   private List<Comment> comments;
 	
 	@ManyToMany
 	private List<Comic> favorites = new LinkedList<Comic>();
@@ -50,6 +57,7 @@ public class User {
 		this.name = name;
 	}
 	
+	
 	public String getSurname() {
 		return surname;
 	}
@@ -65,19 +73,17 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	/* =======================	GESTIONE COMMENTI ================================ */
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
 
 	
-	public List<Comment> getReviews() {
+	public List<Comment> getComments() {
 		return this.comments;
 	}
 
-	public void setReviews(List<Comment> comments) {
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+
+
+
 }
 

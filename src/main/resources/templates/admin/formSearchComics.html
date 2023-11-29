@@ -13,7 +13,7 @@
 
     
     
-   <title>Nerdando-Admin Homepage</title> 
+   <title>Nerdando-Ricerca Fumetti Admin</title> 
 </head>
 <body>
 <header>
@@ -53,25 +53,22 @@
 	  </div>
   </nav>
 </header>
-<div class="container-index-admin my-5 text-center">
-	<h1>Operazioni per amministratore</h1>
-	<div class="indexClasse">
-	<div>
-		<a href="/admin/comics">Elenco Fumetti</a>
+	 <div class="container-searchComic-admin my-5 text-center">
+	 <div th:if="${#request.userPrincipal}">
+	<h1>Cerca fumetti per anno</h1>
+	<div class="search-comics-admin">
+	<form th:action="@{/admin/searchComics}" method="post">
+		<div>Anno: <input type="text" th:value="${year}" name="year" id="year" placeholder="year" required/>
+		</div>
+		<div><input type="submit"class="btn" /></div>
+	</form>
 	</div>
-	<div>
-		<a href="/admin/artists">Elenco Artisti</a>
-	</div>
-	
-	<div>
-		<a href="/admin/formNewComic">Inserisci i dati di un fumetto</a>
-	</div>
-	<div>
-		<a href="/admin/formNewArtist">Inserisci i dati di un nuovo artista</a>
-	</div>
-	</div>
-	</div>
-	 <footer class="footer-index">
+</div>
+	</div> 
+	 
+	 
+	 
+	 <footer class="footer-ricerca-comic">
         <ul class="menu">
             <li class="menu__item">
                 <a class="menu__link" th:href="@{/}">
@@ -86,5 +83,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     </body>
-
-</html>
+    </html>

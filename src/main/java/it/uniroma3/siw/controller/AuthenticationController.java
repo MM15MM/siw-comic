@@ -1,8 +1,13 @@
 package it.uniroma3.siw.controller;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -11,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
@@ -36,21 +42,38 @@ public class AuthenticationController {
 	public String showLoginForm (Model model) {
 		return "formLogin";
 	}
+	
+	@GetMapping(value="/admin/indexAdmin") 
+	public String showIndexAdmin (Model model) {
+		return "indexAdmin";
+	}
+	
+	@GetMapping(value="/index") 
+	public String showIndex (Model model) {
+		return "index";
+	}
 
 	@GetMapping(value = "/") 
 	public String index(Model model) {
-		
-			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-			model.addAttribute("credentials", credentials);
-			User user = credentials.getUser();
-			model.addAttribute("user", user);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication instanceof AnonymousAuthenticationToken) {
+	        return "index.html";
+		}
+		else {	
+			Authentication userDetails =  SecurityContextHolder.getContext().getAuthentication();
+			String loggedUser = userDetails.getName();
+			Credentials credentials = credentialsService.getCredentials(loggedUser);
 			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
 				return "admin/indexAdmin.html";
 			}
+		}
         return "index.html";
 	}
 		
+		/*Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+String username = loggedInUser.getName();*/
+	
+
     @GetMapping(value = "/success")
     public String defaultAfterLogin(Model model) {
         
@@ -77,6 +100,9 @@ public class AuthenticationController {
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
-        return "registerUser";
+        return "formRegister";
     }
+
+	
+
 }

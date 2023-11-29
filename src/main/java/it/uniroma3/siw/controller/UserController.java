@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,17 @@ public class UserController {
 	@Autowired
 	CommentService commentService;
 	
+	/*----------------------------------------------------*/
+	/*----------------------------------------------------*/
+	/*----------------GESTIONE PREFERITI------------------*/
+	/*----------------------------------------------------*/
+	/*----------------------------------------------------*/
+	/*----------------------------------------------------*/
+	
 	
 	/*AGGIUNGI AI PREFERITI*/
 	
-	@GetMapping("/user/{userId}/addFavorite/{articleId}")
+	@GetMapping(value="/user/{userId}/addFavorite/{articleId}")
 	    public String addFavorite(@PathVariable Long userId, @PathVariable Long comicId) {
 	        User user = userService.getUser(userId);
 	        Comic comic = comicService.findById(comicId);
@@ -45,7 +53,7 @@ public class UserController {
 	        return "redirect:/user/{userId}/favorites";
 	    }
 
-	    @GetMapping("/user/{userId}/favorites")
+	    @GetMapping(value="/user/{userId}/favorites")
 	    public String viewFavorites(@PathVariable Long userId, Model model) {
 	        User user = userService.getUser(userId);
 
@@ -60,7 +68,7 @@ public class UserController {
 	    
 	    /*RIMUOVI DAI PREFERITI*/
 	    
-	    @GetMapping("/user/{userId}/removeFavorite/{articleId}")
+	    @GetMapping(value="/user/{userId}/removeFavorite/{articleId}")
 	    public String removeFavorite(@PathVariable Long userId, @PathVariable Long comicId) {
 	    	User user = userService.getUser(userId);
 	    	Comic comic = comicService.findById(comicId);
@@ -73,33 +81,43 @@ public class UserController {
 	        return "redirect:/user/{userId}/favorites";
 	    }
 	    
+	   
+		/*----------------------------------------------------*/
+		/*----------------------------------------------------*/
+		/*----------------GESTIONE COMMENTI-------------------*/
+		/*----------------------------------------------------*/
+		/*----------------------------------------------------*/
+		/*----------------------------------------------------*/
+		
+	    
 	    /*COMMENTI*/
 	    
-	    @PostMapping("/{userId}/articles/{articleId}/addComment")
-	    public String addComment(@PathVariable Long userId, @PathVariable Long articleId, @RequestParam String text) {
-	        Comic comic = this.comicService.findById(articleId);
-
-	        if (comic != null) {
-	            Comment comment = new Comment();
+	    @PostMapping(value="/comic/{comicId}/addComment")
+	    public String addComment(@PathVariable("id") Long comicId, @RequestParam("comment") String text, Principal principal) {
+	        Comic comic = this.comicService.findById(comicId);
+	        String user = principal.getName();
+	        Comment comment = new Comment();
+	        if (comic != null && principal!=null) {
 	            comment.setComment(text);
-	            comment.setUser(this.userService.getUser(userId));
+	            comment.setUsername(user);
 	            comment.setComic(comic);
 	            this.commentService.save(comment);
 	        }
 
-	        return "redirect:/{userId}/comics/{comicId}";
+	        return "redirect:/comic";
 	    }
 
 
-	    @GetMapping("/{userId}/articles/{articleId}/deleteComment/{commentId}")
+	    @PostMapping(value="/admin/deleteComment/{commentId}")
 	    public String deleteComment(@PathVariable Long articleId, @PathVariable Long commentId, User user) {
-	        Comment comment = commentService.findById(commentId);
+	        Comment comment = this.commentService.findById(commentId);
 
-	        if (comment != null && user != null && (user.getEmail()).equals(comment.getUser().getEmail())) {
-	            commentService.delete(comment);
+	        if (comment != null) {
+	            this.commentService.delete(comment);
+	            return "redirect: /admin/comic/{comicId";
 	        }
 
-	        return "redirect:/{userId}/articles/{articleId}";
+	        return "redirect:/admin/comic/{comicId}";
 	    }
 	
 	

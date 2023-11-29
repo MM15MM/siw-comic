@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Cerca Prodotti</title>
-	<link rel="stylesheet" href="/css/stile.css" />
-		   <!-- Required meta tags -->
+ <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-     <link rel="icon" href="/images/box_icon.ico" type="image/x-icon">
+     <link  rel="icon" href="../static/images/boom.png" type="image/x-icon">
+     <link rel="stylesheet" href="../static/css/stile.css">
+    
+     <!-- font -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&display=swap" rel="stylesheet">
+   
+    <!-- titolo pagina -->
+	<title>
+		Cerca Fumetti
+	</title>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/#">Amazein</a>
+    <div class="font-effect-anaglyph"> Nerdando</div>
+    <div class="logo"><img src="../static/images/boom.png" height="10%" width="10%"></div>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,13 +32,13 @@
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		<ul class="navbar-nav elenco">
 			<li class="nav-item elenco-film">
-				<a class="nav-link" href="/productsDefaultUser">Elenco Prodotti</a>
+				<a class="nav-link" href="/comicsDefaultUser">Elenco Fumetti</a>
 			</li>
 			<li class="nav-item elenco-artisti">
-				<a class="nav-link" href="/product">Elenco Produttori</a>
+				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
 			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-				<a class="nav-link" href="/formSearchProducts">Ricerca Prodotti</a>
+				<a class="nav-link" href="/formSearchComics">Ricerca Prodotti</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -44,21 +54,24 @@
 		</ul>
 	  </div>
 </nav>
+<div class="containerCerca my-5 text-center" th:if="${#request.userPrincipal}">
+	<h1>Cerca fumetti per anno</h1>
+	<form th:action="@{/searchComics}" method="post">
+		<div>Nome: <input type="text" th:value="${year}" name="year" id="year" placeholder="year" required/>
+		</div>
+		<div><input type="submit" class="btn"/></div>
+	</form>
+</div>	 
+	  <footer class="footer-search">
+        <ul class="menu">
+            <li class="menu__item">
+                <a class="menu__link" href="/index">
+                    Home
+              </a>
+            </li>
 
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
-	<h1>Cerca prodotti per nome</h1>
-	<form th:action="@{/searchProducts}" method="post">
-		<div>Nome: <input type="text" th:value="${name}" name="name" />
-		</div>
-		<div><input type="submit" /></div>
-	</form>
-	<div>
-		<h2>Cerca prodotto per fornitore</h2>
-	<form th:action="@{/searchMovies}" method="post">
-		<div>Fornitore: <input type="text" th:value="${supplier}" name="supplier" />
-		</div>
-		<div><input type="submit" /></div>
-	</form>
+        </ul>
+    </footer>
 	 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
    

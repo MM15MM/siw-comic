@@ -13,7 +13,7 @@
 
     
     
-   <title>Nerdando-Admin Homepage</title> 
+   <title>Nerdando-Nuovo Fumetto</title> 
 </head>
 <body>
 <header>
@@ -53,25 +53,45 @@
 	  </div>
   </nav>
 </header>
-<div class="container-index-admin my-5 text-center">
-	<h1>Operazioni per amministratore</h1>
-	<div class="indexClasse">
-	<div>
-		<a href="/admin/comics">Elenco Fumetti</a>
-	</div>
-	<div>
-		<a href="/admin/artists">Elenco Artisti</a>
+	
+	<div class="container-NewComic my-5 text-center">
+	<h1>Aggiungi un fumetto</h1>
+	<form th:action="@{/admin/comic}" method="POST" th:object="${comic}">
+  		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
+		
+		<div>
+			<label>Titolo:</label> <span><input placeholder="title" type="text" th:field="${comic.title}" /></span>
+		    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+		</div>
+
+		<div>
+			<label>Anno:</label> <span><input placeholder="year" type="number" th:field="${comic.year}" required /></span>
+		    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+		</div>
+
+		<div>
+			<label>URL immagine:</label> <span><input placeholder="url immagine" type="url" th:field="${comic.image}" /></span>
+		</div>
+
+			<div>
+			<label>Casa editrice:</label> <span><input placeholder="publisher" type="text" th:field="${comic.publisher}" /></span>
+		</div>
+			<div>
+			<label>Genere:</label> <span><input placeholder="publisher" type="text" th:field="${comic.genre}" /></span>
+		</div>
+		<div>
+			<label>Trama:</label> <span><input placeholder="trama" type="text" th:field="${comic.resume}" /></span>
+		</div>
+
+		<div>
+			<span><button class="btn" type="submit">Conferma</button></span>
+		</div>
+	</form>
 	</div>
 	
-	<div>
-		<a href="/admin/formNewComic">Inserisci i dati di un fumetto</a>
-	</div>
-	<div>
-		<a href="/admin/formNewArtist">Inserisci i dati di un nuovo artista</a>
-	</div>
-	</div>
-	</div>
-	 <footer class="footer-index">
+	 <footer class="footer-nuovo-comic">
         <ul class="menu">
             <li class="menu__item">
                 <a class="menu__link" th:href="@{/}">

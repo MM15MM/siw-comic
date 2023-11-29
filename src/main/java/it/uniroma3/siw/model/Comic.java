@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Comic {
@@ -23,18 +24,18 @@ public class Comic {
 	private String title;
 	
 	@Column(nullable = false)
-    @NotBlank
+    @NotNull
 	private Integer year;
 	
 	@Column(nullable = false)
     @NotBlank
-	private String type;
+	private String genre;
 	
     @NotBlank
 	private String publisher;
 	
     @Column(nullable = false, length = 64)
-	private String Image;
+	private String image;
 	
     @ManyToMany
 	private Set<Artist> authors;
@@ -80,11 +81,11 @@ public class Comic {
 	
 	//setter e getter del genere
 	
-	public void setType(String type) {
-		this.type=type;
+	public void setGenre(String genre) {
+		this.genre=genre;
 	}
-	public String getType() {
-		return this.type;
+	public String getGenre() {
+		return this.genre;
 	}
 	
 	
@@ -102,11 +103,11 @@ public class Comic {
 	//setter e getter image
 	
 	public void setImage(String Image) {
-		this.Image = Image;
+		this.image = Image;
 	}
 	
 	public String getImage() {
-		return Image;
+		return image;
 	}
 
 	

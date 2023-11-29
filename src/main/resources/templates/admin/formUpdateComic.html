@@ -10,16 +10,13 @@
      <link  rel="icon" href="../../static/images/boom.png" type="image/x-icon">
       <link rel="stylesheet" href="../../static/css/stileAdmin.css">
     
-
-    
-    
-   <title>Nerdando-Admin Homepage</title> 
+   <title>Nerdando-Aggiorna Fumetto</title> 
 </head>
 <body>
 <header>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="font-effect-anaglyph"> Nerdando</div>
-    <img src="../../static/images/boom.png" height="5%" width="5%">
+    <img src="../../static/images/boom.png", height="5%", width="5%">
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -53,25 +50,73 @@
 	  </div>
   </nav>
 </header>
-<div class="container-index-admin my-5 text-center">
-	<h1>Operazioni per amministratore</h1>
-	<div class="indexClasse">
-	<div>
-		<a href="/admin/comics">Elenco Fumetti</a>
-	</div>
-	<div>
-		<a href="/admin/artists">Elenco Artisti</a>
-	</div>
-	
-	<div>
-		<a href="/admin/formNewComic">Inserisci i dati di un fumetto</a>
-	</div>
-	<div>
-		<a href="/admin/formNewArtist">Inserisci i dati di un nuovo artista</a>
-	</div>
-	</div>
-	</div>
-	 <footer class="footer-index">
+<div class="containerComicUpdate my-5 text-center">
+	<h1>Aggiorna fumetto</h1>
+	<div th:if="${comic}">
+		<div>
+		
+		
+		 <span class ="comic-title" th:text="${comic.title} + '(' +${comic.year}+')'"><strong>Secret Wars</strong>(2022)</span>
+        
+        <ul>
+        <li>
+        <span th:text= " 'Genere: '+ ${comic.genre}">Genere: genre</span> 
+        </li>
+        <li>
+        <span th:text= " 'Anno: '+ ${comic.genre}">Anno: 2021</span> 
+        </li>
+        <li>
+        <span th:text= " 'Genere: '+ ${comic.genre}">Genere: genre</span> 
+        </li>
+        <li>
+        <span th:text=" 'Casa editrice: '+${comic.publisher}">Casa editrice: publisher</span>
+        </li>
+    </ul>
+		
+		
+		
+		
+		
+		
+		
+		    <span th:text="${comic.image}">15€</span>
+			<span th:text="${comic.name}">T-shirt oversize con stampa</span>
+			<span th:text="'(' + ${comic.year} + ')'">15€</span>
+			<span th:text=" ${comic.genre}">15€</span>
+			<span th:text="  ${comic.resume}">15€</span>
+			<span th:text="  ${comic.publisher}">15€</span>
+      </div>
+		</div>
+		</div>
+
+		<div class="containerArtistaUpdate my-5 text-center">
+			<span class="artists-text">Artisti: </span>
+			<div th:each="author: ${comic.author}">
+			 <ul class="author-text">Autore:</ul>
+				<span th:text="${comic.author.name} + ' ' + ${comic.author.surname} + '${comic.author.email}'">Giuseppe Viale Marconi,13 giuse70@gmail.com </span>
+				
+				<span><a th:href="@{'/admin/editArtist/' + ${comic.author.id}}">Modifica autori</a></span>
+		</div>
+		<div th:unless="${comic.author}">
+			<a th:href="@{'/admin/addSupplier/' + ${comic.id}}">Aggiungi autori</a>
+			
+			<div th:each="comic.cartoonist: ${comic.cartoonists}">
+			 <ul class="author-text">Disegnatori:</ul>
+				<span th:text="${comic.cartoonist.name} + ' ' + ${comic.cartoonist.surname} + '${comic.comic.cartoonist.email}'">Giuseppe Viale Marconi,13 giuse70@gmail.com </span>
+				
+				<span><a th:href="@{'/admin/editArtist/' + ${comic.cartoonist.id}}">Modifica disegnatore</a></span>
+		</div>
+		<div th:unless="${comic.cartoonist}">
+			<a th:href="'/admin/addSupplier/' + ${comic.id}">Aggiungi disegnatore</a>
+			</div>
+			<a th:href="@{'/admin/formUpdateComic/' + ${comic.id}}">
+				<button type="button" class="btn">Modifica</button>
+			</a>
+		   </div>
+		</div>
+		<div th:unless="${comic}">Fumetto inesistente</div>
+		
+	 <footer class="footer">
         <ul class="menu">
             <li class="menu__item">
                 <a class="menu__link" th:href="@{/}">
