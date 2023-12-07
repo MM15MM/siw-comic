@@ -1,6 +1,8 @@
 package it.uniroma3.siw.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -13,9 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Artist;
+import it.uniroma3.siw.model.Comic;
 import it.uniroma3.siw.service.ArtistService;
+import it.uniroma3.siw.service.ComicService;
 import it.uniroma3.siw.controller.validator.ArtistValidator;
 
 @Controller
@@ -27,7 +32,8 @@ public class ArtistController {
 	@Autowired 
 	ArtistValidator artistValidator;
 	
-	
+	@Autowired 
+	private ComicService comicService;
 	/*ADMIN VISUALIZZA LISTA ARTISTI*/
 	
 	@GetMapping(value="/admin/artists")
@@ -48,7 +54,7 @@ public class ArtistController {
 	@PostMapping(value = "/admin/deleteArtist/{id}")
 	public String deleteArtist(@PathVariable("id") Long id) {
         this.artistService.deleteById(id);
-		return "indexAdmin.htm";
+		return "redirect:/admin/artists";
 	}
 
 	/*  AGGIUNGI ARTISTA */
@@ -121,4 +127,71 @@ public class ArtistController {
 		model.addAttribute("artist", this.artistService.findById(id));
 		return "admin/artist";
 	}
+	
+	
+	
+	@GetMapping("/admin/updateAuthors/{id}")
+	public String updateAuthors(@PathVariable("id") Long id, Model model) {
+
+		model.addAttribute("authorsToAdd", this.artistService.findArtistsNotInComic(id));
+		model.addAttribute("comic", this.comicService.findById(id));
+
+		return "admin/artistComic.html";
+	}
+
+	@PostMapping(value="/admin/addAuthorToComic/{comicId}")
+	public String addAuthorToComic(@RequestParam("authorId") Long authorId, @PathVariable("comicId") Long comicId, Model model) {
+		 
+	    	
+		Comic comic = this.comicService.findById(comicId);
+		Artist author = this.artistService.findById(authorId);
+		
+		 if (!comic.getAuthors().contains(author)) {
+	            comic.getAuthors().add(author);
+	            author.getWrittenComics().add(comic);
+	            this.comicService.save(comic);
+	            this.artistService.save(author);
+	        }
+		
+		return "redirect:/admin/updateAuthors/{id}" + comicId  ;
+
+	}
+	
+	@PostMapping(value="/admin/removeAuthorFromComic/{comicId}/{authorId}")
+	public String removeAuthorFromComic(@PathVariable("authorId") Long authorId, @PathVariable("comicId") Long comicId, Model model) {
+		Comic comic = this.comicService.findById(comicId);
+		Artist author = this.artistService.findById(authorId);
+		
+		if (comic.getAuthors().contains(author)) {
+            comic.getAuthors().remove(author);
+            author.getWrittenComics().remove(comic);
+            this.comicService.save(comic);
+            this.artistService.save(author);
+        }
+		
+		 return "redirect:/admin/updateAuthors/" + comicId;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

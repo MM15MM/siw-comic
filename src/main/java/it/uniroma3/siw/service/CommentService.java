@@ -35,7 +35,7 @@ public class CommentService {
 		}
         @Transactional
 		public void delete(Comment comment) {
-			this.commentRepository.deleteById(comment.getCommentId());
+			this.commentRepository.deleteById(comment.getId());
 		}
         @Transactional
 		public void addComment(Comment comment) {

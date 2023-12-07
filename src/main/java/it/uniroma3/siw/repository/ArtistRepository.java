@@ -14,9 +14,9 @@ public interface ArtistRepository extends CrudRepository<Artist, Long>{
 	@Query(value="select * "
 			+ "from artist a "
 			+ "where a.id not in "
-			+ "(select artists_id "
-			+ "from comic_artists "
-			+ "where comic_artists.made_comics_id = :comicId)", nativeQuery=true)
+			+ "(select authors_id "
+			+ "from comic_authors "
+			+ "where comic_authors.written_comics_id = :comicId)", nativeQuery=true)
 	public Iterable<Artist> findArtistsNotInComic(@Param("comicId") Long id);
 
 	public boolean existsByNameAndSurname(String name, String surname);

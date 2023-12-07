@@ -3,6 +3,8 @@ package it.uniroma3.siw.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,32 +94,36 @@ public class UserController {
 	    
 	    /*COMMENTI*/
 	    
-	    @PostMapping(value="/comic/{comicId}/addComment")
-	    public String addComment(@PathVariable("id") Long comicId, @RequestParam("comment") String text, Principal principal) {
+	    @PostMapping(value="/comic/{id}/addComment")
+	    public String addComment(@PathVariable("id") Long comicId, @RequestParam("comment") String text, Principal principal,HttpServletRequest request) {
+	    	 String referer = request.getHeader("Referer");//uso HttpServletREquest per aggiornare la pagina
+	    	
+	    	
 	        Comic comic = this.comicService.findById(comicId);
 	        String user = principal.getName();
 	        Comment comment = new Comment();
-	        if (comic != null && principal!=null) {
+	        if ( principal!=null) { //comic != null &&
 	            comment.setComment(text);
+	            //comment.setId(commentId);
 	            comment.setUsername(user);
 	            comment.setComic(comic);
 	            this.commentService.save(comment);
 	        }
-
-	        return "redirect:/comic";
+	        return "redirect:" + referer;
 	    }
 
 
 	    @PostMapping(value="/admin/deleteComment/{commentId}")
-	    public String deleteComment(@PathVariable Long articleId, @PathVariable Long commentId, User user) {
+	    public String deleteComment(@PathVariable("commentId") Long commentId, User user, HttpServletRequest request) {
 	        Comment comment = this.commentService.findById(commentId);
-
+	        String referer = request.getHeader("Referer");//uso HttpServletREquest per aggiornare la pagina
+	    	
 	        if (comment != null) {
 	            this.commentService.delete(comment);
-	            return "redirect: /admin/comic/{comicId";
+	            return "redirect:" + referer;
 	        }
 
-	        return "redirect:/admin/comic/{comicId}";
+	        return "redirect:" + referer;
 	    }
 	
 	

@@ -16,7 +16,7 @@
 <header>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="font-effect-anaglyph"> Nerdando</div>
-    <img src="../../static/images/boom.png", height="5%", width="5%">
+    <img src="../../static/images/boom.png" height="5%" width="5%">
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,7 +30,10 @@
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
 			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-				<a class="nav-link" href="/admin/formSearchComics">Ricerca Fumetti</a>
+	<form th:action="@{/admin/searchComics}" method="post">
+		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
+		</form>
+				
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -50,73 +53,91 @@
 	  </div>
   </nav>
 </header>
+<h1 class="aggiorna-fumetto">Aggiorna il fumetto</h1>
 <div class="containerComicUpdate my-5 text-center">
-	<h1>Aggiorna fumetto</h1>
+	
 	<div th:if="${comic}">
 		<div>
 		
-		
-		 <span class ="comic-title" th:text="${comic.title} + '(' +${comic.year}+')'"><strong>Secret Wars</strong>(2022)</span>
+		<ul>
+        <li>
+		<strong> <span class ="comic-title" th:text="${comic.title}">Secret Wars</span></strong></li>
+        <li>
+        <strong>Genere:</strong> <span th:text= "${comic.genre}"></span> 
+        </li>
+        <li>
+        <strong>Anno:</strong> <span th:text= "${comic.year}">2021</span> 
+        </li>
+       <li>
         
-        <ul>
-        <li>
-        <span th:text= " 'Genere: '+ ${comic.genre}">Genere: genre</span> 
+        <strong>Trama:</strong><div class="trama-block-update"> <span th:text= " ${comic.resume}"></span></div> 
+        
         </li>
         <li>
-        <span th:text= " 'Anno: '+ ${comic.genre}">Anno: 2021</span> 
+        <strong>Casa editrice:</strong> <span th:text=" ${comic.publisher}"></span>
         </li>
         <li>
-        <span th:text= " 'Genere: '+ ${comic.genre}">Genere: genre</span> 
-        </li>
-        <li>
-        <span th:text=" 'Casa editrice: '+${comic.publisher}">Casa editrice: publisher</span>
+        <strong>URL immagine:</strong> <span th:text="${comic.image}"></span>
         </li>
     </ul>
+    <form th:action="@{'/admin/formUpdateComic/' + ${comic.id}}" method="POST" th:object="${comic}">
+  		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}" th:style="'color:red'">...</p> 
+  		</div>
 		
-		
-		
-		
-		
-		
-		
-		    <span th:text="${comic.image}">15€</span>
-			<span th:text="${comic.name}">T-shirt oversize con stampa</span>
-			<span th:text="'(' + ${comic.year} + ')'">15€</span>
-			<span th:text=" ${comic.genre}">15€</span>
-			<span th:text="  ${comic.resume}">15€</span>
-			<span th:text="  ${comic.publisher}">15€</span>
-      </div>
-		</div>
+		<div>
+			<label>Titolo:</label> <span><input placeholder="title" type="text" th:field="${comic.title}" /></span>
+		    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 		</div>
 
-		<div class="containerArtistaUpdate my-5 text-center">
-			<span class="artists-text">Artisti: </span>
-			<div th:each="author: ${comic.author}">
-			 <ul class="author-text">Autore:</ul>
-				<span th:text="${comic.author.name} + ' ' + ${comic.author.surname} + '${comic.author.email}'">Giuseppe Viale Marconi,13 giuse70@gmail.com </span>
-				
-				<span><a th:href="@{'/admin/editArtist/' + ${comic.author.id}}">Modifica autori</a></span>
+		<div>
+			<label>Anno:</label> <span><input placeholder="year" type="number" th:field="${comic.year}" required /></span>
+		    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
 		</div>
-		<div th:unless="${comic.author}">
-			<a th:href="@{'/admin/addSupplier/' + ${comic.id}}">Aggiungi autori</a>
-			
-			<div th:each="comic.cartoonist: ${comic.cartoonists}">
-			 <ul class="author-text">Disegnatori:</ul>
-				<span th:text="${comic.cartoonist.name} + ' ' + ${comic.cartoonist.surname} + '${comic.comic.cartoonist.email}'">Giuseppe Viale Marconi,13 giuse70@gmail.com </span>
-				
-				<span><a th:href="@{'/admin/editArtist/' + ${comic.cartoonist.id}}">Modifica disegnatore</a></span>
+
+		<div>
+			<label>URL immagine:</label> <span><input placeholder="url image" type="url" th:field="${comic.image}" /></span>
 		</div>
-		<div th:unless="${comic.cartoonist}">
-			<a th:href="'/admin/addSupplier/' + ${comic.id}">Aggiungi disegnatore</a>
-			</div>
-			<a th:href="@{'/admin/formUpdateComic/' + ${comic.id}}">
-				<button type="button" class="btn">Modifica</button>
-			</a>
+
+			<div>
+			<label>Casa editrice:</label> <span><input placeholder="publisher" type="text" th:field="${comic.publisher}" /></span>
+		</div>
+			<div>
+			<label>Genere:</label> <span><input placeholder="genre" type="text" th:field="${comic.genre}" /></span>
+		</div>
+		<div>
+			<label>Trama:</label> <span><textarea placeholder="resume" type="text" th:field="${comic.resume}" /></textarea></span>
+		</div>
+
+		<div>
+			<span><button class="btn" type="submit">Modifica</button></span>
+		</div>
+	</form>
+    
+
+      </div>
+      	  <div class="delete-comic">
+        <strong><span class="movie-title" th:text="${comic.title}"></span></strong>
+		<form  class="delete-btn" th:action="@{'/admin/deleteComic/' + ${comic.id}}" method="post">
+			<button type="submit" class="btn2">Elimina</button>
+		</form>
+		</div>
+		
+		</div>
+		    <div class="authors-update-comic">
+        <div><h2 class="authors-up">Autori:</h2></div>
+        <div th:unless="${comic.authors.isEmpty()}">
+        <div th:each="author: ${comic.authors}">
+          <span th:text="${author.name} + ' ' + ${author.surname}"></span>
+        </div>
+              </div>
+        <a class="update-author" th:href="@{'/admin/updateAuthors/' + ${comic.id}}">Modifica</a>
+
+</div> 
 		   </div>
-		</div>
 		<div th:unless="${comic}">Fumetto inesistente</div>
 		
-	 <footer class="footer">
+	 <footer class="footer-update-comic">
         <ul class="menu">
             <li class="menu__item">
                 <a class="menu__link" th:href="@{/}">

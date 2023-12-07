@@ -10,11 +10,15 @@
      <link  rel="icon" href="../../static/images/boom.png" type="image/x-icon">
       <link rel="stylesheet" href="../../static/css/stileAdmin.css">
                 
-    
+    <style>
+        .comic-title-card {
+            font-size: 1.5rem;
+        }
+    </style>
 
     
     
-   <title>Nerdando-Homepage Admin</title> 
+   <title>Nerdando-Lista Comics Admin</title> 
 </head>
 <body>
 <header>
@@ -34,7 +38,10 @@
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
 			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-				<a class="nav-link" href="/admin/formSearchComics">Ricerca Fumetti</a>
+	<form th:action="@{/admin/searchComics}" method="post">
+		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
+		</form>
+				
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -65,11 +72,11 @@
 		<a th:href="@{'/admin/comic' + '/' + ${comic.id}}">
 		<img th:src="@{${comic.image}}" alt="Immagine del fumetto" /></a>
 		<div class="card-elements">
-	 <h3 th:text="${comic.title}"></h3>
-                    <p th:text="${comic.year}"></p>
-                   <a class="aggiorna-link" th:href="'formUpdateComic/'+${comic.id}">Aggiorna</a>
+	<div class="comic-title-card"><h3 th:text="${comic.title}"></h3></div>
+                    <p th:text="'('+${comic.year}+')'"></p>
+                   <!--  <a class="aggiorna-link" th:href="@{'/admin/formUpdateComic'+'/'+${comic.id}}">Aggiorna</a>
                    <form  class="delete-btn-box" th:action="@{'/admin/deleteComic/' + ${comic.id}}" method="post">
-			     <button type="submit" class="btn2" >Elimina</button></form>
+			     <button type="submit" class="btn2" >Elimina</button></form>-->
                  </div>
                </div>
            </div>

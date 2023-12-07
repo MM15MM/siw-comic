@@ -54,7 +54,7 @@ public class Comment {
 	//setter e getter fumetto
 	
 	public void setComic(Comic comic) {
-		this.comic = comic;
+		this.comic=comic;
 	}
 	
 	public Comic getComic() {
@@ -63,11 +63,11 @@ public class Comment {
 
 	//setter e getter degli id dei commenti
 	
-	public void setCommentId(Long commentId) {
+	public void setId(Long commentId) {
 		this.commentId = commentId;
 	}
 	
-	public Long getCommentId() {
+	public Long getId() {
 		return this.commentId;
 	}
 
@@ -81,13 +81,13 @@ public class Comment {
 	public String getComment() {
 		return this.comment;
 	}
-	public String getCommentUsername() {
+	/*public String getCommentUsername() {
 		return this.username;
-	}
+	}*/
 
-	public void setComment_by_user(String username) {
+	/*public void setComment_by_user(String username) {
 		this.username = username;
-	}
+	}*/
 
 
 }

@@ -85,22 +85,22 @@ public class ComicController {
 		    //FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 		    
 			model.addAttribute("comic", comic);
-			return "admin/comics"; // pagina html con lista comics
+			return "redirect:/admin/comics"; // pagina html con lista comics
 		} 
 		else {
-			return "admin/formNewComic.html"; 
+			return "admin/error.html"; 
 		}
 	}
 	
 	/*----------ADMIN ELIMINA COMIC----------*/
 	
 	@PostMapping(value = "/admin/deleteComic/{id}")
-	public String deleteComic(@PathVariable("id") Long comicId){
+	public String deleteComic(@PathVariable("id") Long comicId, Model model){
 
 		Comic comic = comicService.findById(comicId);
 		comicService.deleteById(comic.getId());
 
-		return "redirect: admin/comics";
+		return "redirect:/admin/comics";
 	}
 	
 	/*---------ADMIN MODIFICA DETTAGLI COMIC--------*/
@@ -118,11 +118,9 @@ public class ComicController {
 		originalComic.setTitle(comic.getTitle());
 		originalComic.setGenre(comic.getGenre());
 		originalComic.setImage(comic.getImage());
-		originalComic.setAuthor(comic.getAuthor());
 		originalComic.setPublisher(comic.getPublisher());
 		originalComic.setResume(comic.getResume());
 		originalComic.setYear(comic.getYear());
-		originalComic.setCartoonist(comic.getCartoonist());
 
 		this.comicValidator.validate(originalComic, BindingResult);
 		if (!BindingResult.hasErrors()) {
@@ -159,11 +157,11 @@ public class ComicController {
 	
 	/*CHIUNQUE VISUALIZZA LISTA COMICS E DETTAGLI COMIC*/
 	
-	@GetMapping(value = "/comic/{id}/defaultUser")
+	@GetMapping( "/comic/{id}")
 	public String getComic(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("comic", this.comicService.findById(id));
-		model.addAttribute("comments", this.commentService.findByComic(this.comicService.findById(id)));
-		return "comicDefaultUser.html";
+		model.addAttribute("comments", this.commentService.findByComicId(id));
+		return "comic.html";
 	}
 
 	@GetMapping(value = "/comicsDefaultUser")
@@ -171,7 +169,20 @@ public class ComicController {
 		model.addAttribute("comics", this.comicService.findAll());
 		return "comicsDefaultUser.html";
 	}
+	@GetMapping(value = "/comicDefaultUser")
+	public String showComicDefault() {
+		return "comicsDefaultUser.html";
+	}
 	
+	@GetMapping("/comic/{id}/defaultUser")
+	public String getMovieDefaultUser(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("comic", this.comicService.findById(id));
+
+		//fa si che ogni film visualizzi i commenti propri
+		model.addAttribute("comment", this.commentService.findByComicId(id));
+		return "comicDefaultUser";
+	}
+
 	
 	/* RiCERCA DEI COMICS*/
 	
@@ -195,6 +206,48 @@ public class ComicController {
 		model.addAttribute("user", credentials.getUser());
 		return "comics.html";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

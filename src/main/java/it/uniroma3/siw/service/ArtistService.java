@@ -38,4 +38,8 @@ public class ArtistService {
 	   public void deleteById(Long id) {
 		   this.artistRepository.deleteById(id);
 	   }
+	    @Transactional
+	  public List<Artist> findArtistsNotInComic(Long id){
+	    	return (List<Artist>) this.artistRepository.findArtistsNotInComic(id);
+	    }
 }

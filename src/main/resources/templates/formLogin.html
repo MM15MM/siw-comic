@@ -31,17 +31,7 @@
     </button>
 
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-		<ul class="navbar-nav elenco">
-			<li class="nav-item elenco-comics">
-				<a class="nav-link" href="/comicsDefaultUser">Elenco Fumetti</a>
-			</li>
-			<li class="nav-item elenco-artisti">
-				<a class="nav-link" href="/artist">Elenco Artisti</a>
-			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-				<a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>
-			</li>
-		</ul>
+
 		<ul class="navbar-nav">
 			<li class="nav-item ml-auto" th:unless="${#request.userPrincipal}">
 				<a class="nav-link" href="/login">Login</a>

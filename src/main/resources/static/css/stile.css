@@ -16,6 +16,9 @@ div.font-effect-anaglyph {
 	font-size: 30px;
 	
 }*/
+.cerca{
+	margin-top:5px;
+}
 textarea{
    width: 200px; /* Puoi regolare la larghezza a tuo piacimento */
     height: 30px; /* Puoi regolare l'altezza a tuo piacimento */
@@ -28,6 +31,13 @@ h1,h2,.commento{
 	/*text-decoration : line-through wavy red;*/
 	color: #000000;
 	
+}
+
+    .comic-title-card h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;  /* Aggiungi uno spazio inferiore tra il titolo e il paragrafo */
+    font-weight:bold;
+   /* color:red;*/
 }
 
 body{
@@ -99,11 +109,41 @@ body{
 	font-size:16px;
 }
 
-
+.carousel-caption h5{
+	
+  font-family: 'Comics', sans-serif;
+	/*text-decoration : line-through wavy red;*/
+	color: #000000;
+}
+.carousel-caption{
+	justify-content: center;
+    align-items: center;
+    margin-bottom: 170px;
+}
+.carousel-item{
+	margin-top:50px;
+	background-size:cover;
+}
 /*footer*/
+.footer-index{
+	
+			bottom:0;
+            position: fixed;
+            width: 100%;
+            background: #282828;
+            min-height: 50px;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 300px;
+	
+	
+}
 .footer-comics{
 		    bottom:0;
-            position: absolute;
+            position: fixed;
             width: 100%;
             background: #282828;
             min-height: 50px;
@@ -116,7 +156,7 @@ body{
 }
 .footer-comics-default{
 	        bottom:0;
-            position: absolute;
+            position:fixed;
             width: 100%;
             background: #282828;
             min-height: 50px;
@@ -154,8 +194,8 @@ body{
             margin-top: 202px;
         }
 .footer-comics-trovati{
-	        bottom:100;
-            position: absolute;
+	        bottom:0;
+            position: fixed;
             width: 100%;
             background: #282828;
             min-height: 50px;
@@ -267,8 +307,8 @@ body{
         
      /*pagina comic*/
         .comic-image{
-          width: 170px; /* Larghezza del box */
-          height: 250px; /* Altezza del box */
+          width: 250px; /* Larghezza del box */
+          height: 300px; /* Altezza del box */
           border: 1px solid #ccc; /* Bordo del box */
           padding: 10px; /* Spazio interno del box */
           margin: 30px 300px 0px; /* Margine: 10px in alto, 0 a destra, 10px in basso, -20px a sinistra */
@@ -280,8 +320,8 @@ body{
         border-width: 5px; /* Cambia la larghezza del bordo al passaggio del mouse */
         }
         .comic-image img{
-          max-width: 100%; /* L'immagine si adatta alla larghezza del box */
-         max-height: 100%; /* L'immagine si adatta all'altezza del box */
+          width: 100%; /* L'immagine si adatta alla larghezza del box */
+         height: 100%; /* L'immagine si adatta all'altezza del box */
         }
         .containerComic-admin{
              margin: -200px 700px 0px;
@@ -389,13 +429,26 @@ li{
         }
 
         .card {
-            width: 300px;
+           /* width: 300px;
+            border: 1px solid #ddd; /*Aggiunge un bordo sottile di colore grigio alle cards.*/
+          /*  border-radius: 8px; /* bordo arrotondato*/
+            /*overflow: hidden;   /*Nasconde eventuali contenuti che potrebbero fuoriuscire dalla cards.*/
+            /*transition: transform 0.3s ease-in-out; /*Aggiunge un'animazione di transizione al cambiamento 
+                                                   della proprietà transform, che viene utilizzata quando il cursore 
+                                                   si posiziona su una card.*/
+                                                   
+            height:300px;
+            width: 200px;
             border: 1px solid #ddd; /*Aggiunge un bordo sottile di colore grigio alle cards.*/
             border-radius: 8px; /* bordo arrotondato*/
             overflow: hidden;   /*Nasconde eventuali contenuti che potrebbero fuoriuscire dalla cards.*/
             transition: transform 0.3s ease-in-out; /*Aggiunge un'animazione di transizione al cambiamento 
                                                    della proprietà transform, che viene utilizzata quando il cursore 
                                                    si posiziona su una card.*/
+           display: flex; /* Utilizza il modello di layout flessibile */
+          flex-direction: column; /* Imposta la direzione dei figli come colonna */
+                                                   
+                                              
         }
 
         .card:hover {

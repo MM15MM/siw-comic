@@ -40,8 +40,8 @@ public class Comic {
     @ManyToMany
 	private Set<Artist> authors;
 	
-	@ManyToOne
-	private Artist cartoonist;
+	/*@ManyToOne
+	private Artist cartoonist;*/
 	
 	private String resume;
 
@@ -124,16 +124,16 @@ public class Comic {
 	
 	//setter e getter autore 
 	
-	public void setAuthor(Set<Artist> authors) {
+	public void setAuthors(Set<Artist> authors) {
 		this.authors=authors;
 	}
 	
-	public Set<Artist> getAuthor(){
+	public Set<Artist> getAuthors(){
 	    return this.authors;
 	}
 	
 	
-	//setter e getter del disegnatore
+	/*//setter e getter del disegnatore
 	
 	public void setCartoonist(Artist cartoonist) {
 		this.cartoonist=cartoonist;
@@ -141,7 +141,7 @@ public class Comic {
 	
 	public Artist getCartoonist(){
 	    return this.cartoonist;
-	}
+	}*/
 	
 	
 	@Override

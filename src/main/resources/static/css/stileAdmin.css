@@ -42,6 +42,28 @@ h2{
 	color: #000000;
 	
 }
+.cerca{
+	margin-top:5px;
+}
+
+textarea{
+    width: 200px; /* Puoi regolare la larghezza a tuo piacimento */
+    height: 100px; /* Puoi regolare l'altezza a tuo piacimento */
+    border-radius: 8px; /* Puoi regolare il raggio del bordo a tuo piacimento */
+    resize: none; /* Opzione per impedire il ridimensionamento della textarea da parte dell'utente */
+	
+}
+
+.aggiorna-fumetto{
+    text-align: center;
+    margin-top: 50px; /* Regola il margine superiore a tuo piacimento */
+    justify-content:center;
+    margin-left:40px;
+}
+.autori-up{
+	margin-left:30px;
+	margin-top:20px;
+}
 .fumetti{
     text-align: center;
     margin-top: 50px; /* Regola il margine superiore a tuo piacimento */
@@ -94,7 +116,19 @@ li{
         margin-right: 10px; /* Aggiunge un margine destro per separare le etichette dagli input */
         padding: 5px; /* Aggiunge spaziatura interna per una migliore presentazione */
 }
-
+      .footer-update-comic{
+             bottom:0;
+            position: fixed;
+            width: 100%;
+            background: #282828;
+            min-height: 50px;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 100px;
+      }
       .footer-comics-admin{            
 	        bottom:0;
             position: absolute;
@@ -122,8 +156,26 @@ li{
             margin-top: 189px;
        }
        
-       
-       
+
+    .comic-title-card h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;  /* Aggiungi uno spazio inferiore tra il titolo e il paragrafo */
+    font-weight:bold;
+   /* color:red;*/
+}         .footer-update-authors{
+	
+	            bottom:0;
+            position: fixed;
+            width: 100%;
+            background: #282828;
+            min-height: 50px;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 98px;
+          }
        
         .footer-nuovo-artista{
             bottom:100;
@@ -139,8 +191,8 @@ li{
             margin-top: 196px;
         }
         .footer-nuovo-comic{
-            bottom:100;
-            position: absolute;
+            bottom:0;
+            position: fixed;
             width: 100%;
             background: #282828;
             min-height: 50px;
@@ -163,6 +215,21 @@ li{
             align-items: center;
             flex-direction: column;
             margin-top: 70px;
+        }
+        .footer-comic{
+        
+            bottom:100;
+            position: absolute;
+            width: 100%;
+            background: #282828;
+            min-height: 50px;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 180px;
+        
         }
         .footer-index{
             /*bottom:100;*/
@@ -202,12 +269,26 @@ li{
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            margin-top: 70px;
+            margin-top: 380px;
+        }
+        
+        .footer-comics-admin{
+            bottom:0;
+            position: fixed;
+            width: 100%;
+            background: #282828;
+            min-height: 50px;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 1000px;
         }
         
         .footer-artisti {
-            bottom:100;
-            position: absolute;
+            bottom:0;
+            position: fixed;
             width: 100%;
             background: #282828;
             min-height: 50px;
@@ -250,11 +331,11 @@ li{
         }
         
         .comic-image{
-          width: 170px; /* Larghezza del box */
-          height: 250px; /* Altezza del box */
+          width: 250px; /* Larghezza del box */
+          height: 300px; /* Altezza del box */
           border: 1px solid #ccc; /* Bordo del box */
           padding: 10px; /* Spazio interno del box */
-          margin: 60px 400px 0px; /* Margine: 10px in alto, 0 a destra, 10px in basso, -20px a sinistra */
+          margin: 60px 300px 0px; /* Margine: 10px in alto, 0 a destra, 10px in basso, -20px a sinistra */
           display:flex;
           align-items:center;
           transition:border-width 0.3s;
@@ -267,15 +348,21 @@ li{
          max-height: 100%; /* L'immagine si adatta all'altezza del box */
         }
         
+        .authors-update-comic{
+            margin-bottom:125px;
+        }
+        
         .container-index-admin{
         text-transform: uppercase;
         font-size:16px;
         line-height:30px;
         }
         .containerComic-admin{
-             margin: -200px 700px 0px;
+             margin: -200px 600px 0px;
         }
-       
+       .containerComicUpdate{
+           margin-bottom:300px;
+       }
        .container-reg{
         text-transform: uppercase;
         font-size:16px;
@@ -316,8 +403,13 @@ li{
         line-height:30px;
    }
    
-   
-   
+.trama-block-update {
+	display:flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:25%;
+    margin-right:25%;
+}
  .lista-fumetti {
             margin-top:50px;
             display: flex; /*Utilizza il modello di layout Flexbox*/
@@ -366,7 +458,7 @@ li{
         }
 
         .card:hover .aggiorna-link {
-            display: block; /*Mostra trama quando il cursore è posizionato sulla card*/
+            display: block; /*Mostra link quando il cursore è posizionato sulla card*/
         }     
 
    

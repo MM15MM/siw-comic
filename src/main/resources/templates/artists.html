@@ -36,7 +36,10 @@
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
 			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-				<a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>
+			<form th:action="@{/searchComics}" method="post">
+		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
+	</form>
+				<!--  <a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>-->
 			</li>
 		</ul>
 		<ul class="navbar-nav">

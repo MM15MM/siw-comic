@@ -32,8 +32,8 @@ public class Artist {
 	@ManyToMany(mappedBy = "authors")
 	private List<Comic> writtenComics;
 	
-	@OneToMany(mappedBy= "cartoonist")
-	private List<Comic> drawnComics;
+	/*@OneToMany(mappedBy= "cartoonist")
+	private List<Comic> drawnComics;*/
 	
 
 	//setter e getter dell'id
@@ -91,7 +91,7 @@ public class Artist {
 	}
 	
 	
-	//setter e getter dei fumetti disegnati da...
+/*	//setter e getter dei fumetti disegnati da...
 	
 	public void setDrawnComics(List<Comic> lista) {
 		this.drawnComics=lista;
@@ -99,7 +99,7 @@ public class Artist {
 	
 	public List<Comic> getDrawnComics(){
 		return this.drawnComics;
-	}
+	}*/
 	
 	@Override
 	public int hashCode() {

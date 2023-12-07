@@ -7,8 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-     <link  rel="icon" href="../static/images/boom.png" type="image/x-icon">
-      <link rel="stylesheet" href="../static/css/stile.css">
+     <link  rel="icon" th:href="@{/static/images/boom.png}" type="image/x-icon">
+      <link rel="stylesheet" type="text/css" th:href="@{/static/css/stile.css}">
     
      <!-- font -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
 
 <body>
  <header><nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-   <div class="font-effect-anaglyph"> Nerdando</div><img src="../static/images/boom.png" height="5%" width="5%">
+   <div class="font-effect-anaglyph"> Nerdando</div><img th:src="@{/static/images/boom.png}" height="5%" width="5%">
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -36,7 +36,10 @@
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
 			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-				<a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>
+			<form th:action="@{/searchComics}" method="post">
+		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
+	</form>
+				<!--  <a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>-->
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -74,24 +77,26 @@
        <span class="comic-image"><img width="5%" th:src=${comic.Image} /></span>
     </div> 
      <ul>
-     <li> <p class="trama" th:text="'Trama: ' + ${comic.resume}"><strong>Trama:</strong>Gli avengers si trovano ad affrontare una nuova minaccia. Come riusciranno a sconfiggere Doctor Doom?</p>
+     <li><p class="trama" th:text="'Trama: ' + ${comic.resume}">Gli avengers si trovano ad affrontare una nuova minaccia. Come riusciranno a sconfiggere Doctor Doom?</p>
      </li> </ul><div th:unless="${comic}">Non esiste</div>
      </div>
      <div class="comment-section">
      <h2 >Commenti</h2>
      <div><ul>
         <li th:each="comment : ${comments}">
+        <span>User:<strong> <span th:text="*{comment.username}"></span></strong></span>
             <span th:text="*{comment.comment}"></span>
-            <span>User: <span th:text="*{comment.user}"></span></span>
+            
         </li>
     </ul>
     <div  th:if="${#request.userPrincipal}" class="add-comment">
     <h3 class="commento">Aggiungi un Commento</h3>
-    <form method="post" th:action="@{'/comic/' + ${comic.Id}+ '/addComment'}">
+    <form method="post" th:action="@{'/comic/' + ${comic.id} + '/addComment'}">
         <label for="text">Commento: </label>
-        <textarea id="text" name="text" required></textarea>
+        <textarea id="text" name="comment" required></textarea>
         <button type="submit" class="btn">Invia Commento</button>
     </form></div>
+</div>
 </div>
 </div>
  <footer class="footer">
