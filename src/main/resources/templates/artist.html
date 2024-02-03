@@ -31,14 +31,16 @@
 			<li class="nav-item elenco-comics">
 				<a class="nav-link" href="/comicsDefaultUser">Elenco Fumetti</a>
 			</li>
+			<li class="nav-item elenco-preferiti" th:if="${#request.userPrincipal}">
+				<a class="nav-link" href="/favorites">Elenco Preferiti</a>
+			</li>
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
-<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
 			<form th:action="@{/searchComics}" method="post">
-		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
+		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>
-				<!--  <a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>-->
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -62,15 +64,15 @@
 <div class="containerArtista my-5 text-center">
 	<h1>Dettagli artista</h1>
 	<div>
-		<span>Nome: </span>
+		<strong><span>Nome: </span></strong>
 		<span th:text="${artist.name}"></span>
 	</div>
 	<div>
-		<span>Cognome: </span>
+		<strong><span>Cognome: </span></strong>
 		<span th:text="${artist.surname}"></span>
 	</div>
 	<div>
-		<span>Email: </span>
+		<strong><span>Email: </span></strong>
 		<span th:text="${artist.email}"></span>
 	</div>
 	</div>

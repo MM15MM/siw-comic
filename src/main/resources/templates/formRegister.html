@@ -20,7 +20,7 @@
     <title>Nerdando - Registrazione</title>
 </head>
 
-<body>
+<body class="pagina-registrazione">
  <header>	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
    <div class="font-effect-anaglyph"> Nerdando</div>
    <img src="../static/images/boom.png" height="5%" width="5%">
@@ -36,11 +36,10 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
-<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
 			<form th:action="@{/searchComics}" method="post">
-		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
+		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>
-				<!--  <a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>-->
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -65,7 +64,7 @@
 	<div class="container-reg">
 	<form th:action="@{/register}" method="POST">
 		<div>
-			<label>Nome:</label>
+			<label><strong>Nome:</strong></label>
 			<ul>
 			 <li>
 			<span><input type="text" placeholder="name" required th:field="${user.name}" /></span>
@@ -76,7 +75,7 @@
 			</ul>
 		</div>
 		<div>
-			<label>Cognome:</label>
+			<label><strong>Cognome:</strong></label>
 			<ul> 
 			<li>
 			 <span><input type="text" placeholder="surname" required th:field="${user.surname}" /></span>
@@ -87,7 +86,7 @@
 			 </ul>
 		</div>
 		<div>
-			<label>Email:</label>
+			<label><strong>Email:</strong></label>
 			<ul>
 			<li>
 			<span><input type="text" placeholder="email" required th:field="${user.email}" /></span>
@@ -98,7 +97,7 @@
 		</ul>
 		</div>
 		<div>
-			<label>Username:</label>
+			<label><strong>Username:</strong></label>
 			<ul>
 			<li>
 			<span><input type="text" placeholder="username" required th:field="${credentials.username}" id="username"/></span>
@@ -109,7 +108,7 @@
 		</ul>
 		</div>
 		<div>
-			<label>Password:</label>
+			<label><strong>Password:</strong></label>
 			<ul>
 			<li> <span><input type="password" placeholder="password" required th:field="${credentials.password}" /></span>
 			</li>

@@ -16,13 +16,13 @@
      <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&display=swap" rel="stylesheet">
    
     <!-- titolo pagina -->
-    <title>Fornitori</title>
+    <title>Artisti</title>
 </head>
 
 <body>
 	<header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="font-effect-anaglyph"> Nerdando</div>5<img src="../static/images/boom.png" height="5%" width="5%">
+  <div class="font-effect-anaglyph"> Nerdando</div><img src="../static/images/boom.png" height="5%" width="5%">
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,14 +32,16 @@
 			<li class="nav-item elenco-comics">
 				<a class="nav-link" href="/comicsDefaultUser">Elenco Fumetti</a>
 			</li>
+			<li class="nav-item elenco-preferiti" th:if="${#request.userPrincipal}">
+				<a class="nav-link" href="/favorites">Elenco Preferiti</a>
+			</li>
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+						<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
 			<form th:action="@{/searchComics}" method="post">
-		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
+		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>
-				<!--  <a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>-->
 			</li>
 		</ul>
 		<ul class="navbar-nav">

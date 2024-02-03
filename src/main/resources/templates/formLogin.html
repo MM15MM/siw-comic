@@ -22,7 +22,7 @@
 	</title>
 </head>
 
-<body>
+<body class="pagina-login">
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
    <div class="font-effect-anaglyph"> Nerdando</div><img src="../static/images/boom.png" height="5%" width="5%">
@@ -57,23 +57,23 @@
 	<form th:action="@{/login}" method="POST">
 	
 			<ul>	
-				<li><span>Username:</span>
+				<li><span><strong>Username:</strong></span>
 				<span><input placeholder="username" name="username" type="text" required /></span></li>
 			
 			</ul>
 			<ul>
-				<li><span>Password:</span>
+				<li><span><strong>Password:</strong></span>
 				<span><input placeholder="password" name="password" type="password" required /></span></li>
 			</ul>
 			<div>
-				<span th:if="${param.error != null}">Username o password errati</span>
+				<span th:if="${param.error != null}" th:style="'color:red'">Username o password errati</span>
 			</div>
 			<div>
 				<span><button class="btn" type="submit">Login</button></span>
 			</div>
 	</form>
 	<div>
-		<a href="/formRegister" th:text="Registrati">Registrati</a>
+		<a href="/register" th:text="Registrati">Registrati</a>
 	  </div>
 	</div>
 	 <footer class="footer-login">

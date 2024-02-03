@@ -1,12 +1,11 @@
 package it.uniroma3.siw.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,12 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.controller.validator.ComicValidator;
 import it.uniroma3.siw.model.Comic;
-import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.ComicService;
 import it.uniroma3.siw.service.CommentService;
 import it.uniroma3.siw.service.CredentialsService;
@@ -28,16 +25,16 @@ import it.uniroma3.siw.service.CredentialsService;
 public class ComicController {
    
 	@Autowired 
-	ComicService comicService;
+	private ComicService comicService;
 	
 	@Autowired 
-	ComicValidator comicValidator;
+	private ComicValidator comicValidator;
 	
 	@Autowired
-	CommentService commentService;
+	private CommentService commentService;
 	
 	@Autowired
-	CredentialsService credentialsService;
+	private CredentialsService credentialsService;
 
 
 /*----------------------------------------------------*/
@@ -48,7 +45,7 @@ public class ComicController {
 /*----------------------------------------------------*/
 	
 	
-	/*--------------PERCORSO PER L'ADMIN---------------*/
+	/* ADMIN VEDE PAGINA COMICS E COMIC SPECIFICO*/
 	@GetMapping(value ="/admin/comics")
 	public String getComicsAdmin(Model model) {
 		model.addAttribute("comics", this.comicService.findAll());
@@ -60,13 +57,12 @@ public class ComicController {
 
 		Comic comic = this.comicService.findById(id);
 		model.addAttribute("comic", comic);
-		//fa si che ogni film visualizzi i commenti propri
-		model.addAttribute("comments", this.commentService.findByComicId(id));
+		model.addAttribute("comments", this.commentService.findAllByComicId(id));
 		return "admin/comicAdmin.html";
 	}
 	
 	
-	/*------------------AGGIUNTA NUOVO COMIC-------------------*/
+	/*AGGIUNTA NUOVO COMIC*/
 	
 	@GetMapping(value = "/admin/formNewComic")
 	public String formNewComic(Model model) {
@@ -79,10 +75,7 @@ public class ComicController {
 			              BindingResult bindingResult, Model model) {
 		this.comicValidator.validate(comic, bindingResult);
 		if(!bindingResult.hasErrors()) { //se i dati sono corretti
-			//String imageName = StringUtils.cleanPath(multiPartFile.getOriginalFilename());
 		    this.comicService.save(comic); //salvo oggetto comic
-		    //String uploadDir = "comic-pic/" + newComic.getId();
-		    //FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 		    
 			model.addAttribute("comic", comic);
 			return "redirect:/admin/comics"; // pagina html con lista comics
@@ -92,7 +85,11 @@ public class ComicController {
 		}
 	}
 	
-	/*----------ADMIN ELIMINA COMIC----------*/
+	
+	
+	/*ADMIN ELIMINA COMIC*/
+	
+	
 	
 	@PostMapping(value = "/admin/deleteComic/{id}")
 	public String deleteComic(@PathVariable("id") Long comicId, Model model){
@@ -103,7 +100,11 @@ public class ComicController {
 		return "redirect:/admin/comics";
 	}
 	
-	/*---------ADMIN MODIFICA DETTAGLI COMIC--------*/
+	
+	
+	/*ADMIN MODIFICA DETTAGLI COMIC*/
+	
+	
 	
 	@GetMapping(value = "/admin/formUpdateComic/{id}")
 	public String editComic(@PathVariable("id") Long id, Model model) {
@@ -133,17 +134,19 @@ public class ComicController {
 		return "admin/formUpdateComic.html";
 	}
 	
-/*---------RICERCA COMICS E ARTISTI DA PARTE DELL'ADMIN----------*/
+	
+	
+  /*RICERCA COMICS DA PARTE DELL'ADMIN*/
 	
 
 
-	@RequestMapping(value="/admin/formSearchComics",method = RequestMethod.GET)
-	public String formSearchComicsAdmin() {
+/*	@RequestMapping(value="/admin/formSearchComics",method = RequestMethod.GET)
+	public String formSearchComicsAdmin(Model model) {
 		return "admin/formSearchComics.html";
-	}
+	}*/
 	@PostMapping(value ="/admin/searchComics")
-	public String searchComicsAdmin(Model model, @RequestParam int year) {
-		model.addAttribute("comics", this.comicService.findByYear(year));
+	public String searchComicsAdmin(Model model, @RequestParam String title) {
+		model.addAttribute("comics", this.comicService.findByTitle(title));
 		return "admin/adminComicsFound.html";
 
 	}
@@ -157,12 +160,12 @@ public class ComicController {
 	
 	/*CHIUNQUE VISUALIZZA LISTA COMICS E DETTAGLI COMIC*/
 	
-	@GetMapping( "/comic/{id}")
+/*	@GetMapping( value= "/comic/{id}")
 	public String getComic(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("comic", this.comicService.findById(id));
-		model.addAttribute("comments", this.commentService.findByComicId(id));
+		model.addAttribute("comments", this.commentService.findAllByComicId(id));
 		return "comic.html";
-	}
+	}*/
 
 	@GetMapping(value = "/comicsDefaultUser")
 	public String showComics(Model model) {
@@ -174,30 +177,23 @@ public class ComicController {
 		return "comicsDefaultUser.html";
 	}
 	
-	@GetMapping("/comic/{id}/defaultUser")
-	public String getMovieDefaultUser(@PathVariable("id") Long id, Model model) {
+	@GetMapping(value= "/comic/{id}/defaultUser")
+	public String getComicDefaultUser(@PathVariable("id") Long id, Model model, Principal principal) {
 		model.addAttribute("comic", this.comicService.findById(id));
+		model.addAttribute("comments", this.commentService.findAllByComicId(id));
+		 if (principal != null) {
+		        String username = principal.getName();
+		        User user = this.credentialsService.getCredentials(username).getUser();
 
-		//fa si che ogni film visualizzi i commenti propri
-		model.addAttribute("comment", this.commentService.findByComicId(id));
+		        if (user != null && user.getFavorites().contains(this.comicService.findById(id))) {
+		            // L'utente ha il fumetto tra i preferiti, visualizza comic.html
+		            return "comic";
+		        }
+		    }
 		return "comicDefaultUser";
 	}
 
-	
-	/* RiCERCA DEI COMICS*/
-	
-	@GetMapping(value = "/formSearchComics")
-	public String formSearchComics() {
-		return "formSearchComics.html";
-	}
-
-	@PostMapping(value = "/searchComics")
-	public String searchComicsByYear(Model model, @RequestParam Integer year) {
-		model.addAttribute("comics", this.comicService.findByYear(year));
-		return "foundComics.html";
-	}
-	
-	@GetMapping(value = "/comics")
+		/*@GetMapping(value = "/comics")
 	public String ShowComics(Model model) {
 	 	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = this.credentialsService.getCredentials(userDetails.getUsername());
@@ -205,49 +201,23 @@ public class ComicController {
 		model.addAttribute("comics", this.comicService.findAll());
 		model.addAttribute("user", credentials.getUser());
 		return "comics.html";
-	}
+	}*/
+	
+	
+	/* RiCERCA DEI COMICS*/
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+/*	@GetMapping(value = "/formSearchComics")
+	public String formSearchComics() {
+		return "formSearchComics.html";
+	}*/
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@PostMapping(value = "/searchComics")
+	public String searchComicsByYear(Model model, @RequestParam String title) {
+		model.addAttribute("comics", this.comicService.findByTitle(title));
+		return "foundComics.html";
+	}
 	
 	
 	

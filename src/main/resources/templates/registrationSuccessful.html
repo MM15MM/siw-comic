@@ -20,7 +20,7 @@
     <title>Nerdando-Registrazione Eseguita</title>
 </head>
 
-<body>
+<body class="pagina-login">
 <header>	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
    <div class="font-effect-anaglyph"> Nerdando</div><img src="../static/images/boom.png" height="5%" width="5%">
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,15 +49,15 @@
 	<h1 class="Congratulazioni"><strong>Congratulazioni ti sei registrato!</strong></h1>
 	
 	<div>
-		<span>Nome: </span>
+		<span><strong>Nome:</strong> </span>
 		<span th:text="${user.name}"></span>
 	</div>
 	<div>
-		<span>Cognome: </span>
+		<span><strong>Cognome: </strong></span>
 		<span th:text="${user.surname}"></span>
 	</div>
 	<div>
-		<span>Email: </span>
+		<span><strong>Email: </strong></span>
 		<span th:text="${user.email}"></span>
 	</div>
 
@@ -65,15 +65,15 @@
 	<h2><strong>Login</strong></h2>
 	<form th:action="@{/login}" method="POST">
 		<div class="form-group">
-			<label for="username">Username</label>
+			<label for="username"><strong>Username</strong></label>
 			<input placeholder="username" type="text" class="form-control" id="username-lg" name="username" required>
 		</div>
 		<div class="form-group">
-			<label for="password">Password</label>
+			<label for="password"><strong>Password</strong></label>
 			<input placeholder="password" type="password" class="form-control" id="password-lg" name="password" required>
 		</div>
 		<div>
-			<span class="pass-error" th:if="${param.error != null}">Username o password errati</span>
+			<span class="pass-error" th:if="${param.error != null}" th:style="'color:red'">Username o password errati</span>
 		</div>
 		<button type="submit" class="btn">Login</button>
 	</form>

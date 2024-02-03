@@ -29,16 +29,18 @@
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		<ul class="navbar-nav elenco">
 			<li class="nav-item elenco-comics">
-				<a class="nav-link" href="/comics">Elenco Fumetti</a>
+				<a class="nav-link" href="/comicsDefaultUser">Elenco Fumetti</a>
+			</li>
+			<li class="nav-item elenco-preferiti" th:if="${#request.userPrincipal}">
+				<a class="nav-link" href="/favorites">Elenco Preferiti</a>
 			</li>
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+						<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
 			<form th:action="@{/searchComics}" method="post">
-		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
+		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>
-				<!--  <a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>-->
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -58,18 +60,23 @@
 	  </div>
 </nav>
 	</header>
-<div class="containerComic my-5 text-center">
-	<h1>Ecco i risultati della ricerca</h1>
-	<div th:if="${comics.isEmpty()}">Non ci sono fumetti che soddisfano i requisiti</div>
-	<ul th:if="${!comics.isEmpty()}">
-		<li th:each="comic : ${comics}">
-			<a href="comic.html" th:href="@{'/comic' + '/' + ${comic.id}}"
-				th:text="${comic.title} + ' (' + ${comic.year}+')'">Up! (2000)</a>
-		</li>
-	</ul>
-	</div>
-	
-		 <footer class="footer-comics-trovati">
+    
+    <h1 class="fumetti">Ecco i risultati della ricerca</h1>
+<div th:if="${comics==null || comics.isEmpty()}">Non ci sono fumetti nel sistema</div>
+<div class="lista-fumetti">
+	<div th:each="comic : ${comics}">
+	<div class="card">
+		<a th:href="@{'/comic' + '/' + ${comic.id} +'/defaultUser'}">
+		<img th:src="@{${comic.image}}" alt="Immagine del fumetto" /></a>
+		<div class="card-elements">
+	<div class="comic-title-card"><h3 th:text="${comic.title}"></h3></div> 
+                    <p th:text="${comic.year}"></p>
+                 </div>
+               </div>
+           </div>
+       </div>
+
+ <footer class="footer-comics-default">
         <ul class="menu">
             <li class="menu__item">
                 <a class="menu__link" href="/index">

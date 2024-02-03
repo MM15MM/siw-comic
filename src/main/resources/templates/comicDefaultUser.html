@@ -32,14 +32,16 @@
 			<li class="nav-item elenco-comics">
 				<a class="nav-link" href="/comicsDefaultUser">Elenco Fumetti</a>
 			</li>
+			<li class="nav-item elenco-preferiti" th:if="${#request.userPrincipal}">
+				<a class="nav-link" href="/favorites">Elenco Preferiti</a>
+			</li>
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+						<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
 			<form th:action="@{/searchComics}" method="post">
-		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
+		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>
-				<!--  <a class="nav-link" href="/formSearchComics">Ricerca Fumetti</a>-->
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -63,29 +65,35 @@
   <div class="containerComic my-5 text-center">
   <!-- Content here --> 
   <h1>Dettagli Fumetto</h1>
-    <div th:if="${comic}"><div>
+    <div th:if="${comic}">
       <ul>
-        <li>  <span class ="comic-title" th:text="${comic.title} + '(' +${comic.year}+')'"><strong>Secret Wars</strong>(2022)</span>
+        <li><span class="comic-image"><img width="5%" th:src=${comic.Image} /></span></li>
+        <li> <strong><span class ="comic-title" th:text="${comic.title} + '(' +${comic.year}+')'">)</span></strong> 
         </li>
-        <li>
-        <span th:text= " 'Genere: '+ ${comic.genre}">Genere: genre</span> 
+        <li><strong><span>Genere: </span></strong>
+        <span th:text= "${comic.genre}">Genere: genre</span> 
         </li>
-        <li>
-        <span th:text=" 'Casa editrice: '+${comic.publisher}">Casa editrice: publisher</span>
+        <li><strong><span>Casa editrice: </span></strong>
+        <span th:text="${comic.publisher}">Casa editrice: publisher</span>
         </li>
-    </ul>
-       <span class="comic-image"><img width="5%" th:src=${comic.Image} /></span>
-    </div> 
-     <ul>
-     <li><p class="trama" th:text="'Trama: ' + ${comic.resume}">Gli avengers si trovano ad affrontare una nuova minaccia. Come riusciranno a sconfiggere Doctor Doom?</p>
-     </li> </ul><div th:unless="${comic}">Non esiste</div>
+     <li class="trama-detail-comic" >
+     <strong><span>Trama: </span></strong><span th:text="${comic.resume}">Gli avengers si trovano ad affrontare una nuova minaccia. Come riusciranno a sconfiggere Doctor Doom?</span>
+     </li>
+     <li th:if="${#request.userPrincipal}"> 
+      <form th:action="@{'/addFavorite/' + ${comic.id}}"  method="post">
+        <button type="submit" class="btn">Aggiungi ai preferiti</button>
+    </form>
+     </li>
+     </ul>
      </div>
+     <div th:unless="${comic}">Non esiste</div>
+     
      <div class="comment-section">
      <h2 >Commenti</h2>
      <div><ul>
         <li th:each="comment : ${comments}">
-        <span>User:<strong> <span th:text="*{comment.username}"></span></strong></span>
-            <span th:text="*{comment.comment}"></span>
+        <span><strong> <span th:text="${comment.username} + ': '"></span></strong></span>
+            <span th:text="${comment.comment}"></span>
             
         </li>
     </ul>
@@ -99,7 +107,7 @@
 </div>
 </div>
 </div>
- <footer class="footer">
+ <footer class="footer-comic">
         <ul class="menu">
             <li class="menu__item">
                 <a class="menu__link" href="/index">

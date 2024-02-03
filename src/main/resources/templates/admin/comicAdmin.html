@@ -32,11 +32,10 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-	<form th:action="@{/admin/searchComics}" method="post">
-		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
-		</form>
-				
+					<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+			<form th:action="@{/admin/searchComics}" method="post">
+		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
+	</form>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -62,29 +61,33 @@
   <h1>Dettagli Fumetto Admin</h1>
     <div th:if="${comic}">
         <span class= "comic-image"><img th:src=${comic.Image} /></span>
-     <div class="containerComic-admin">
+     
     <strong> <span class ="comic-title" th:text="${comic.title}">Up!</span></strong>
         <span th:text="'('+${comic.year}+ ')'">(2000)</span>
         <a th:href="@{'/admin' +'/formUpdateComic/'+ ${comic.id}}">Modifica</a>
-      <form th:action="@{'/admin/deleteComic/'+ ${comic.id}}"  method="POST">
-            <button type="submit" class="btn2">Elimina</button>
-            </form>  
+        <form th:action="@{'/admin/deleteComic/' + ${comic.id}}" method="post">
+    <button type="submit" class="btn2">Elimina</button>
+</form>
+             
+            </div>
    
-    </div>
+  
      <div th:unless="${comic}">Non esiste</div>
-     <h2 class="comment-section">Commenti</h2>
-     <div><ul>
+     <h2>Commenti</h2>
+     <ul  class="comment-section">
         <li th:each="comment : ${comments}">
+        <strong><span th:text="*{comment.username} + ':'"></span></strong>
             <span th:text="*{comment.comment}"></span>
-            <strong><span th:text="*{comment.username} + ':'"></span></strong>
-          <div class="delete-comment">
-            <form th:action="@{'/admin/deleteComment/' + ${comment.commentId}}" method="post" > 
+            <div>
+            <a th:href="@{'/admin/deleteComment/' + ${comment.id}}"class="elimina-commento"> Elimina commento</a>
+            <!--  <form th:action="@{'/admin/deleteComment/' + ${comment.id}}" method="post" > 
             <button type="submit" class="btn2" >Elimina</button>
-            </form></div>
+            </form>-->
+            </div>
         </li>
     </ul>
 
-</div>
+
 </div>   
 		 <footer class="footer-comic">
         <ul class="menu">
@@ -96,7 +99,7 @@
 
         </ul>
     </footer>
-</div>
+
 
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

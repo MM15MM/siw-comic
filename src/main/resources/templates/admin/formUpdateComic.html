@@ -29,11 +29,10 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-	<form th:action="@{/admin/searchComics}" method="post">
-		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
-		</form>
-				
+						<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+			<form th:action="@{/admin/searchComics}" method="post">
+		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
+	</form>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -57,29 +56,9 @@
 <div class="containerComicUpdate my-5 text-center">
 	
 	<div th:if="${comic}">
-		<div>
 		
-		<ul>
-        <li>
-		<strong> <span class ="comic-title" th:text="${comic.title}">Secret Wars</span></strong></li>
-        <li>
-        <strong>Genere:</strong> <span th:text= "${comic.genre}"></span> 
-        </li>
-        <li>
-        <strong>Anno:</strong> <span th:text= "${comic.year}">2021</span> 
-        </li>
-       <li>
-        
-        <strong>Trama:</strong><div class="trama-block-update"> <span th:text= " ${comic.resume}"></span></div> 
-        
-        </li>
-        <li>
-        <strong>Casa editrice:</strong> <span th:text=" ${comic.publisher}"></span>
-        </li>
-        <li>
-        <strong>URL immagine:</strong> <span th:text="${comic.image}"></span>
-        </li>
-    </ul>
+		
+	
     <form th:action="@{'/admin/formUpdateComic/' + ${comic.id}}" method="POST" th:object="${comic}">
   		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}" th:style="'color:red'">...</p> 
@@ -117,11 +96,10 @@
 
       </div>
       	  <div class="delete-comic">
-        <strong><span class="movie-title" th:text="${comic.title}"></span></strong>
 		<form  class="delete-btn" th:action="@{'/admin/deleteComic/' + ${comic.id}}" method="post">
 			<button type="submit" class="btn2">Elimina</button>
 		</form>
-		</div>
+		
 		
 		</div>
 		    <div class="authors-update-comic">

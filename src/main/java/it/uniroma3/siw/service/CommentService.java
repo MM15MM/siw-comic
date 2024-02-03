@@ -22,13 +22,10 @@ public class CommentService {
         	return this.commentRepository.save(comment);
         }
         @Transactional
-		public List<Comment> findByComic(Comic comic) {
-			return this.commentRepository.findAllByComicId(comic.getId());
+		public List<Comment> findAllByComicId(Long comic) {
+			return this.commentRepository.findAllByComicId(comic);
 		}
-        @Transactional
-		public Comment findByComicId(Long comicId) {
-			return this.commentRepository.findByComicId(comicId);
-		}
+ 
         @Transactional
 		public Comment findById(Long commentId) {
 			return this.commentRepository.findById(commentId).get();

@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.User;
@@ -18,19 +20,22 @@ import it.uniroma3.siw.model.Comic;
 import it.uniroma3.siw.model.Comment;
 import it.uniroma3.siw.service.ComicService;
 import it.uniroma3.siw.service.CommentService;
+import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.UserService;
 
 @Controller
 public class UserController {
 
+	@Autowired
+	private CredentialsService credentialsService;
 	@Autowired 
-	ComicService comicService;
+	private ComicService comicService;
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@Autowired
-	CommentService commentService;
+	private CommentService commentService;
 	
 	/*----------------------------------------------------*/
 	/*----------------------------------------------------*/
@@ -42,22 +47,30 @@ public class UserController {
 	
 	/*AGGIUNGI AI PREFERITI*/
 	
-	@GetMapping(value="/user/{userId}/addFavorite/{articleId}")
-	    public String addFavorite(@PathVariable Long userId, @PathVariable Long comicId) {
-	        User user = userService.getUser(userId);
-	        Comic comic = comicService.findById(comicId);
+	@PostMapping(value="/addFavorite/{id}")
+	    public String addFavorite(@PathVariable("id") Long comicId, Principal principal, Model model,
+	    		HttpServletRequest request) {
+		
+		String referer = request.getHeader("Referer");//per aggiornare la pagina
+		String username = principal.getName();
+		
+		User user = this.credentialsService.getCredentials(username).getUser();
+	        Comic comic = this.comicService.findById(comicId);
 
 	        if (user != null && comic != null) {
 	            user.getFavorites().add(comic);
-	            userService.saveUser(user);
+	            model.addAttribute("favorite",comic);
+	            this.userService.saveUser(user);
 	        }
 
-	        return "redirect:/user/{userId}/favorites";
+	        return "redirect:" + referer;
 	    }
 
-	    @GetMapping(value="/user/{userId}/favorites")
-	    public String viewFavorites(@PathVariable Long userId, Model model) {
-	        User user = userService.getUser(userId);
+	    @GetMapping(value="/favorites")
+	    public String viewFavorites( Model model, Principal principal) {
+	    	String username = principal.getName();
+			
+			User user = this.credentialsService.getCredentials(username).getUser();
 
 	        if (user != null) {
 	            List<Comic> favorites = user.getFavorites();
@@ -70,9 +83,12 @@ public class UserController {
 	    
 	    /*RIMUOVI DAI PREFERITI*/
 	    
-	    @GetMapping(value="/user/{userId}/removeFavorite/{articleId}")
-	    public String removeFavorite(@PathVariable Long userId, @PathVariable Long comicId) {
-	    	User user = userService.getUser(userId);
+	    @PostMapping(value="/removeFavorite/{id}")
+	    public String removeFavorite(@PathVariable("id") Long comicId,HttpServletRequest request,Principal principal) {
+	    	String username = principal.getName();
+	    	String referer = request.getHeader("Referer");//per aggiornare la pagina
+	    	
+			User user = this.credentialsService.getCredentials(username).getUser();
 	    	Comic comic = comicService.findById(comicId);
 
 	        if (user != null && comic != null) {
@@ -80,7 +96,7 @@ public class UserController {
 	            this.userService.saveUser(user);
 	        }
 
-	        return "redirect:/user/{userId}/favorites";
+	        return "redirect:" + referer;
 	    }
 	    
 	   
@@ -95,8 +111,9 @@ public class UserController {
 	    /*COMMENTI*/
 	    
 	    @PostMapping(value="/comic/{id}/addComment")
-	    public String addComment(@PathVariable("id") Long comicId, @RequestParam("comment") String text, Principal principal,HttpServletRequest request) {
-	    	 String referer = request.getHeader("Referer");//uso HttpServletREquest per aggiornare la pagina
+	    public String addComment(@PathVariable("id") Long comicId, @RequestParam("comment") String text, 
+	    		Principal principal,HttpServletRequest request) {
+	    	 String referer = request.getHeader("Referer");//per aggiornare la pagina
 	    	
 	    	
 	        Comic comic = this.comicService.findById(comicId);
@@ -113,10 +130,10 @@ public class UserController {
 	    }
 
 
-	    @PostMapping(value="/admin/deleteComment/{commentId}")
+	    @RequestMapping(value="/admin/deleteComment/{commentId}", method=RequestMethod.GET)
 	    public String deleteComment(@PathVariable("commentId") Long commentId, User user, HttpServletRequest request) {
 	        Comment comment = this.commentService.findById(commentId);
-	        String referer = request.getHeader("Referer");//uso HttpServletREquest per aggiornare la pagina
+	        String referer = request.getHeader("Referer");//per aggiornare la pagina
 	    	
 	        if (comment != null) {
 	            this.commentService.delete(comment);

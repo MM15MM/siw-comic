@@ -31,6 +31,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "comicId")
     private Comic comic;
+   
     @Column(name = "username")
 	private String username;
     //setter e getter user
@@ -81,13 +82,5 @@ public class Comment {
 	public String getComment() {
 		return this.comment;
 	}
-	/*public String getCommentUsername() {
-		return this.username;
-	}*/
-
-	/*public void setComment_by_user(String username) {
-		this.username = username;
-	}*/
-
 
 }

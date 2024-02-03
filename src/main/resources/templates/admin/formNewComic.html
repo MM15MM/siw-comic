@@ -32,11 +32,10 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-	<form th:action="@{/admin/searchComics}" method="post">
-		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
-		</form>
-				
+					<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+			<form th:action="@{/admin/searchComics}" method="post">
+		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
+	</form>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -75,7 +74,7 @@
 		</div>
 
 		<div>
-			<label>URL immagine:</label> <span><input placeholder="url immagine" type="url" th:field="${comic.image}" /></span>
+			<label>URL immagine:</label> <span><input placeholder="url image" type="url" th:field="${comic.image}" /></span>
 		</div>
 
 			<div>

@@ -32,12 +32,13 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-	<form th:action="@{/admin/searchComics}" method="post">
-		<input class="cerca" type="text" th:value="${year}" name="year" id="year" placeholder="inserisci anno di uscita fumetto" required/>
-		</form>
-				
+					<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+			<form th:action="@{/admin/searchComics}" method="post">
+		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
+	</form>
 			</li>
+				
+			
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item ml-auto" th:unless="${#request.userPrincipal}">
@@ -60,11 +61,11 @@
   <!-- Content here --> 
 		    <h1 th:if="${artist}">Dettagli artista:</h1>
           <ul>
-			<li><span th:text="#{artistname.message}+' '+${artist.name}">Paolo</span></li>
-			<li><span th:text="#{artistsurname.message}+' '+${artist.surname}">Rossi</span></li>
-			<li><span th:text="#{artistemail.message}+' '+${artist.email}">PaoloRossi@gmail.com</span></li>
+			<li><strong><span>Nome: </span></strong><span th:text="${artist.name}">Paolo</span></li>
+			<li><strong><span>Cognome: </span></strong><span th:text="${artist.surname}">Rossi</span></li>
+			<li><strong><span>Email: </span></strong><span th:text="${artist.email}">PaoloRossi@gmail.com</span></li>
 			</ul>
-            <div th:unless="${artist}">Artista inesistente</div>
+            <div th:unless="${artist}" th:style="'color:red'">Artista inesistente</div>
        </div>
 	<footer class="footer-artista">
         <ul class="menu">
