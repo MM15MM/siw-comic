@@ -65,12 +65,12 @@
 		
 		<div>
 			<label>Titolo:</label> <span><input placeholder="title" type="text" th:field="${comic.title}" /></span>
-		    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+		    <span th:if="${#fields.hasErrors('title')}" th:errors="${comic.title}"></span>
 		</div>
 
 		<div>
 			<label>Anno:</label> <span><input placeholder="year" type="number" th:field="${comic.year}" required /></span>
-		    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+		    <span th:if="${#fields.hasErrors('year')}" th:errors="${comic.year}"></span>
 		</div>
 
 		<div>
