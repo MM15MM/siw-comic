@@ -131,6 +131,9 @@ public class Comic {
 	    return this.authors;
 	}
 	
+	public Comic getComic() {
+		return this;
+	}
 	
 	/*//setter e getter del disegnatore
 	

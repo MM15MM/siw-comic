@@ -21,7 +21,7 @@
 <header>
 
 	 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-     <div class="font-effect-anaglyph"> Nerdando</div><img src="../static/images/boom.png" height="5%" width="5%">
+   <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -37,7 +37,7 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+			<li class="nav-item ml-auto" >
 			<form th:action="@{/searchComics}" method="post">
 		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>
@@ -63,7 +63,7 @@
 
 <div class="containerArtista my-5 text-center">
 	<h1>Dettagli artista</h1>
-	<div>
+	<div th:if="${artist}">
 		<strong><span>Nome: </span></strong>
 		<span th:text="${artist.name}"></span>
 	</div>
@@ -75,7 +75,15 @@
 		<strong><span>Email: </span></strong>
 		<span th:text="${artist.email}"></span>
 	</div>
+	<div th:unless="${artist}" th:style="'color:red;'">Artista inesistente</div>
 	</div>
+	
+	            <div class="containerArtista my-5 text-center">
+            <div> <h2 th:if="${comics}">Fumetti scritti:</h2>
+              <ul th:each="comic : ${comics}">
+                <li><strong><span>Nome Fumetto: </span></strong><span th:text="${comic.title}"></span></li>
+              </ul></div>
+       </div>
 	 <footer class="footer-artista">
         <ul class="menu">
             <li class="menu__item">

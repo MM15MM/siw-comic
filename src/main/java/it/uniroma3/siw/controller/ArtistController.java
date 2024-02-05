@@ -122,6 +122,8 @@ public class ArtistController {
 	@GetMapping(value = "/artist/{id}")
 	public String getArtist(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("artist", this.artistService.findById(id));
+		List<Comic> comics = this.artistService.findById(id).getWrittenComics();
+		model.addAttribute("comics", comics);
 		return "artist.html";
 	}
 
@@ -136,6 +138,8 @@ public class ArtistController {
 	@GetMapping (value="/admin/artist/{id}")
 	public String showArtistDetailsAdmin(@PathVariable("id") Long id ,Model model){
 		model.addAttribute("artist", this.artistService.findById(id));
+		List<Comic> comics = this.artistService.findById(id).getWrittenComics();
+		model.addAttribute("comics", comics);
 		return "admin/artist";
 	}
 	

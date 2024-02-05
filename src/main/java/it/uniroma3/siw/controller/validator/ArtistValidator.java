@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.model.Artist;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.ArtistRepository;
 
 @Component
@@ -17,9 +18,16 @@ public class ArtistValidator implements Validator {
 	@Override
 	public void validate(Object o, Errors errors) {
 		Artist artist = (Artist)o;
-		if (artist.getName()!=null && artist.getSurname()!=null 
-				&& artistRepository.existsByNameAndSurname(artist.getName(),  artist.getSurname())) {
-			errors.reject("artist.duplicate");
+		String nome= artist.getName().trim();
+		String cognome = artist.getSurname().trim();
+		  
+		if(nome.isEmpty())
+			errors.rejectValue("name", "required");
+		if(cognome.isEmpty())
+			errors.rejectValue("surname", "required");
+		else if (artistRepository.existsByNameAndSurname(nome,cognome)) {
+			errors.rejectValue("surname","duplicate");
+			errors.rejectValue("name","duplicate");
 		}
 	}
 	

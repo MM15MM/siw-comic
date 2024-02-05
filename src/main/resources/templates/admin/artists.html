@@ -18,8 +18,7 @@
 <body>
 <header>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="font-effect-anaglyph"> Nerdando</div>
-    <img src="../../static/images/boom.png" height="5%" width="5%">
+  <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,7 +54,33 @@
 	  </div>
   </nav>
 </header>
+
 <div class="container-artisti my-5 text-center">
+    <h1>Artisti</h1>
+
+    <div th:if="${artists == null or artists.isEmpty()}">Non ci sono artisti nel sistema</div>
+    <ul class="artists">
+        <li th:each="artist : ${artists}" class="row mb-2 custom-row">
+            <div class="col-md-6">
+                <a th:href="@{'/admin/artist/' + ${artist.id}}" th:text="${artist.name + ' ' + artist.surname}">Dino Risi</a>
+            </div>
+            <div class="col-md-6">
+                <form class="delete-btn-box" th:action="@{'/admin/deleteArtist/'+${artist.id}}" method="post">
+                    <div class="delete-artist-text">
+                        <button type="submit" class="btn2">Elimina</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+
+<!--  <div class="container-artisti my-5 text-center">
 <h1>Artisti</h1>
 
     <div th:if="${artists == null or artists.isEmpty()}">Non ci sono artisti nel sistema</div>
@@ -67,7 +92,7 @@
 		   <div class="delete-artist-text">
 		   <!-- th:action="@{'/admin/deleteArtist/' + ${artist.id}}" method="post"> -->
        
-			<button type="submit" class="btn2">Elimina</button>
+		<!--	<button type="submit" class="btn2">Elimina</button>
 		
 		</div>
 		  </form>
@@ -75,7 +100,7 @@
   
 </ul>
 
-</div>
+</div>-->
         	 <footer class="footer-artisti">
         <ul class="menu">
             <li class="menu__item">

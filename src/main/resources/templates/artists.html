@@ -22,7 +22,7 @@
 <body>
 	<header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="font-effect-anaglyph"> Nerdando</div><img src="../static/images/boom.png" height="5%" width="5%">
+ <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,7 +38,7 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
-						<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+						<li class="nav-item ml-auto" >
 			<form th:action="@{/searchComics}" method="post">
 		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>
@@ -61,7 +61,25 @@
 	  </div>
 </nav>
 	</header>
-<div class="containerArtisti my-5 text-center">
+	<div class="containerArtisti my-5 text-center">
+    <h1 class="h1-artisti">Artisti</h1>
+     <div th:if="${artists == null or artists.isEmpty()}">Non ci sono artisti nel sistema</div>
+<div class="container">
+
+<div class="container-custom">
+    <th:block th:each="artist : ${artists}">
+        <div class="row custom-row">
+            <div class="col">
+                <a th:href="@{'/artist/' + ${artist.id}}" th:text="${artist.name + ' ' + artist.surname}">D</a>
+            </div>
+        </div>
+    </th:block>
+</div>
+</div>
+</div>
+
+    
+<!--<div class="containerArtisti my-5 text-center">
     <h1 class="h1-artisti">Artisti</h1>
     <div class="containerArtisti-link">
     <div th:if="${artists == null or artists.isEmpty()}">Non ci sono artisti nel sistema</div>
@@ -71,7 +89,7 @@
     </li>
 </ul>
 </div>
-    </div>
+    </div>-->
     	 <footer class="footer-artisti">
         <ul class="menu">
             <li class="menu__item">

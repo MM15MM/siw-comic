@@ -81,7 +81,7 @@ public class ComicController {
 			return "redirect:/admin/comics"; // pagina html con lista comics
 		} 
 		else {
-			return "admin/error.html"; 
+			return "admin/formNewComic.html"; 
 		}
 	}
 	

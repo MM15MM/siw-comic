@@ -22,7 +22,7 @@
 
 <body>
  <header><nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-   <div class="font-effect-anaglyph"> Nerdando</div><img th:src="@{/static/images/boom.png}" height="5%" width="5%">
+   <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,7 +38,7 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
-						<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+						<li class="nav-item ml-auto" >
 			<form th:action="@{/searchComics}" method="post">
 		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>

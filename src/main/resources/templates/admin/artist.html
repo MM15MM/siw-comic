@@ -18,8 +18,7 @@
 <body>
 <header>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="font-effect-anaglyph"> Nerdando</div>
-    <img src="../../static/images/boom.png" height="5%" width="5%">
+  <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -66,6 +65,12 @@
 			<li><strong><span>Email: </span></strong><span th:text="${artist.email}">PaoloRossi@gmail.com</span></li>
 			</ul>
             <div th:unless="${artist}" th:style="'color:red'">Artista inesistente</div>
+            </div>
+            <div class="containerArtista my-5 text-center">
+            <div th:if="${comics != null and not #lists.isEmpty(comics)}" > <h2 >Fumetti scritti:</h2>
+              <ul th:each="comic : ${comics}">
+                <li><strong><span>Nome Fumetto: </span></strong><span th:text="${comic.title}"></span></li>
+              </ul></div>
        </div>
 	<footer class="footer-artista">
         <ul class="menu">

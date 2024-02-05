@@ -18,7 +18,7 @@
 </head>
         <body>
  <header> <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="font-effect-anaglyph"> Nerdando</div><img src="../static/images/boom.png" height="5%" width="5%">>
+  <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -34,7 +34,7 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/artist">Elenco Artisti</a>
 			</li>
-			<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+			<li class="nav-item ml-auto">
 			<form th:action="@{/searchComics}" method="post">
 		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>
@@ -57,15 +57,20 @@
 	  </div>
 </nav></header>
 
+   <div class="index-container">
+        
+        <img src="../static/images/comic-speech-bubble.png" class="bubble-image" alt="Comic Speech Bubble">
+        <h5 class="caption">Benvenuto sognatore!</h5>
+        <p class="paragraph">Registrati o accedi per aggiungere ai preferiti i fumetti!</p>
+    </div>
 
-
-<div id="carouselExampleFade" class="carousel slide carousel-fade carousel-dark" data-bs-ride="carousel">
-  <div class="carousel-inner">
+<!--  <div id="carouselExampleFade" class="carousel slide carousel-fade carousel-dark" data-bs-ride="carousel">
+  <div class="carousel-inner d-flex">
     <div class="carousel-item active">
       <img src="../static/images/comic-speech-bubble.png"  class="d-block mx-auto w-40" alt="First slide">
-       <div class="carousel-caption"> <!--d-none d-md-block"> -->
+       <div class="carousel-caption"> 
         <h5>Benvenuto sognatore!</h5>
-        <p>Registrati o accedi per cercare i fumetti!</p>
+        <p th:unless="${#request.userPrincipal}">Registrati o accedi per aggiungere ai preferiti i fumetti!</p>
       </div>
     </div>
     <div class="carousel-item">
@@ -83,7 +88,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>
+</div>-->
           	 <footer class="footer-index">
         <ul class="menu">
             <li class="menu__item">

@@ -18,8 +18,7 @@
 <body>
 <header>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="font-effect-anaglyph"> Nerdando</div>
-    <img src="../../static/images/boom.png" height="5%" width="5%">
+  <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -65,12 +64,12 @@
 		
 		<div>
 			<label>Titolo:</label> <span><input placeholder="title" type="text" th:field="${comic.title}" /></span>
-		    <span th:if="${#fields.hasErrors('title')}" th:errors="${comic.title}"></span>
+		    <ul><li><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:style="'color:red;'"></span><li></ul>
 		</div>
 
 		<div>
 			<label>Anno:</label> <span><input placeholder="year" type="number" th:field="${comic.year}" required /></span>
-		    <span th:if="${#fields.hasErrors('year')}" th:errors="${comic.year}"></span>
+		   <ul><li> <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" th:style="'color:red;'"></span></li></ul>
 		</div>
 
 		<div>

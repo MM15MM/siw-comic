@@ -89,6 +89,9 @@ public class Artist {
 		return this.writtenComics;
 	}
 	
+	public Artist getArtist() {
+		return this;
+	}
 	
 /*	//setter e getter dei fumetti disegnati da...
 	

@@ -18,8 +18,7 @@
 <body>
 <header>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="font-effect-anaglyph"> Nerdando</div>
-    <img src="../../static/images/boom.png" height="5%" width="5%">
+  <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -58,18 +57,18 @@
 <div class="container-newArtist my-5 text-center">
  <h1>Aggiungi un artista</h1>
 	<form th:action="@{/admin/artist}" method="POST" th:object="${artist}">
-		<div>
-			<span th:text="${messaggioErrore}">Errore</span>
-		</div>
+		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
 		
 		<div>
 			<label>Nome:</label> <span><input required type="text" th:field="${artist.name}" placeholder="name" /></span>
 		</div>
-
+          <ul><li><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color:red;'"></span><li></ul>
 		<div>
 			<label>Cognome:</label> <span><input required type="text" th:field="${artist.surname}" placeholder="surname"  /></span>
 		</div>
-
+         <ul><li><span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" th:style="'color:red;'"></span><li></ul> 
 		<div>
 			<label>Email:</label> <span><input required type="email" th:field="${artist.email}" placeholder="email"  /></span>
 		</div>

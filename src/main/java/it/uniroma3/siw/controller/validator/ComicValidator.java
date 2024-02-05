@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.model.Comic;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.ComicRepository;
 
 @Component
@@ -17,11 +18,15 @@ public class ComicValidator implements Validator {
 		@Override
 		public void validate(Object o, Errors errors) {
 			Comic comic = (Comic)o;
-			if (comic.getTitle()!=null && comic.getYear()!=null 
-					&& comicRepository.existsByTitleAndYear(comic.getTitle(),  comic.getYear())) {
-				errors.reject("comic.duplicate");
-			}
+			String titolo = comic.getTitle().trim();
+			if (titolo.isEmpty())
+	            errors.rejectValue("title", "required");
+			else if (comicRepository.existsByTitleAndYear(titolo,  comic.getYear())) 
+				errors.rejectValue("title","duplicate");
+			    errors.rejectValue("year","duplicate");
+			
 		}
+
 		@Override
 		public boolean supports(Class<?> aClass) {
 			return Comic.class.equals(aClass);
