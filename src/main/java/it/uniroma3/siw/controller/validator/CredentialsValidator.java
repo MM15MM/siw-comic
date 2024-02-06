@@ -7,7 +7,6 @@ import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
-import it.uniroma3.siw.repository.CredentialsRepository;
 import it.uniroma3.siw.service.CredentialsService;
 
 @Component
@@ -21,8 +20,7 @@ public class CredentialsValidator implements Validator {
     final Integer MAX_PASSWORD_LENGTH = 20;
     final Integer MIN_PASSWORD_LENGTH = 6;
 
-    @Autowired
-	private CredentialsRepository credentialsRepository;
+
 
     @Override
     public void validate(Object o, Errors errors) {
@@ -34,7 +32,7 @@ public class CredentialsValidator implements Validator {
             errors.rejectValue("username", "required");
         else if (username.length() < MIN_USERNAME_LENGTH || username.length() > MAX_USERNAME_LENGTH)
             errors.rejectValue("username", "size");
-        else if (this.credentialsRepository.existsByUsername(username))
+        else if (this.credentialsService.existsByUsername(username))
             errors.rejectValue("username", "duplicate");
 
         if (password.isEmpty())
