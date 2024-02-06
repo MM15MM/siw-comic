@@ -61,8 +61,8 @@
 
 <h1 class="fumetti">Fumetti</h1>
 <div th:if="${comics==null || comics.isEmpty()}">Non ci sono fumetti nel sistema</div>
-<div class="lista-fumetti">
-	<div th:each="comic : ${comics}">
+<div class="row lista-fumetti ml-auto">
+	<div th:each="comic : ${comics}" class="col-md-2">
 	<div class="card">
 		<a th:href="@{'/comic' + '/' + ${comic.id} +'/defaultUser'}">
 		<img th:src="@{${comic.image}}" alt="Immagine del fumetto" /></a>

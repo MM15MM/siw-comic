@@ -128,7 +128,7 @@ public class ComicController {
 			List<Comic> comics = this.comicService.findAll();
 			model.addAttribute("comics", comics);
 			this.comicService.save(originalComic);
-			return "admin/comics.html";
+			return "redirect:/admin/comic/"+id;
 		}
 		model.addAttribute("comic", this.comicService.findById(id));
 		return "admin/formUpdateComic.html";
@@ -140,10 +140,6 @@ public class ComicController {
 	
 
 
-/*	@RequestMapping(value="/admin/formSearchComics",method = RequestMethod.GET)
-	public String formSearchComicsAdmin(Model model) {
-		return "admin/formSearchComics.html";
-	}*/
 	@PostMapping(value ="/admin/searchComics")
 	public String searchComicsAdmin(Model model, @RequestParam String title) {
 		model.addAttribute("comics", this.comicService.findByTitle(title));
@@ -160,12 +156,7 @@ public class ComicController {
 	
 	/*CHIUNQUE VISUALIZZA LISTA COMICS E DETTAGLI COMIC*/
 	
-/*	@GetMapping( value= "/comic/{id}")
-	public String getComic(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("comic", this.comicService.findById(id));
-		model.addAttribute("comments", this.commentService.findAllByComicId(id));
-		return "comic.html";
-	}*/
+
 
 	@GetMapping(value = "/comicsDefaultUser")
 	public String showComics(Model model) {
@@ -183,7 +174,7 @@ public class ComicController {
 		model.addAttribute("comments", this.commentService.findAllByComicId(id));
 		 if (principal != null) {
 		        String username = principal.getName();
-		        User user = this.credentialsService.getCredentials(username).getUser();
+		        User user = this.credentialsService.getCredentialsUsername(username).getUser();
 
 		        if (user != null && user.getFavorites().contains(this.comicService.findById(id))) {
 		            // L'utente ha il fumetto tra i preferiti, visualizza comic.html
@@ -193,26 +184,11 @@ public class ComicController {
 		return "comicDefaultUser";
 	}
 
-		/*@GetMapping(value = "/comics")
-	public String ShowComics(Model model) {
-	 	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Credentials credentials = this.credentialsService.getCredentials(userDetails.getUsername());
 
-		model.addAttribute("comics", this.comicService.findAll());
-		model.addAttribute("user", credentials.getUser());
-		return "comics.html";
-	}*/
-	
 	
 	/* RiCERCA DEI COMICS*/
 	
 	
-	
-/*	@GetMapping(value = "/formSearchComics")
-	public String formSearchComics() {
-		return "formSearchComics.html";
-	}*/
-
 	@PostMapping(value = "/searchComics")
 	public String searchComicsByYear(Model model, @RequestParam String title) {
 		model.addAttribute("comics", this.comicService.findByTitle(title));

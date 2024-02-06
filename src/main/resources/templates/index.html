@@ -57,12 +57,17 @@
 	  </div>
 </nav></header>
 
-   <div class="index-container">
-        
-        <img src="../static/images/comic-speech-bubble.png" class="bubble-image" alt="Comic Speech Bubble">
-        <h5 class="caption">Benvenuto sognatore!</h5>
-        <p class="paragraph">Registrati o accedi per aggiungere ai preferiti i fumetti!</p>
-    </div>
+   <div class="index-container my-5 text-center" th:unless="${#request.userPrincipal}">
+	<h1>Benvenuto in Nerdando!</h1>
+    <p>Scopri i fumetti che sono disponibili sul sito.</p>
+    <p>Registrati o/e fai il login per mettere tra i preferiti i fumetti che ti piacciono di più</p>
+</div>
+
+
+<div class="index-container my-5 text-center" th:if="${#request.userPrincipal}">
+	<h1>Benvenuto!</h1>
+    <p>Ora puoi aggiungere i fumetti ai preferiti e lasciare un commento.</p>
+</div>
 
 <!--  <div id="carouselExampleFade" class="carousel slide carousel-fade carousel-dark" data-bs-ride="carousel">
   <div class="carousel-inner d-flex">

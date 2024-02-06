@@ -25,7 +25,7 @@ public class CredentialsService {
 	}
 
 	@Transactional
-	public Credentials getCredentials(String username) {
+	public Credentials getCredentialsUsername(String username) {
 		Optional<Credentials> result = this.credentialsRepository.findByUsername(username);
 		return result.orElse(null);
 	}
@@ -36,4 +36,9 @@ public class CredentialsService {
         credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
         return this.credentialsRepository.save(credentials);
     }
+    @Transactional
+    public boolean existsByUsername(String username){
+    	return this.credentialsRepository.existsByUsername(username);
+    }
+    
 }

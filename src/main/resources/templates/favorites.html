@@ -60,12 +60,12 @@
 	  </div>
 </nav></header>
 
-<div class="containerComic my-5 text-center">
+
 <h1 class="fumetti">Fumetti preferiti</h1>
 <div th:if="${favorites==null || favorites.isEmpty()}" th:style="'color:red'">
-Non hai aggiunto alcun fumetto ai preferiti</div></div>
-<div class="lista-fumetti">
-	<div th:each="favorite : ${favorites}">
+Non hai aggiunto alcun fumetto ai preferiti</div>
+<div class="row lista-fumetti ml-auto">
+	<div th:each="favorite : ${favorites}"class="col-md-2">
 	<div class="card">
 		<a th:href="@{'/comic' + '/' + ${favorite.id}+'/defaultUser'}">
 			<img th:src="@{${favorite.image}}" alt="Immagine del fumetto" /></a>

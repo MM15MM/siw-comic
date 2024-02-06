@@ -66,7 +66,7 @@ public class AuthenticationController {
 		else {	
 			Authentication userDetails =  SecurityContextHolder.getContext().getAuthentication();
 			String loggedUser = userDetails.getName();
-			Credentials credentials = credentialsService.getCredentials(loggedUser);
+			Credentials credentials = credentialsService.getCredentialsUsername(loggedUser);
 			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
 				return "admin/indexAdmin.html";
 			}
@@ -78,7 +78,7 @@ public class AuthenticationController {
     public String defaultAfterLogin(Model model) {
         
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+    	Credentials credentials = credentialsService.getCredentialsUsername(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/indexAdmin.html";
         }

@@ -54,7 +54,7 @@ public class UserController {
 		String referer = request.getHeader("Referer");//per aggiornare la pagina
 		String username = principal.getName();
 		
-		User user = this.credentialsService.getCredentials(username).getUser();
+		User user = this.credentialsService.getCredentialsUsername(username).getUser();
 	        Comic comic = this.comicService.findById(comicId);
 
 	        if (user != null && comic != null) {
@@ -70,7 +70,7 @@ public class UserController {
 	    public String viewFavorites( Model model, Principal principal) {
 	    	String username = principal.getName();
 			
-			User user = this.credentialsService.getCredentials(username).getUser();
+			User user = this.credentialsService.getCredentialsUsername(username).getUser();
 
 	        if (user != null) {
 	            List<Comic> favorites = user.getFavorites();
@@ -88,7 +88,7 @@ public class UserController {
 	    	String username = principal.getName();
 	    	String referer = request.getHeader("Referer");//per aggiornare la pagina
 	    	
-			User user = this.credentialsService.getCredentials(username).getUser();
+			User user = this.credentialsService.getCredentialsUsername(username).getUser();
 	    	Comic comic = comicService.findById(comicId);
 
 	        if (user != null && comic != null) {

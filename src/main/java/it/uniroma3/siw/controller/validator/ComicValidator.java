@@ -23,7 +23,6 @@ public class ComicValidator implements Validator {
 	            errors.rejectValue("title", "required");
 			else if (comicRepository.existsByTitleAndYear(titolo,  comic.getYear())) 
 				errors.rejectValue("title","duplicate");
-			    errors.rejectValue("year","duplicate");
 			
 		}
 

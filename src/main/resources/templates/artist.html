@@ -64,22 +64,17 @@
 <div class="containerArtista my-5 text-center">
 	<h1>Dettagli artista</h1>
 	<div th:if="${artist}">
-		<strong><span>Nome: </span></strong>
-		<span th:text="${artist.name}"></span>
-	</div>
-	<div>
-		<strong><span>Cognome: </span></strong>
-		<span th:text="${artist.surname}"></span>
-	</div>
-	<div>
-		<strong><span>Email: </span></strong>
-		<span th:text="${artist.email}"></span>
+		<ul>
+			<li><strong><span>Nome: </span></strong><span th:text="${artist.name}">Paolo</span></li>
+			<li><strong><span>Cognome: </span></strong><span th:text="${artist.surname}">Rossi</span></li>
+			<li><strong><span>Email: </span></strong><span th:text="${artist.email}">PaoloRossi@gmail.com</span></li>
+			</ul>
 	</div>
 	<div th:unless="${artist}" th:style="'color:red;'">Artista inesistente</div>
 	</div>
 	
 	            <div class="containerArtista my-5 text-center">
-            <div> <h2 th:if="${comics}">Fumetti scritti:</h2>
+            <div th:if="${comics != null and not #lists.isEmpty(comics)}" > <h2 >Fumetti scritti:</h2>
               <ul th:each="comic : ${comics}">
                 <li><strong><span>Nome Fumetto: </span></strong><span th:text="${comic.title}"></span></li>
               </ul></div>

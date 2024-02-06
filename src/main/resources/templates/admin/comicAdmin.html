@@ -72,7 +72,7 @@
    
   
      <div th:unless="${comic}">Non esiste</div>
-     <h2>Commenti</h2>
+   <div th:if="${comments != null and not #lists.isEmpty(comments)}" > <h2>Commenti</h2>
      <ul  class="comment-section">
         <li th:each="comment : ${comments}">
         <strong><span th:text="*{comment.username} + ':'"></span></strong>
@@ -84,7 +84,7 @@
             </form>-->
             </div>
         </li>
-    </ul>
+    </ul></div>
 
 
 </div>   

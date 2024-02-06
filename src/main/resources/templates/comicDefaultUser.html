@@ -22,7 +22,7 @@
 
 <body>
  <header><nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-   <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
+   <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -65,9 +65,11 @@
   <div class="containerComic my-5 text-center">
   <!-- Content here --> 
   <h1>Dettagli Fumetto</h1>
-    <div th:if="${comic}">
-      <ul>
-        <li><span class="comic-image"><img width="5%" th:src=${comic.Image} /></span></li>
+    
+    <div class="row  mx-0">
+        <div class="col-md-2 offset-md-5 px-0">
+            <ul class="list-unstyled">
+            <li><span class="comic-image"><img width="5%" th:src=${comic.Image} /></span></li>
         <li> <strong><span class ="comic-title" th:text="${comic.title} + '(' +${comic.year}+')'">)</span></strong> 
         </li>
         <li><strong><span>Genere: </span></strong>
@@ -76,20 +78,26 @@
         <li><strong><span>Casa editrice: </span></strong>
         <span th:text="${comic.publisher}">Casa editrice: publisher</span>
         </li>
-     <li class="trama-detail-comic" >
-     <strong><span>Trama: </span></strong><span th:text="${comic.resume}">Gli avengers si trovano ad affrontare una nuova minaccia. Come riusciranno a sconfiggere Doctor Doom?</span>
-     </li>
-     <li th:if="${#request.userPrincipal}"> 
+                <li>
+                    <strong><span>Trama: </span></strong>
+                    <span th:text="${comic.resume}">
+                        Gli avengers si trovano ad affrontare una nuova minaccia. Come riusciranno a sconfiggere Doctor Doom?
+                    </span>
+                    </li>
+                     <li th:if="${#request.userPrincipal}"> 
       <form th:action="@{'/addFavorite/' + ${comic.id}}"  method="post">
         <button type="submit" class="btn">Aggiungi ai preferiti</button>
     </form>
      </li>
-     </ul>
-     </div>
+            </ul>
+        </div>
+    </div>
+
+ 
+     
      <div th:unless="${comic}">Non esiste</div>
      
-     <div class="comment-section">
-     <h2 >Commenti</h2>
+     <div th:if="${comments != null and not #lists.isEmpty(comments)}" class="comment-section"><h2>Commenti</h2>
      <div><ul>
         <li th:each="comment : ${comments}">
         <span><strong> <span th:text="${comment.username} + ': '"></span></strong></span>
@@ -105,8 +113,7 @@
         <button type="submit" class="btn">Invia Commento</button>
     </form></div>
 </div>
-</div>
-</div>
+</div></div>
  <footer class="footer-comic">
         <ul class="menu">
             <li class="menu__item">

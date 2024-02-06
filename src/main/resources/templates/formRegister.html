@@ -59,7 +59,7 @@
 </nav></header>
 
 
-	<h1 class="registrazione">Registrazione nuovo utente</h1>
+	 <h1 class="registrazione">Registrazione nuovo utente</h1>
 	<div class="container-reg">
 	<form th:action="@{/register}" method="POST">
 		<div>
@@ -95,11 +95,12 @@
 		</li>
 		</ul>
 		</div>
-		<div>
+
+		  <div>
 			<label><strong>Username:</strong></label>
 			<ul>
 			<li>
-			<span><input type="text" placeholder="username" required th:field="${credentials.username}" id="username"/></span>
+			<span><input type="text" placeholder="@username" required th:field="${credentials.username}" id="username"/></span>
 			</li>
 			<li>
 			<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}" th:style="'color:red'"></span>
@@ -119,7 +120,7 @@
 			<button class="btn" th:href="@{/registerSuccesLogin.html}" type="submit">Registra</button>
 		</div>
 	</form>
-	</div>
+	</div>-->
 	 <footer class="footer-reg">
         <ul class="menu">
             <li class="menu__item">
