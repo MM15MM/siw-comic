@@ -25,7 +25,7 @@ import it.uniroma3.siw.controller.validator.ArtistValidator;
 public class ArtistController {
 	
 	@Autowired 
-	private ArtistService artistService;
+	private ArtistService artistServicess;
 	
 	@Autowired 
 	private ArtistValidator artistValidator;
@@ -36,8 +36,6 @@ public class ArtistController {
 	
 	
 	/*ADMIN VISUALIZZA LISTA ARTISTI*/
-	
-	
 	
 	@GetMapping(value="/admin/artists")
 	public String indexArtist(Model model) {
