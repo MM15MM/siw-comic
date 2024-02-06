@@ -88,7 +88,7 @@
 		</div>
 
 		<div>
-			<span><button class="btn" type="submit">Modifica</button></span>
+			<span class="update-comic-button" ><button class="btn" type="submit">Conferma Modifica</button></span>
 		</div>
 	</form>
     
@@ -96,7 +96,7 @@
       </div>
       	  <div class="delete-comic">
 		<form  class="delete-btn" th:action="@{'/admin/deleteComic/' + ${comic.id}}" method="post">
-			<button type="submit" class="btn2">Elimina</button>
+		<div class="elimina-comic" >	<button type="submit" class="btn2">Elimina</button></div>
 		</form>
 		
 		

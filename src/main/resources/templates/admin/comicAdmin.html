@@ -65,16 +65,16 @@
         <span th:text="'('+${comic.year}+ ')'">(2000)</span>
         <a th:href="@{'/admin' +'/formUpdateComic/'+ ${comic.id}}">Modifica</a>
         <form th:action="@{'/admin/deleteComic/' + ${comic.id}}" method="post">
-    <button type="submit" class="btn2">Elimina</button>
+   <div class="elimina-comic" ><button type="submit" class="btn2">Elimina</button></div>
 </form>
              
             </div>
    
   
      <div th:unless="${comic}">Non esiste</div>
-   <div th:if="${comments != null and not #lists.isEmpty(comments)}" > <h2>Commenti</h2>
-     <ul  class="comment-section">
-        <li th:each="comment : ${comments}">
+   <div th:if="${comments != null and not #lists.isEmpty(comments)}" class="comment-section"> <h2>Commenti</h2>
+      <div class="comments-container"><ul class="comments-by.users"  >
+        <li class="user-commento" th:each="comment : ${comments}">
         <strong><span th:text="*{comment.username} + ':'"></span></strong>
             <span th:text="*{comment.comment}"></span>
             <div>
@@ -85,7 +85,7 @@
             </div>
         </li>
     </ul></div>
-
+</div>
 
 </div>   
 		 <footer class="footer-comic">

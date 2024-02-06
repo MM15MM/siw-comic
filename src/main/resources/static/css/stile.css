@@ -10,31 +10,20 @@ div.font-effect-anaglyph {
      font-size:60px;
      color: white;
 }
+header {
+  position: fixed; /* Assicurati che l'header abbia una posizione fissa o relativa */
+  top: 0; /* Posiziona l'header in alto nella pagina */
+  width: 100%; /* Assicurati che l'header occupi l'intera larghezza */
+  z-index: 1000; /* Imposta un valore di z-index elevato per l'header */
+}
 
-/*a.navbar-brand{
-	font-family: 'Sofia', sans-serif;
-	font-size: 30px;
-	
-}*/
 .caption h5{
 	  font-family: 'Comics', sans-serif;
 	/*text-decoration : line-through wavy red;*/
 	color: #000000;
 	margin-top:50px;
 }
-.caption,.paragraph{
-	margin-top:50px;
-}
 
-        .caption {
-        color:black;
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            color: white;
-        }
   .index-container {
             display: flex;
             flex-direction: column;
@@ -43,10 +32,6 @@ div.font-effect-anaglyph {
             padding-top:5em;
         }
 
-        .bubble-image {
-            width: 40%;
-            margin-bottom:80px;
-        }
     
 .custom-row{
 border:1px solid black;
@@ -65,6 +50,7 @@ textarea{
     resize: none; /* Opzione per impedire il ridimensionamento della textarea da parte dell'utente */
 	
 }
+
 h1,h2,.commento{
 	font-family: 'Comics', sans-serif;
 	/*text-decoration : line-through wavy red;*/
@@ -90,6 +76,7 @@ h1,h2,.commento{
 	
 }
 body{
+	padding-top:2em;
 	font-family:cursive;
 	background-image: url("../images/background.jpg");
 	background-position:center;
@@ -98,7 +85,7 @@ body{
     background-attachment: fixed; /* Opzionale: fissa l'immagine di sfondo durante lo scrolling */
     margin: 0; /* Rimuove i margini predefiniti del body */
 	padding-bottom: 8em;
-	
+	z-index: 1;
 }
 .trama-detail-comic{
 	margin-right:200px;
@@ -453,17 +440,40 @@ li{
         padding: 5px; /* Aggiunge spaziatura interna per una migliore presentazione */
 }
 .comment-section{
-	/*align-items:center;
-	margin-right:550px;*/
+	
+	align-items:center;
+	/*margin-right:550px;*/
 	margin-bottom:100px;
 	/*margin-left: 600px;
 	margin-top:180px;
 	line-height:30px;*/
 	text-align:center;
 	padding-top:3em;
+	
 }
+.comments-by-users li{
+	padding-right:5px;
+}
+.comments-container .comments-by-users li {
+    word-wrap: break-word; /* Fa andare a capo i commenti lunghi */
+}
+.comments-container {
+	background-color: rgba(270, 200, 100, 0.8);
+    border: 2px solid #ccc; /* Bordo del container dei commenti */
+    border-radius: 5px; /* Bordi arrotondati */
+    overflow-x: auto; /* Abilita lo scrolling orizzontale se necessario */
+    max-width: 300px; /* Larghezza massima del container dei commenti */
+    margin: 0 auto; /* Centra il container dei commenti orizzontalmente */
+text-align: center; /* Centra il testo all'interno del container */
+    padding: 5px; /* Spazio interno al container dei commenti */
 
-
+}
+.user-commento{
+	padding-right:2em;
+}
+.add-comment{
+	padding-top:3em;
+}
 
 .containerComic{
 	line-height:30px;

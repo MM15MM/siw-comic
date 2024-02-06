@@ -97,13 +97,14 @@
      
       <div th:if="${comments != null and not #lists.isEmpty(comments)}" class="comment-section">
      <h2 >Commenti</h2>
-     <div><ul>
-        <li th:each="comment : ${comments}">
+     <div>
+     <div class="comments-container"><ul class="comments-by.users">
+        <li class="user-commento" th:each="comment : ${comments}">
         <span><strong> <span th:text="${comment.username} + ': '"></span></strong></span>
             <span th:text="${comment.comment}"></span>
             
         </li>
-    </ul>
+    </ul></div>
     <div  th:if="${#request.userPrincipal}" class="add-comment">
     <h3 class="commento">Aggiungi un Commento</h3>
     <form method="post" th:action="@{'/comic/' + ${comic.id} + '/addComment'}">

@@ -5,7 +5,7 @@
 
 
     html{
-        cursor: url("https://localhost:8082/../images/pokeball.png"), auto;
+        cursor: url("../images/pokeball.png"), auto;
         /* Imposta il percorso dell'immagine desiderata e 'auto' come fallback */
     }
 
@@ -18,13 +18,19 @@ div.font-effect-anaglyph {
 }
 
 .custom-row{
-	margin-left:-5;
-	margin-right:-5;
+	padding-right:8em;
+	padding-left:9em;
 border:1px solid black;
 background-color: rgba(270, 200, 100, 0.8);
 }
 .custom-row:hover{
 	background-color: rgba(255, 200, 100, 1);
+}
+header {
+  position: fixed; /* Assicurati che l'header abbia una posizione fissa o relativa */
+  top: 0; /* Posiziona l'header in alto nella pagina */
+  width: 100%; /* Assicurati che l'header occupi l'intera larghezza */
+  z-index: 1000; /* Imposta un valore di z-index elevato per l'header */
 }
 body{
 	cursor: url("../images/pokeball.png"), auto;
@@ -36,9 +42,9 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed; /* Opzionale: fissa l'immagine di sfondo durante lo scrolling */
     margin: 0; /* Rimuove i margini predefiniti del body */
-	
+	padding-top:2em;
 	 padding-bottom: 8em;
-	
+	 z-index: 1;
 }
 
 
@@ -73,7 +79,12 @@ textarea{
     margin-left:40px;
 }
 .artists{
-	margin-right:25px;
+	margin-top:20px;
+	padding-right:8em;
+	padding-left:8em;
+}
+.authors-update-comic{
+	padding-top:2em;
 }
 .autori-up{
 	margin-left:30px;
@@ -374,40 +385,14 @@ li{
         line-height:30px;
         }
         
-       .containerComicUpdate{
-           margin-bottom:300px;
-       }
-       .container-reg{
-        text-transform: uppercase;
-        font-size:16px;
-       }
-        .container-login {
-          display:inline-block;
-          padding:10px 20px;
-          color:black;
-          font-size:16px;
-          text-decoration:none;
-          text-transform: uppercase;
-          overflow: hidden;
-          /*margin: -300px 650px 40px;*/
-        }
+      
+     
         .container-newArtist{
         text-transform: uppercase;
         font-size:16px;
         line-height:30px;
         }
-        
-        /*.container-artisti{
-        text-transform: uppercase;
-        font-size:16px;
-        line-height:30px;
-        }*/
-
-   .container-searchComic-admin{
-        text-transform: uppercase;
-        font-size:16px;
-        line-height:30px;
-   }
+ 
    .search-comics-admin{
    margin-top: 100px;
    }
@@ -474,14 +459,32 @@ li{
 
         .card:hover .aggiorna-link {
             display: block; /*Mostra link quando il cursore è posizionato sulla card*/
-        }     
+        }  
+     .update-comic-button,.elimina-comic{
+     padding-top:1em;
+     }      
+.comments-by-users li{
+	padding-right:5px;
+}
+.comments-container .comments-by-users li {
+    word-wrap: break-word; /* Fa andare a capo i commenti lunghi */
+}
+.comments-container {
+	background-color: rgba(270, 200, 100, 0.8);
+    border: 2px solid #ccc; /* Bordo del container dei commenti */
+    border-radius: 5px; /* Bordi arrotondati */
+    overflow-x: auto; /* Abilita lo scrolling orizzontale se necessario */
+    max-width: 300px; /* Larghezza massima del container dei commenti */
+    margin: 0 auto; /* Centra il container dei commenti orizzontalmente */
+text-align: center; /* Centra il testo all'interno del container */
+    padding: 5px; /* Spazio interno al container dei commenti */
 
-   .comment-section{
-   	align-items:center;
-	margin-bottom:80px;
-	margin-right:25px;
-	line-height:30px;
-	text-align:center
+}
+  .user-commento{
+	padding-right:2em;
+}
+  .containerArtistaFumetti,.comment-section{
+padding-top:3em;
    }
    .elimina-commento{
 	color:red;

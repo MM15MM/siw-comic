@@ -131,7 +131,7 @@ public class ComicController {
 			return "redirect:/admin/comic/"+id;
 		}
 		model.addAttribute("comic", this.comicService.findById(id));
-		return "admin/formUpdateComic.html";
+		return "redirect:/admin/comic/"+id;
 	}
 	
 	

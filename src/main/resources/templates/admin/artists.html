@@ -64,13 +64,11 @@
             <div class="col-md-6">
                 <a th:href="@{'/admin/artist/' + ${artist.id}}" th:text="${artist.name + ' ' + artist.surname}">Dino Risi</a>
             </div>
-            <div class="col-md-6">
-                <form class="delete-btn-box" th:action="@{'/admin/deleteArtist/'+${artist.id}}" method="post">
-                    <div class="delete-artist-text">
-                        <button type="submit" class="btn2">Elimina</button>
-                    </div>
-                </form>
-            </div>
+            		 <div class="col-md-6">
+         <a th:href="@{'/admin/deleteArtist/'+${artist.id}}" th:style="'color:red;'">Elimina</a>
+		
+		</div>
+
         </li>
     </ul>
 </div>

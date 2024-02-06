@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Artist;
@@ -25,7 +27,7 @@ import it.uniroma3.siw.controller.validator.ArtistValidator;
 public class ArtistController {
 	
 	@Autowired 
-	private ArtistService artistServicess;
+	private ArtistService artistService;
 	
 	@Autowired 
 	private ArtistValidator artistValidator;
@@ -47,7 +49,7 @@ public class ArtistController {
 	/*ADMIN  RIMOZIONE ARTISTA */
 	
 
-	@PostMapping(value = "/admin/deleteArtist/{id}")
+	@RequestMapping(value = "/admin/deleteArtist/{id}", method=RequestMethod.GET)
 	public String deleteArtist(@PathVariable("id") Long id) {
         this.artistService.deleteById(id);
 		return "redirect:/admin/artists";
