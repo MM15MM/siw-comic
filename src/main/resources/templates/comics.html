@@ -10,6 +10,8 @@
      <link  rel="icon" href="../static/images/boom.png" type="image/x-icon">
      <link rel="stylesheet" href="../static/css/stile.css">
     
+     <link rel="preload" href="../static/css/stile.css" as="style">
+    <script th:src="@{../static/js/paginaDefaultUsers.js}" defer></script>
      <!-- font -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +36,7 @@
 				<a class="nav-link" href="/favorites">Elenco Preferiti</a>
 			</li>
 			<li class="nav-item elenco-artisti">
-				<a class="nav-link" href="/artist">Elenco Artisti</a>
+				<a class="nav-link" href="/artists">Elenco Artisti</a>
 			</li>
 						<li class="nav-item ml-auto" >
 			<form th:action="@{/searchComics}" method="post">
@@ -58,13 +60,13 @@
 		</ul>
 	  </div>
 </nav></header>
-
+<div class="containerComic my-5 text-center">
 <h1 class="fumetti">Fumetti</h1>
 <div th:if="${comics==null || comics.isEmpty()}">Non ci sono fumetti nel sistema</div>
 <div class="row lista-fumetti ml-auto">
 	<div th:each="comic : ${comics}" class="col-md-2">
 	<div class="card">
-		<a th:href="@{'/comic' + '/' + ${comic.id} +'/defaultUser'}">
+		<a th:href="@{'/comic' + '/' + ${comic.id}}">
 		<img th:src="@{${comic.image}}" alt="Immagine del fumetto" /></a>
 		<div class="card-elements">
 	<div class="comic-title-card"><h3 th:text="${comic.title}"></h3></div> 
@@ -72,6 +74,7 @@
                  </div>
                </div>
            </div>
+       </div>
        </div>
 
  <footer class="footer-comics-default">

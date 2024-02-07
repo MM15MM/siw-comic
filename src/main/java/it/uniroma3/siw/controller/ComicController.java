@@ -158,17 +158,14 @@ public class ComicController {
 	
 
 
-	@GetMapping(value = "/comicsDefaultUser")
+	@GetMapping(value = "/comics")
 	public String showComics(Model model) {
 		model.addAttribute("comics", this.comicService.findAll());
-		return "comicsDefaultUser.html";
+		return "comics.html";
 	}
-	@GetMapping(value = "/comicDefaultUser")
-	public String showComicDefault() {
-		return "comicsDefaultUser.html";
-	}
+
 	
-	@GetMapping(value= "/comic/{id}/defaultUser")
+	@GetMapping(value= "/comic/{id}")
 	public String getComicDefaultUser(@PathVariable("id") Long id, Model model, Principal principal) {
 		model.addAttribute("comic", this.comicService.findById(id));
 		model.addAttribute("comments", this.commentService.findAllByComicId(id));
@@ -190,7 +187,7 @@ public class ComicController {
 	
 	
 	@PostMapping(value = "/searchComics")
-	public String searchComicsByYear(Model model, @RequestParam String title) {
+	public String searchComicsByTitle(Model model, @RequestParam String title) {
 		model.addAttribute("comics", this.comicService.findByTitle(title));
 		return "foundComics.html";
 	}

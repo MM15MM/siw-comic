@@ -10,6 +10,8 @@
      <link  rel="icon" th:href="@{/static/images/boom.png}" type="image/x-icon">
       <link rel="stylesheet" type="text/css" th:href="@{/static/css/stile.css}">
     
+     <link rel="preload" href="../static/css/stile.css" as="style">
+    <script th:src="@{../../static/js/paginaDefaultUsers.js}" defer></script>
      <!-- font -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,13 +32,13 @@
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		<ul class="navbar-nav elenco">
 			<li class="nav-item elenco-comics">
-				<a class="nav-link" href="/comicsDefaultUser">Elenco Fumetti</a>
+				<a class="nav-link" href="/comics">Elenco Fumetti</a>
 			</li>
 			<li class="nav-item elenco-preferiti" th:if="${#request.userPrincipal}">
 				<a class="nav-link" href="/favorites">Elenco Preferiti</a>
 			</li>
 			<li class="nav-item elenco-artisti">
-				<a class="nav-link" href="/artist">Elenco Artisti</a>
+				<a class="nav-link" href="/artists">Elenco Artisti</a>
 			</li>
 						<li class="nav-item ml-auto">
 			<form th:action="@{/searchComics}" method="post">
@@ -104,16 +106,16 @@
             <span th:text="${comment.comment}"></span>
             
         </li>
-    </ul></div>
+    </ul></div></div></div>
     <div  th:if="${#request.userPrincipal}" class="add-comment">
-    <h3 class="commento">Aggiungi un Commento</h3>
+   <div  class="commento" ><h3>Aggiungi un Commento</h3></div>
     <form method="post" th:action="@{'/comic/' + ${comic.id} + '/addComment'}">
         <label for="text">Commento: </label>
         <textarea id="text" name="comment" required></textarea>
         <button type="submit" class="btn">Invia Commento</button>
     </form></div>
+
 </div>
-</div></div>
 
  <footer class="footer-comic">
         <ul class="menu">

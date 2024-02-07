@@ -16,7 +16,9 @@ div.font-effect-anaglyph {
      font-size:60px;
      color: white;
 }
-
+.no-fumetti {
+	padding-left:40em;
+}
 .custom-row{
 	padding-right:8em;
 	padding-left:9em;
@@ -31,6 +33,9 @@ header {
   top: 0; /* Posiziona l'header in alto nella pagina */
   width: 100%; /* Assicurati che l'header occupi l'intera larghezza */
   z-index: 1000; /* Imposta un valore di z-index elevato per l'header */
+  opacity: 0;
+	   transition: opacity 0.5s ease-in-out;
+   
 }
 body{
 	cursor: url("../images/pokeball.png"), auto;
@@ -45,21 +50,18 @@ body{
 	padding-top:2em;
 	 padding-bottom: 8em;
 	 z-index: 1;
+	  opacity: 0;
+	   transition: opacity 0.5s ease-in-out;
 }
 
 
-h1{
+h1,h2,h3{
 	font-family: 'Comics', sans-serif;
 	/*text-decoration : line-through wavy red;*/
 	color: #000000;
 	
 }
-h2{
-	font-family: 'Comics', sans-serif;
-	/*text-decoration : line-through wavy red;*/
-	color: #000000;
-	
-}
+
 .cerca{
 	margin-top:5px;
 }
@@ -149,184 +151,23 @@ li{
     margin-bottom: 5px;  /* Aggiungi uno spazio inferiore tra il titolo e il paragrafo */
     font-weight:bold;
    /* color:red;*/
-}         .footer-update-authors{
-	
-	            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 98px;
-          }
-        .footer-update-comic{
-             bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 100px;
-      }
-      .footer-comics-admin{            
-	        bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 1000px
-            }
-       .footer-ricerca-comic{
-            bottom:100;
-            position: absolute;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 189px;
-       }
-       
-       
-        .footer-nuovo-artista{
-            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 196px;
-        }
-        .footer-nuovo-comic{
-            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 98px;
-        }
-        .footer {
-            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 70px;
-        }
-        .footer-comic{
-        
-            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 300px;
-        
-        }
-        .footer-index{
-            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 148px;
-        }
-        .footer-artista {
-            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 264px;
-        }
-        
-        .footer-comics-trovati{
-            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 380px;
-        }
-        
-        .footer-comics-admin{
-            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 1000px;
-        }
-        
-        .footer-artisti {
-            bottom:0;
-            position: fixed;
-            width: 100%;
-            background: #282828;
-            min-height: 50px;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 336px;
-        }
-        
+}        
+ footer{
+ transition: opacity 0.5s ease-in-out;
+ padding-top: 3em;
+    opacity: 1; /* Imposta l'opacità a 1 per renderlo visibile */
+    z-index: 1000;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    background: #282828;
+    min-height: 50px;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }   
         .menu {
             position: relative;
             display: flex;
@@ -387,11 +228,7 @@ li{
         
       
      
-        .container-newArtist{
-        text-transform: uppercase;
-        font-size:16px;
-        line-height:30px;
-        }
+       
  
    .search-comics-admin{
    margin-top: 100px;

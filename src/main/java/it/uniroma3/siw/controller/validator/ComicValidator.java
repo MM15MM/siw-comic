@@ -6,14 +6,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.model.Comic;
-import it.uniroma3.siw.model.User;
-import it.uniroma3.siw.repository.ComicRepository;
+import it.uniroma3.siw.service.ComicService;
 
 @Component
 public class ComicValidator implements Validator {
 
 		@Autowired
-		private ComicRepository comicRepository;
+		private ComicService comicService;
 
 		@Override
 		public void validate(Object o, Errors errors) {
@@ -21,7 +20,7 @@ public class ComicValidator implements Validator {
 			String titolo = comic.getTitle().trim();
 			if (titolo.isEmpty())
 	            errors.rejectValue("title", "required");
-			else if (comicRepository.existsByTitleAndYear(titolo,  comic.getYear())) 
+			else if (comicService.existsByTitleAndYear(titolo,  comic.getYear())) 
 				errors.rejectValue("title","duplicate");
 			
 		}

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.uniroma3.siw</groupId>
-	<artifactId>siwproduct</artifactId>
+	<artifactId>siwcomic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>siw-product-01</name>
+	<name>siw-comic-01</name>
 	<description>progetto</description>
 	<properties>
 		<java.version>1.8</java.version>

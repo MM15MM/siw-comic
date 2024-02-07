@@ -44,5 +44,10 @@ public class ComicService {
 	   public void deleteById(Long id) {
 		   this.comicRepository.deleteById(id);
 	   }
+     @Transactional
+	public boolean existsByTitleAndYear(String titolo, Integer year) {
+		// TODO Auto-generated method stub
+		return this.comicRepository.existsByTitleAndYear(titolo, year);
+	}
 	   
 }
