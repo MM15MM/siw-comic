@@ -26,6 +26,12 @@
 
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		<ul class="navbar-nav elenco">
+		<li class="nav-item elenco-comics">
+				<a class="nav-link" href="/admin/comics">Elenco Fumetti</a>
+			</li>
+			<li class="nav-item elenco-artisti">
+				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
+			</li>
 						<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
 			<form th:action="@{/admin/searchComics}" method="post">
 		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
@@ -51,22 +57,32 @@
 </header>
 <div class="container-index-admin my-5 text-center">
 	<h1>Operazioni per amministratore</h1>
-	<div class="indexClasse">
-	<div>
-		<a href="/admin/comics">Elenco Fumetti</a>
-	</div>
-	<div>
-		<a href="/admin/artists">Elenco Artisti</a>
-	</div>
-	
-	<div>
-		<a href="/admin/formNewComic">Inserisci i dati di un fumetto</a>
-	</div>
-	<div>
-		<a href="/admin/formNewArtist">Inserisci i dati di un nuovo artista</a>
-	</div>
-	</div>
-	</div>
+<div class="container text-center mt-5">
+<div class="indexClasse">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card-home">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Nuovo Fumetto</strong></h5>
+                    <p class="card-text">Inserisci una nuovo fumetto.</p>
+                    <a href="/admin/formNewComic" class="btn btn-primary">Vai</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-home">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Nuovo Artista</strong></h5>
+                    <p class="card-text">Inserisci un nuovo artista.</p>
+                    <a href="/admin/formNewArtist" class="btn btn-primary">Vai</a>
+                </div>
+            </div>
+        </div>
+     
+    </div>
+</div></div>
+
+</div>
 	 <footer class="footer-index">
         <ul class="menu">
             <li class="menu__item">

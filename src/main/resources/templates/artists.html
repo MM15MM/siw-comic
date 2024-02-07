@@ -66,19 +66,17 @@
 	<div class="containerArtisti my-5 text-center">
     <h1 class="h1-artisti">Artisti</h1>
  <div th:if="${artists == null or artists.isEmpty()}">Non ci sono artisti nel sistema</div>
-<div class="container">
-
-<div class="container-custom">
-    <th:block th:each="artist : ${artists}">
-         <div class="row custom-row" th:onclick="'redirectToArtistPage(\'' + ${artist.id} + '\')'" th:style="'cursor:pointer;'">
-            <div class="col ">
-                <span th:text="${artist.name + ' ' + artist.surname}">D</span>
-            </div>
+  
+ <div class="list-artists">
+  <ul >
+     <li th:each="artist : ${artists}" class="row mb-2 custom-row" th:onclick="'redirectToArtistPage(\'' + ${artist.id} + '\')'" th:style="'cursor:pointer;'">
+            <div class="col">
+             <span th:text="${artist.name + ' ' + artist.surname}">D</span>
+   </div> </li> </ul>
+    
         </div>
-    </th:block>
 </div>
-</div>
-</div>
+
 
 
     

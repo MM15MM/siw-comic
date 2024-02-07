@@ -2,14 +2,10 @@
 @import url('https://fonts.cdnfonts.com/css/comics');
 
 
-
-
-    html{
-        cursor: url("../images/pokeball.png"), auto;
-        /* Imposta il percorso dell'immagine desiderata e 'auto' come fallback */
-    }
-
-
+.card-home {
+            background-color: rgba(255, 200, 100, 1);
+            border: 1px solid #dee2e6; /* Bordo */;
+        }
 div.font-effect-anaglyph {
 
 	font-family: 'Poppins', sans-serif;

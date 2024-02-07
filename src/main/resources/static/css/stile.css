@@ -251,7 +251,11 @@ footer{
          height: 100%; /* L'immagine si adatta all'altezza del box */
         }
         
-       
+  .list-artists{
+  margin-top:20px;
+	padding-left:8em;
+	padding-right:8em;
+  }
         .container-login {
           font-size:16px;
           text-decoration:none;
