@@ -25,10 +25,7 @@ public class ComicService {
 			return this.comicRepository.findById(id).get();
 		}
 	   
-	   @Transactional
-		public List<Comic> findByYear(int year) {
-			return this.comicRepository.findByYear(year);
-		}
+
 	  
 	   @Transactional
 		public List<Comic> findAll() {

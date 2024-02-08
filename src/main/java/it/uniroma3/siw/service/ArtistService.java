@@ -42,4 +42,9 @@ public class ArtistService {
 	  public List<Artist> findArtistsNotInComic(Long id){
 	    	return (List<Artist>) this.artistRepository.findArtistsNotInComic(id);
 	    }
+	    @Transactional
+		public List<Artist> findByName(String name) {
+			// TODO Auto-generated method stub
+			return this.artistRepository.findByName(name);
+		}
 }

@@ -20,6 +20,9 @@ var pagesToPreload = [
     '/login',
     '/comic/',
     '/comics',
+    '/searchExhibitions',
+    '/exhibitions',
+    '/searchArtists',
     '/'
     // Aggiungi qui altri URL delle pagine
 ];

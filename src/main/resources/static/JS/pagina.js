@@ -18,7 +18,14 @@ var pagesToPreload = [
     '/admin/comics',
     '/admin/comic/',
     '/admin/formNewComic',
+    '/admin/formNewExhibition',
+    '/admin/updateComic/',
+    '/admin/updateAuthors/',
+    '/admin/exhibitions',
+    '/admin/formUpdateExhibition/',
     '/admin/formUpdateComic/',
+    '/admin/searchExhibitions',
+    '/admin/searchArtists',
     '/success',
     '/'
     // Aggiungi qui altri URL delle pagine

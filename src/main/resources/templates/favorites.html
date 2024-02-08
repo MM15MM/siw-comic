@@ -13,6 +13,7 @@
     
     <link rel="preload" href="../static/css/stile.css" as="style">
  <script th:src="@{../static/js/paginaDefaultUsers.js}" defer></script>
+   <script th:src="@{../static/js/spinners.js}" defer></script>
      <!-- font -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +33,9 @@
 		<ul class="navbar-nav elenco">
 			<li class="nav-item elenco-comics">
 				<a class="nav-link" href="/comics">Elenco Fumetti</a>
+			</li>
+			<li class="nav-item elenco-fiere" >
+				<a class="nav-link" href="/exhibitions">Elenco Fiere</a>
 			</li>
 			<li class="nav-item elenco-preferiti" th:if="${#request.userPrincipal}">
 				<a class="nav-link" href="/favorites">Elenco Preferiti</a>
@@ -64,6 +68,11 @@
 
 <div class="containerComic my-5 text-center">
 <h1 class="fumetti">Fumetti preferiti</h1>
+<div class="d-flex justify-content-center">
+<div id="loadingSpinner" class="spinner-grow text-danger" role="status">
+  <span class="visually-hidden">Caricamento in corso...</span>
+  
+</div> </div>
 <div th:if="${favorites==null || favorites.isEmpty()}" th:style="'color:red'">
 Non hai aggiunto alcun fumetto ai preferiti</div>
 <div class="row lista-fumetti ml-auto">

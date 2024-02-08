@@ -39,7 +39,7 @@ public class Comic {
 	private Set<Artist> authors;
 	
 	
-	
+	@NotBlank
 	private String resume;
 
    

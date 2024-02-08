@@ -1,5 +1,7 @@
 package it.uniroma3.siw.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,6 +22,8 @@ public interface ArtistRepository extends CrudRepository<Artist, Long>{
 	public Iterable<Artist> findArtistsNotInComic(@Param("comicId") Long id);
 
 	public boolean existsByNameAndSurname(String name, String surname);
+
+	public List<Artist> findByName(String nome);
 
 
 

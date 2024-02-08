@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="../../static/css/stileAdmin.css">
     <link rel="preload" href="../../static/css/stileAdmin.css" as="style">
        <script th:src="@{../static/js/pagina.js}" defer></script>
-
+<script th:src="@{../static/js/spinners.js}" defer></script>  
     
     
    <title>Nerdando-Artisti Admin</title> 
@@ -29,12 +29,15 @@
 			<li class="nav-item elenco-comics">
 				<a class="nav-link" href="/admin/comics">Elenco Fumetti</a>
 			</li>
+			<li class="nav-item elenco-fiere" >
+				<a class="nav-link" href="/admin/exhibitions">Elenco Fiere</a>
+			</li>
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-					<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-			<form th:action="@{/admin/searchComics}" method="post">
-		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
+	<li class="nav-item ml-auto">
+			<form th:action="@{/admin/searchArtists}" method="post">
+		<input class="cerca" type="search" th:value="${name}" name="name" id="name" placeholder="inserisci nome artista" required/>
 	</form>
 			</li>
 		</ul>

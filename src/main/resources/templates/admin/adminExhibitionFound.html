@@ -11,15 +11,15 @@
       <link rel="stylesheet" href="../../static/css/stileAdmin.css">
     <link rel="preload" href="../../static/css/stileAdmin.css" as="style">
        <script th:src="@{../static/js/pagina.js}" defer></script>
-
+<script th:src="@{../static/js/spinners.js}" defer></script>  
     
     
-   <title>Nerdando-Nuovo Fumetto</title> 
+   <title>Nerdando- Ricerca Admin</title> 
 </head>
 <body>
 <header>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
+ <a class="navbar-brand font-effect-anaglyph" href="#"><img src="../static/images/boom.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">Nerdando</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,7 +35,12 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-					
+					<li class="nav-item ml-auto" >
+			<form th:action="@{/admin/searchExhibitions}" method="post">
+		<input class="cerca" type="search" th:value="${name}" name="name" id="name" placeholder="inserisci nome fiera" required/>
+	</form>
+			</li>
+				
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item ml-auto" th:unless="${#request.userPrincipal}">
@@ -54,45 +59,34 @@
 	  </div>
   </nav>
 </header>
-	
-	<div class="container-NewComic my-5 text-center">
-	<h1>Aggiungi un fumetto</h1>
-	<form th:action="@{/admin/comic}" method="POST" th:object="${comic}">
-  		<div th:if="${#fields.hasGlobalErrors()}">
-  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
-  		</div>
-		
-		<div>
-			<label>Titolo:</label> <span><input placeholder="title" type="text" th:field="${comic.title}" /></span>
-		    <ul><li><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:style="'color:red;'"></span><li></ul>
-		</div>
+<div class="containerSearchFiere my-5 text-center">
+	<h1 class="fumetti">Ecco i risultati della ricerca</h1>
+	<div class="d-flex justify-content-center">
+<div id="loadingSpinner" class="spinner-grow text-danger" role="status">
+  <span class="visually-hidden">Caricamento in corso...</span>
+  
+</div> </div>
+	<div th:if="${exhibitions.isEmpty()}">Non ci sono fiere che soddisfano la tua rischiesta</div>
 
-		<div>
-			<label>Anno:</label> <span><input placeholder="year" type="number" th:field="${comic.year}" required /></span>
-		   <ul><li> <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" th:style="'color:red;'"></span></li></ul>
-		</div>
-
-		<div>
-			<label>URL immagine:</label> <span><input placeholder="url image" type="url" th:field="${comic.image}" /></span>
-		</div>
-
-			<div>
-			<label>Casa editrice:</label> <span><input placeholder="publisher" type="text" th:field="${comic.publisher}" /></span>
-		</div>
-			<div>
-			<label>Genere:</label> <span><input placeholder="genre" type="text" th:field="${comic.genre}" /></span>
-		</div>
-		<div>
-			<label>Trama:</label> <span><textarea placeholder="resume" type="text" th:field="${comic.resume}" /></textarea></span>
-		</div>
-
-		<div>
-			<span><button class="btn" type="submit">Conferma</button></span>
-		</div>
-	</form>
-	</div>
-	
-	 <footer class="footer-nuovo-comic">
+	<div class="container-exhibitions">
+  <div class="row">
+    <div th:each="exhibition : ${exhibitions}" class="col-md-4">
+      <div class="card-fiera card-sm">
+        <h5 class="card-header" th:text="${exhibition.name}"></h5>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text" th:text="${exhibition.description}">Descrizione </p>
+          <a href="#" class="btn btn-primary" th:href="${exhibition.website}">Visita il Sito</a>
+         <a th:href="@{'/admin' +'/formUpdateExhibition/'+ ${exhibition.id}}">Modifica</a>
+         <a th:href="@{'/admin/deleteExhibition/' + ${exhibition.id}}" >Elimina</a>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+       </div>
+		 <footer class="footer-comics-admin">
         <ul class="menu">
             <li class="menu__item">
                 <a class="menu__link" th:href="@{/}">
@@ -102,10 +96,11 @@
 
         </ul>
     </footer>
-	
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    </body>
+   
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+   
+</body>
 
 </html>

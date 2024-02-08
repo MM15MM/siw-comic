@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="../../static/css/stileAdmin.css">
     <link rel="preload" href="../../static/css/stileAdmin.css" as="style">
        <script th:src="@{../../static/js/pagina.js}" defer></script>
-
+<script th:src="@{../../static/js/spinners.js}" defer></script>  
     
     
    <title>Nerdando-Admin Update Authors</title> 
@@ -29,12 +29,15 @@
 			<li class="nav-item elenco-comics">
 				<a class="nav-link" href="/admin/comics">Elenco Fumetti</a>
 			</li>
+			<li class="nav-item elenco-fiere" >
+				<a class="nav-link" href="/admin/exhibitions">Elenco Fiere</a>
+			</li>
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-						<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-			<form th:action="@{/admin/searchComics}" method="post">
-		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
+				<li class="nav-item ml-auto">
+			<form th:action="@{/admin/searchArtists}" method="post">
+		<input class="cerca" type="search" th:value="${name}" name="name" id="name" placeholder="inserisci nome artista" required/>
 	</form>
 			</li>
 		</ul>
@@ -62,12 +65,17 @@
 
 <div class="containerComicUpdate my-5 text-center">
     <h1>Autori del fumetto</h1>
+    <div class="d-flex justify-content-center">
+<div id="loadingSpinner" class="spinner-grow text-danger" role="status">
+  <span class="visually-hidden">Caricamento in corso...</span>
+  
+</div> </div>
     <div class="authors-list" th:if="${comic.authors.isEmpty()}">Non ci sono autori</div>
     <ul class="authors">
       <li th:each="author : ${comic.authors}">
         <span th:value="${author.id}" th:text="${author.name}+' '+${author.surname}"></span>
         <form th:action="@{'/admin/removeAuthorFromComic/'+${comic.id} +'/'+ ${author.id}}" method="post">
-        <button class="btn" type="submit">Elimina autore</button>
+        <button class="btn" type="submit">Rimuovi autore</button>
      </form>	
       </li>
     </ul>

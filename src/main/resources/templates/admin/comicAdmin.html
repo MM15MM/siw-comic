@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="../../static/css/stileAdmin.css">
     <link rel="preload" href="../../static/css/stileAdmin.css" as="style">
        <script th:src="@{/../static/js/pagina.js}" defer></script>
-
+<script th:src="@{../../static/js/spinners.js}" defer></script>  
     
     
    <title>Nerdando-Fumetto</title> 
@@ -29,10 +29,13 @@
 			<li class="nav-item elenco-comics">
 				<a class="nav-link" href="/admin/comics">Elenco Fumetti</a>
 			</li>
+			<li class="nav-item elenco-fiere" >
+				<a class="nav-link" href="/admin/exhibitions">Elenco Fiere</a>
+			</li>
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-					<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
+					<li class="nav-item ml-auto" >
 			<form th:action="@{/admin/searchComics}" method="post">
 		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
 	</form>
@@ -59,6 +62,11 @@
  <div class="containerComic my-5 text-center">
   <!-- Content here --> 
   <h1>Dettagli Fumetto Admin</h1>
+  <div class="d-flex justify-content-center">
+<div id="loadingSpinner" class="spinner-grow text-danger" role="status">
+  <span class="visually-hidden">Caricamento in corso...</span>
+  
+</div> </div>
     <div th:if="${comic}">
         <span class= "comic-image"><img th:src=${comic.Image} /></span>
      

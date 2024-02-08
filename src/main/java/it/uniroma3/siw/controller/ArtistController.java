@@ -193,9 +193,20 @@ public class ArtistController {
 		 return "redirect:/admin/updateAuthors/" + comicId;
 	}
 
+	/*RICERCA ARTISTI PER NOME */
+	@PostMapping(value="/searchArtists")
+	public String searchArtists(Model model, @RequestParam String name) {
+		List<Artist> artists = this.artistService.findByName(name);
+	    model.addAttribute("artists", artists);
+	    return "artistsFound";
+	}
 	
-	
-	
+	@PostMapping(value="/admin/searchArtists")
+	public String searchAdminArtists(Model model, @RequestParam String name) {
+		List<Artist> artists = this.artistService.findByName(name);
+	    model.addAttribute("artists", artists);
+	    return "adminArtistsFound";
+	}
 	
 	
 	

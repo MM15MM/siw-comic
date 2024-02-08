@@ -14,7 +14,7 @@
 
     
     
-   <title>Nerdando-Nuovo Fumetto</title> 
+   <title>Nerdando-Nuovo Fiera</title> 
 </head>
 <body>
 <header>
@@ -35,7 +35,7 @@
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-					
+	
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item ml-auto" th:unless="${#request.userPrincipal}">
@@ -56,34 +56,23 @@
 </header>
 	
 	<div class="container-NewComic my-5 text-center">
-	<h1>Aggiungi un fumetto</h1>
-	<form th:action="@{/admin/comic}" method="POST" th:object="${comic}">
+	<h1>Aggiungi una fiera</h1>
+	<form th:action="@{/admin/exhibition}" method="POST" th:object="${exhibition}">
   		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
   		</div>
 		
 		<div>
-			<label>Titolo:</label> <span><input placeholder="title" type="text" th:field="${comic.title}" /></span>
-		    <ul><li><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:style="'color:red;'"></span><li></ul>
+			<label>Nome:</label> <span><input placeholder="name" type="text" th:field="${exhibition.name}" /></span>
+		    <ul><li><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color:red;'"></span><li></ul>
 		</div>
 
-		<div>
-			<label>Anno:</label> <span><input placeholder="year" type="number" th:field="${comic.year}" required /></span>
-		   <ul><li> <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" th:style="'color:red;'"></span></li></ul>
-		</div>
-
-		<div>
-			<label>URL immagine:</label> <span><input placeholder="url image" type="url" th:field="${comic.image}" /></span>
-		</div>
 
 			<div>
-			<label>Casa editrice:</label> <span><input placeholder="publisher" type="text" th:field="${comic.publisher}" /></span>
-		</div>
-			<div>
-			<label>Genere:</label> <span><input placeholder="genre" type="text" th:field="${comic.genre}" /></span>
-		</div>
+			<label>Sito Fiera:</label> <span><input placeholder="exhibition website" type="url" th:field="${exhibition.website}" /></span>
+</div>
 		<div>
-			<label>Trama:</label> <span><textarea placeholder="resume" type="text" th:field="${comic.resume}" /></textarea></span>
+			<label>Descrizione:</label> <span><textarea placeholder="description" type="text" th:field="${exhibition.description}" /></textarea></span>
 		</div>
 
 		<div>

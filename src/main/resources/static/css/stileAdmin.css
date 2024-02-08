@@ -1,7 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:wght@500&display=swap&effect=anaglyph');
 @import url('https://fonts.cdnfonts.com/css/comics');
 
-
+.card-fiera {
+  background-color: rgba(270, 200, 100, 0.8); /* Colore di sfondo con opacità */
+  border: 2px solid rgba(0, 0, 0, 0.5); 
+  width: 300px; 
+  height: 200px; 
+   overflow: auto; /* Abilita lo scorrimento quando il contenuto è troppo lungo */
+  margin-bottom: 20px;
+}
+ .comic-title-card {
+            font-size: 1.5rem;
+        }
+.container-exhibitions{
+	padding-top:2em;
+	padding-left:3em;
+	padding-right:3em;
+}
+.card-fiera .card-header {
+  background-color: rgba(270, 200, 100, 0.8); /* Colore di sfondo per l'heade della card */
+}
 .card-home {
             background-color: rgba(255, 200, 100, 1);
             border: 1px solid #dee2e6; /* Bordo */;
@@ -25,10 +43,10 @@ background-color: rgba(270, 200, 100, 0.8);
 	background-color: rgba(255, 200, 100, 1);
 }
 header {
-  position: fixed; /* Assicurati che l'header abbia una posizione fissa o relativa */
-  top: 0; /* Posiziona l'header in alto nella pagina */
-  width: 100%; /* Assicurati che l'header occupi l'intera larghezza */
-  z-index: 1000; /* Imposta un valore di z-index elevato per l'header */
+  position: fixed; /* headerposizione fissa  */
+  top: 0; /*  l'header in alto nella pagina */
+  width: 100%; 
+  z-index: 1000; 
   opacity: 0;
 	   transition: opacity 0.5s ease-in-out;
    
@@ -38,10 +56,9 @@ body{
 	font-family:cursive;
 	background-image: url("../images/background.jpg");
 	background-position:center;
-	/*min-height: 100vh; /* Impedisce che il footer si sovrapponga al contenuto */
 	 background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Opzionale: fissa l'immagine di sfondo durante lo scrolling */
+    background-attachment: fixed; /*  fissa l'immagine di sfondo durante lo scrolling */
     margin: 0; /* Rimuove i margini predefiniti del body */
 	padding-top:2em;
 	 padding-bottom: 8em;
@@ -51,9 +68,8 @@ body{
 }
 
 
-h1,h2,h3{
+h1,h2,h3,h5{
 	font-family: 'Comics', sans-serif;
-	/*text-decoration : line-through wavy red;*/
 	color: #000000;
 	
 }
@@ -63,10 +79,10 @@ h1,h2,h3{
 }
 
 textarea{
-    width: 200px; /* Puoi regolare la larghezza a tuo piacimento */
-    height: 100px; /* Puoi regolare l'altezza a tuo piacimento */
-    border-radius: 8px; /* Puoi regolare il raggio del bordo a tuo piacimento */
-    resize: none; /* Opzione per impedire il ridimensionamento della textarea da parte dell'utente */
+    width: 200px; 
+    height: 100px; 
+    border-radius: 8px; 
+    resize: none; 
 	
 }
 
@@ -81,8 +97,17 @@ textarea{
 	padding-right:8em;
 	padding-left:8em;
 }
+.fumetti-scritti{
+	padding-right:2em;
+}
+.authors{
+	padding-right:2em;
+}
 .authors-update-comic{
 	padding-top:2em;
+}
+.autore{
+	padding-right:2em;
 }
 .autori-up{
 	margin-left:30px;
@@ -90,7 +115,7 @@ textarea{
 }
 .fumetti{
     text-align: center;
-    margin-top: 50px; /* Regola il margine superiore a tuo piacimento */
+    margin-top: 50px; 
 }
 
  .btn{
@@ -131,22 +156,21 @@ li{
 	list-style:none;
 } 
     input {
-        border-radius: 5px 5px 5px 5px; /* Aggiunge angoli arrotondati solo al lato destro */
+        border-radius: 5px 5px 5px 5px; /*  angoli arrotondati */
   }
     label {
     font-weight:bold;
         display: inline-block;
-        width: 100px; /* Imposta la larghezza desiderata */
-        text-align: right; /* Allinea il testo a destra */
-        margin-right: 10px; /* Aggiunge un margine destro per separare le etichette dagli input */
-        padding: 5px; /* Aggiunge spaziatura interna per una migliore presentazione */
+        width: 100px; 
+        text-align: right; 
+        margin-right: 10px; 
+        padding: 5px; 
 }
     
     .comic-title-card h3 {
     font-size: 1rem;
-    margin-bottom: 5px;  /* Aggiungi uno spazio inferiore tra il titolo e il paragrafo */
+    margin-bottom: 5px;  /*  spazio inferiore tra il titolo e il paragrafo */
     font-weight:bold;
-   /* color:red;*/
 }        
  footer{
  transition: opacity 0.5s ease-in-out;
@@ -195,11 +219,11 @@ li{
         }
         
         .comic-image{
-          width: 250px; /* Larghezza del box */
-          height: 300px; /* Altezza del box */
+          width: 250px; 
+          height: 300px;
           border: 1px solid #ccc; /* Bordo del box */
           padding: 10px; /* Spazio interno del box */
-          margin: 60px auto 0px; /* Margine: 10px in alto, 0 a destra, 10px in basso, -20px a sinistra */
+          margin: 60px auto 0px; 
           display:flex;
           align-items:center;
           transition:border-width 0.3s;
@@ -208,8 +232,8 @@ li{
         border-width: 5px; /* Cambia la larghezza del bordo al passaggio del mouse */
         }
         .comic-image img{
-          max-width: 100%; /* L'immagine si adatta alla larghezza del box */
-         max-height: 100%; /* L'immagine si adatta all'altezza del box */
+          max-width: 100%; 
+         max-height: 100%; 
         }
         
         .authors-update-comic{
@@ -244,55 +268,45 @@ li{
 }
  .lista-fumetti {
             margin-top:50px;
-            display: flex; /*Utilizza il modello di layout Flexbox*/
-            flex-wrap: wrap; /* Consente agli elementi figli di andare a capo quando raggiungono la fine della linea.*/
-            gap: 20px;/*Aggiunge uno spazio di 20 pixel tra gli elementi figli*/
+            display: flex; 
+            flex-wrap: wrap; /*  andare a capo quando raggiungono la fine della linea.*/
+            gap: 20px;/* spazio di 20 pixel tra gli elementi figli*/
             margin-left: 30px;
             margin-right:0px;
-            /*margin-bottom:100px;*/
             padding-left: 6em;
         }
 
         .card {
             height:300px;
             width: 200px;
-            border: 1px solid #ddd; /*Aggiunge un bordo sottile di colore grigio alle cards.*/
-            border-radius: 8px; /* bordo arrotondato*/
-            overflow: hidden;   /*Nasconde eventuali contenuti che potrebbero fuoriuscire dalla cards.*/
-            transition: transform 0.3s ease-in-out; /*Aggiunge un'animazione di transizione al cambiamento 
-                                                   della proprietà transform, che viene utilizzata quando il cursore 
+            border: 1px solid #ddd; /*bordo*/
+            border-radius: 8px; 
+            overflow: hidden;   /*Nasconde  contenuti che potrebbero fuoriuscire dalla cards.*/
+            transition: transform 0.3s ease-in-out; /*Aggiunge un'animazione di transizione che viene utilizzata quando il cursore 
                                                    si posiziona su una card.*/
-           display: flex; /* Utilizza il modello di layout flessibile */
-          flex-direction: column; /* Imposta la direzione dei figli come colonna */
+           display: flex; 
+          flex-direction: column; /*  direzione dei figli come colonna */
                                                    
         }
 
         .card:hover {
-            transform: scale(1.05); /*Applica una trasformazione di scala al 105% quando il cursore è posizionato sulla card, 
-                                      creando un effetto di ingrandimento.*/
+            transform: scale(1.05); /*effetto di ingrandimento.*/
         }
 
         .card img {
             width: 100%;
-            height: auto; /*Mantiene l'aspetto proporzionato dell'immagine.*/
+            height: auto; /*aspetto proporzionato dell'immagine.*/
         }
 
         .card-content {
-            padding: 15px; /*Aggiunge uno spazio interno di 15 pixel */
+            padding: 15px; /* spazio interno  */
         }
 
         h3, p {
-            margin: 0; /*Rimuove i margini predefiniti per gli elementi <h3> e <p> all'interno delle cards.*/
+            margin: 0; 
         }
 
-        .aggiorna-link {
-            display: none; /* Inizialmente, nasconde la trama*/
-            color: #008080;
-        }
-
-        .card:hover .aggiorna-link {
-            display: block; /*Mostra link quando il cursore è posizionato sulla card*/
-        }  
+     
      .update-comic-button,.elimina-comic{
      padding-top:1em;
      }      
@@ -304,13 +318,14 @@ li{
 }
 .comments-container {
 	background-color: rgba(270, 200, 100, 0.8);
-    border: 2px solid #ccc; /* Bordo del container dei commenti */
-    border-radius: 5px; /* Bordi arrotondati */
-    overflow-x: auto; /* Abilita lo scrolling orizzontale se necessario */
-    max-width: 300px; /* Larghezza massima del container dei commenti */
-    margin: 0 auto; /* Centra il container dei commenti orizzontalmente */
-text-align: center; /* Centra il testo all'interno del container */
-    padding: 5px; /* Spazio interno al container dei commenti */
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    overflow-x: auto; /* lo scrolling orizzontale  */
+    overflow-y: auto;
+    max-width: 300px; 
+    margin: 0 auto; 
+  text-align: center; 
+    padding: 5px; 
 
 }
   .user-commento{

@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="../../static/css/stileAdmin.css">
     <link rel="preload" href="../../static/css/stileAdmin.css" as="style">
        <script th:src="@{../../static/js/pagina.js}" defer></script>
-
+<script th:src="@{../../static/js/spinners.js}" defer></script>  
     
     
    <title>Nerdando-Artista Admin</title> 
@@ -29,12 +29,15 @@
 			<li class="nav-item elenco-comics">
 				<a class="nav-link" href="/admin/comics">Elenco Fumetti</a>
 			</li>
+			<li class="nav-item elenco-fiere" >
+				<a class="nav-link" href="/admin/exhibitions">Elenco Fiere</a>
+			</li>
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-					<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-			<form th:action="@{/admin/searchComics}" method="post">
-		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
+			<li class="nav-item ml-auto">
+			<form th:action="@{/admin/searchArtists}" method="post">
+		<input class="cerca" type="search" th:value="${name}" name="name" id="name" placeholder="inserisci nome artista" required/>
 	</form>
 			</li>
 				
@@ -60,7 +63,12 @@
 	  <div class="containerArtista my-4 text-center">
   <!-- Content here --> 
 		    <h1 th:if="${artist}">Dettagli artista:</h1>
-          <ul>
+		<div class="d-flex justify-content-center">
+<div id="loadingSpinner" class="spinner-grow text-danger" role="status">
+  <span class="visually-hidden">Caricamento in corso...</span>
+  
+</div> </div>
+          <ul class="autore">
 			<li><strong><span>Nome: </span></strong><span th:text="${artist.name}">Paolo</span></li>
 			<li><strong><span>Cognome: </span></strong><span th:text="${artist.surname}">Rossi</span></li>
 			<li><strong><span>Email: </span></strong><span th:text="${artist.email}">PaoloRossi@gmail.com</span></li>
@@ -69,7 +77,7 @@
             
             <div class="containerArtistaFumetti">
             <div th:if="${comics != null and not #lists.isEmpty(comics)}" > <h2 >Fumetti scritti:</h2>
-              <ul th:each="comic : ${comics}">
+              <ul class="fumetti-scritti" th:each="comic : ${comics}">
                 <li><strong><span>Nome Fumetto: </span></strong><span th:text="${comic.title}"></span></li>
               </ul></div>
        </div>

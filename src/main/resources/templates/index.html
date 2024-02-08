@@ -12,7 +12,7 @@
      
      <link rel="preload" href="../static/css/stile.css" as="style">
        <script th:src="@{../static/js/paginaDefaultUsers.js}" defer></script>
-     
+      <script th:src="@{../static/js/spinners.js}" defer></script>
      <!-- font -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,20 +29,10 @@
 
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		<ul class="navbar-nav elenco">
-			<li class="nav-item elenco-comics">
-				<a class="nav-link" href="/comics">Elenco Fumetti</a>
-			</li>
 			<li class="nav-item elenco-preferiti" th:if="${#request.userPrincipal}">
 				<a class="nav-link" href="/favorites">Elenco Preferiti</a>
 			</li>
-			<li class="nav-item elenco-artisti">
-				<a class="nav-link" href="/artists">Elenco Artisti</a>
-			</li>
-			<li class="nav-item ml-auto">
-			<form th:action="@{/searchComics}" method="post">
-		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
-	</form>
-			</li>
+			
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item ml-auto" th:unless="${#request.userPrincipal}">
@@ -60,7 +50,7 @@
 		</ul>
 	  </div>
 </nav></header>
-
+<div class="containerComicHome my-5 text-center">
    <div class="index-container my-5 text-center" th:unless="${#request.userPrincipal}">
 	<h1>Benvenuto in Nerdando!</h1>
     <p>Scopri i fumetti che sono disponibili sul sito.</p>
@@ -72,7 +62,39 @@
 	<h1>Benvenuto!</h1>
     <p>Ora puoi aggiungere i fumetti ai preferiti e lasciare un commento.</p>
 </div>
-
+ <div class="row justify-content-center">
+        <div class="col-md-2 mb-3">
+            <div class="card-home" >
+                <img src="../static/images/Comics.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Fumetti</strong></h5>
+                    <p class="card-text">Qui potrai consultare l'elenco dei fumetti.</p>
+                    <a href="/comics" class="btn btn-primary">Vai</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card-home">
+                <img src="../static/images/Comic-Con.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Fiere</strong></h5>
+                    <p class="card-text">Qui potrai consultare l'elenco delle fiere.</p>
+                    <a href="/exhibitions" class="btn btn-primary">Vai</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card-home">
+                <img src="../static/images/artisti.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Artisti</strong></h5>
+                    <p class="card-text">Qui potrai consultare l'elenco degli artisti.</p>
+                    <a href="/artists" class="btn btn-primary">Vai</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
           	 <footer class="footer-index">
         <ul class="menu">

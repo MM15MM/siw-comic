@@ -26,17 +26,17 @@
 
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		<ul class="navbar-nav elenco">
+		
 		<li class="nav-item elenco-comics">
 				<a class="nav-link" href="/admin/comics">Elenco Fumetti</a>
+			</li>
+			<li class="nav-item elenco-fiere">
+				<a class="nav-link" href="/admin/exhibitions">Elenco Fiere</a>
 			</li>
 			<li class="nav-item elenco-artisti">
 				<a class="nav-link" href="/admin/artists">Elenco Artisti</a>
 			</li>
-						<li class="nav-item ml-auto" th:if="${#request.userPrincipal}">
-			<form th:action="@{/admin/searchComics}" method="post">
-		<input class="cerca" type="search" th:value="${title}" name="title" id="title" placeholder="inserisci nome fumetto" required/>
-	</form>
-			</li>
+				
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item ml-auto" th:unless="${#request.userPrincipal}">
@@ -75,6 +75,15 @@
                     <h5 class="card-title"><strong>Nuovo Artista</strong></h5>
                     <p class="card-text">Inserisci un nuovo artista.</p>
                     <a href="/admin/formNewArtist" class="btn btn-primary">Vai</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-home">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Nuova Fiera</strong></h5>
+                    <p class="card-text">Inserisci una nuova fiera.</p>
+                    <a href="/admin/formNewExhibition" class="btn btn-primary">Vai</a>
                 </div>
             </div>
         </div>
