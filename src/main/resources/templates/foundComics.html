@@ -79,7 +79,7 @@
 	<div th:each="comic : ${comics}" class="col-md-2">
 	<div class="card">
 		<a th:href="@{'/comic' + '/' + ${comic.id}}">
-		<img th:src="@{${comic.image}}" alt="Immagine del fumetto" /></a>
+		<img th:src="@{${comic.image}}" class="img-fluid" alt="Immagine del fumetto" /></a>
 		<div class="card-elements">
 	<div class="comic-title-card"><h3 th:text="${comic.title}"></h3></div> 
                     <p th:text="${comic.year}"></p>

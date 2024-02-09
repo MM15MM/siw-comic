@@ -263,10 +263,7 @@ footer{
         .comic-image:hover {
         border-width: 5px; /* Cambia la larghezza del bordo al passaggio del mouse */
         }
-        .comic-image img{
-          width: 100%; /* L'immagine si adatta alla larghezza del box */
-         height: 100%; /* L'immagine si adatta all'altezza del box */
-        }
+       
         
   .list-artists{
   margin-top:20px;
@@ -379,10 +376,7 @@ li{
             transform: scale(1.05); /* trasformazione di scala al 105% quando il cursore è posizionato sulla card.*/
         }
 
-        .card img {
-            width: 100%;
-            height: auto; /* l'aspetto proporzionato dell'immagine.*/
-        }
+      
 
         .card-content {
             padding: 15px; /*Aggiunge uno spazio interno */
