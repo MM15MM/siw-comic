@@ -134,11 +134,7 @@ body{
 	  opacity: 0;
 	   transition: opacity 0.5s ease-in-out;
 }
-.trama-detail-comic{
-	margin-right:200px;
-	margin-left:200px;
-	margin-bottom:100px;
-}
+
 .fumetti{
 	margin-top:50px;
 	flex-direction: column;
@@ -270,12 +266,7 @@ footer{
 	padding-left:8em;
 	padding-right:8em;
   }
-        .container-login {
-          font-size:16px;
-          text-decoration:none;
-          text-transform: uppercase;
-          overflow: hidden;
-        }
+      
         .container-login-suc {
           display:inline-block;
           color:black;
