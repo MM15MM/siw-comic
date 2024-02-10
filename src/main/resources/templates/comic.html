@@ -113,7 +113,9 @@
         <li class="user-commento" th:each="comment : ${comments}">
         <span><strong> <span th:text="${comment.username} + ': '"></span></strong></span>
             <span th:text="${comment.comment}"></span>
-            
+            <div th:if="${#request.userPrincipal.name eq comment.username}">
+                        <a th:href="@{'/admin/deleteCommentUser/' + ${comment.id}}" class="delete">Elimina commento</a>
+                    </div>
         </li>
     </ul></div></div></div>
     <div  th:if="${#request.userPrincipal}" class="add-comment">

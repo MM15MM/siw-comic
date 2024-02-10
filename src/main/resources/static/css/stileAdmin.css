@@ -318,7 +318,7 @@ li{
     margin: 0 auto; 
   text-align: center; 
     padding: 5px; 
-
+max-height: 200px;
 }
   .user-commento{
 	padding-right:2em;
@@ -330,5 +330,16 @@ padding-top:3em;
 	color:red;
 	font-weight:bold;
 }
-   
+   /* Personalizzazione scrollbar */
+::-webkit-scrollbar {
+    width: 12px; /* Larghezza scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: red; /* Colore barra mobile */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Colore barra fissa */
+}
    

@@ -129,8 +129,8 @@ public class UserController {
 	    }
 
 
-	    @RequestMapping(value="/admin/deleteComment/{commentId}", method=RequestMethod.GET)
-	    public String deleteComment(@PathVariable("commentId") Long commentId, User user, HttpServletRequest request) {
+	    @RequestMapping(value="/admin/deleteCommentUser/{commentId}", method=RequestMethod.GET)
+	    public String deleteCommentAdmin(@PathVariable("commentId") Long commentId, User user, HttpServletRequest request) {
 	        Comment comment = this.commentService.findById(commentId);
 	        String referer = request.getHeader("Referer");//per aggiornare la pagina
 	    	
@@ -141,6 +141,18 @@ public class UserController {
 
 	        return "redirect:" + referer;
 	    }
-	
+	    
+	    @RequestMapping(value="/admin/deleteComment/{commentId}", method=RequestMethod.GET)
+	    public String deleteCommentUser(@PathVariable("commentId") Long commentId, Principal principal, HttpServletRequest request) {
+	        String referer = request.getHeader("Referer"); //per aggiornare la pagina
+	        Comment comment = this.commentService.findById(commentId);
+	        String username = principal.getName();
+
+	        if (comment != null && comment.getUsername().equals(username)) { // se l'utente corrente ha creato il commento
+	            this.commentService.delete(comment);
+	        }
+
+	        return "redirect:" + referer;
+	    }
 	
 }

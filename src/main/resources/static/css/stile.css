@@ -325,7 +325,7 @@ li{
     margin: 0 auto; /* Centra il container dei commenti orizzontalmente */
   text-align: center; /* Centra il testo all'interno del container */
     padding: 5px; /* Spazio interno al container dei commenti */
-
+   max-height: 200px;
 }
 .user-commento{
 	padding-right:2em;
@@ -376,4 +376,16 @@ li{
         h3, p {
             margin: 0; /*Rimuove  margini predefiniti  all'interno delle cards.*/
         }
+ /* Personalizzazione scrollbar */
+::-webkit-scrollbar {
+    width: 12px; /* Larghezza scrollbar */
+}
 
+::-webkit-scrollbar-thumb {
+    background-color: red; /* Colore barra mobile */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Colore barra fissa */
+}
+   
