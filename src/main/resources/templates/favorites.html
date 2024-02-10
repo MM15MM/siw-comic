@@ -79,7 +79,7 @@ Non hai aggiunto alcun fumetto ai preferiti</div>
 	<div th:each="favorite : ${favorites}"class="col-md-2">
 	<div class="card">
 		<a th:href="@{'/comic' + '/' + ${favorite.id}}">
-			<img th:src="@{${favorite.image}}" alt="Immagine del fumetto" /></a>
+			<img th:src="@{${favorite.image}}" class="img-fluid" alt="Immagine del fumetto" /></a>
 			<div class="card-elements">
 				<div class="comic-title-card"> <h3 th:text="${favorite.title}"></h3></div>
                     <p th:text="${favorite.year}"></p>

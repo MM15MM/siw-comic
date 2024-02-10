@@ -121,7 +121,6 @@ public class UserController {
 	        Comment comment = new Comment();
 	        if ( principal!=null) { //comic != null &&
 	            comment.setComment(text);
-	            //comment.setId(commentId);
 	            comment.setUsername(user);
 	            comment.setComic(comic);
 	            this.commentService.save(comment);

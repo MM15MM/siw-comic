@@ -12,26 +12,3 @@ document.addEventListener("DOMContentLoaded", function() {
       $('#navbarNav').toggleClass('show');
     });
   });
-// Lista degli URL delle pagine da precaricare
-var pagesToPreload = [
-    '/artist/',
-    '/artists',
-    '/comic',
-    '/favorites',
-    '/index',
-    '/success',
-    '/register',
-    '/login',
-    '/comic/',
-    '/comics',
-    '/searchExhibitions',
-    '/exhibitions',
-    '/searchArtists',
-    '/'
-    // Aggiungi qui altri URL delle pagine
-];
-
-// Cicla attraverso la lista e precarica le pagine
-pagesToPreload.forEach(function(url) {
-    fetch(url);
-});

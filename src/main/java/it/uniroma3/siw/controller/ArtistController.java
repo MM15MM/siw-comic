@@ -84,37 +84,6 @@ public class ArtistController {
 	
 	
 	
-	/*ADMIN MODIFICA DETTAGLI ARTISTA*/
-	
-	
-	
-	@GetMapping(value = "/admin/editArtist/{id}")
-	public String editArtist(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("artist", this.artistService.findById(id));
-		return "admin/editArtist";
-	}
-
-	@PostMapping(value = "/admin/editArtist/{id}")
-	public String editingArtist(@PathVariable("id") Long id, @ModelAttribute("comic") Artist artist,
-			BindingResult BindingResult, Model model) {
-		Artist originalArtist = this.artistService.findById(id);
-		originalArtist.setName(artist.getName());
-		originalArtist.setSurname(artist.getSurname());
-		originalArtist.setEmail(artist.getEmail());
-
-		this.artistValidator.validate(originalArtist, BindingResult);
-		if (!BindingResult.hasErrors()) {
-			List<Artist> artists = this.artistService.findAll();
-			model.addAttribute("artists", artists);
-			this.artistService.save(originalArtist);
-			return "admin/indexArtist.html";
-		}
-		model.addAttribute("artist", this.artistService.findById(id));
-		return "admin/editartist.html";
-	}
-
-	
-	
 	/* CHIUNQUE VISUALIZZA I DETTAGLI DELL'ARTISTA E LA LISTA DEGLI ARTISTI*/
 	
 	
