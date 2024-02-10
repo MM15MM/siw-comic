@@ -34,6 +34,8 @@ public class User {
 	@ManyToMany
 	private List<Comic> favorites = new LinkedList<Comic>();
 	
+	
+	
 	public void setFavorites(Comic comic) {
 		this.favorites.add(comic);
 	}

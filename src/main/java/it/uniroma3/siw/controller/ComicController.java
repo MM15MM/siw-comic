@@ -165,20 +165,27 @@ public class ComicController {
 	}
 
 	
-	@GetMapping(value= "/comic/{id}")
-	public String getComicDefaultUser(@PathVariable("id") Long id, Model model, Principal principal) {
-		model.addAttribute("comic", this.comicService.findById(id));
-		model.addAttribute("comments", this.commentService.findAllByComicId(id));
-		 if (principal != null) {
-		        String username = principal.getName();
-		        User user = this.credentialsService.getCredentialsUsername(username).getUser();
+	@GetMapping(value = "/comic/{id}")
+	public String getComicUser(@PathVariable("id") Long id, Model model, Principal principal) {
+		 model.addAttribute("comic", this.comicService.findById(id));
+		    model.addAttribute("comments", this.commentService.findAllByComicId(id));
+	    if (principal == null) {
+	        // L'utente non è autenticato
+	        return "comicDefault";
+	    }
 
-		        if (user != null && user.getFavorites().contains(this.comicService.findById(id))) {
-		            // L'utente ha il fumetto tra i preferiti, visualizza comic.html
-		            return "comic";
-		        }
-		    }
-		return "comicDefaultUser";
+	   
+
+	    String username = principal.getName();
+	    User user = this.credentialsService.getCredentialsUsername(username).getUser();
+
+	    if (user != null && user.getFavorites().contains(this.comicService.findById(id))) {
+	        // L'utente ha il fumetto tra i preferiti
+	        return "comicFavorite";
+	    }
+
+	    // L'utente è autenticato ma il fumetto non è tra i preferiti
+	    return "comicNotFavorite";
 	}
 
 
