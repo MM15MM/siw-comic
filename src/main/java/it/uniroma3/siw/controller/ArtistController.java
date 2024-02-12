@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Artist;
@@ -49,8 +47,8 @@ public class ArtistController {
 	/*ADMIN  RIMOZIONE ARTISTA */
 	
 
-	@RequestMapping(value = "/admin/deleteArtist/{id}", method=RequestMethod.GET)
-	public String deleteArtist(@PathVariable("id") Long id) {
+	@GetMapping(value = "/admin/deleteArtist/{id}")
+	public String deleteArtist(@PathVariable("id") Long id, Model model) {
         this.artistService.deleteById(id);
 		return "redirect:/admin/artists";
 	}
@@ -118,7 +116,7 @@ public class ArtistController {
 	
 	
 	
-	@GetMapping("/admin/updateAuthors/{id}")
+	@GetMapping(value="/admin/updateAuthors/{id}")
 	public String updateAuthors(@PathVariable("id") Long id, Model model) {
 
 		model.addAttribute("authorsToAdd", this.artistService.findArtistsNotInComic(id));

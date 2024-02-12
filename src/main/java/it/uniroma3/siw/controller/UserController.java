@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.User;
@@ -87,7 +85,7 @@ public class UserController {
 	    /*RIMUOVI DAI PREFERITI*/
 	    
 	    @PostMapping(value="/removeFavorite/{id}")
-	    public String removeFavorite(@PathVariable("id") Long comicId,HttpServletRequest request,Principal principal) {
+	    public String removeFavorite(@PathVariable("id") Long comicId,HttpServletRequest request, Model model,Principal principal) {
 	    	String username = principal.getName();
 	    	String referer = request.getHeader("Referer");//per aggiornare la pagina
 	    	
@@ -115,7 +113,7 @@ public class UserController {
 	    
 	    @PostMapping(value="/comic/{id}/addComment")
 	    public String addComment(@PathVariable("id") Long comicId, @RequestParam("comment") String text, 
-	    		Principal principal,HttpServletRequest request) {
+	    		Principal principal,Model model,HttpServletRequest request) {
 	    	 String referer = request.getHeader("Referer");//per aggiornare la pagina
 	    	
 	    	
@@ -132,8 +130,8 @@ public class UserController {
 	    }
 
 
-	    @RequestMapping(value="/admin/deleteCommentUser/{commentId}", method=RequestMethod.GET)
-	    public String deleteCommentAdmin(@PathVariable("commentId") Long commentId, User user, HttpServletRequest request) {
+	    @GetMapping(value="/admin/deleteCommentUser/{commentId}")
+	    public String deleteCommentAdmin(@PathVariable("commentId") Long commentId, User user,Model model, HttpServletRequest request) {
 	        Comment comment = this.commentService.findById(commentId);
 	        String referer = request.getHeader("Referer");//per aggiornare la pagina
 	    	
@@ -145,8 +143,8 @@ public class UserController {
 	        return "redirect:" + referer;
 	    }
 	    
-	    @RequestMapping(value="/admin/deleteComment/{commentId}", method=RequestMethod.GET)
-	    public String deleteCommentUser(@PathVariable("commentId") Long commentId, Principal principal, HttpServletRequest request) {
+	    @GetMapping(value="/admin/deleteComment/{commentId}")
+	    public String deleteCommentUser(@PathVariable("commentId") Long commentId, Principal principal,Model model, HttpServletRequest request) {
 	        String referer = request.getHeader("Referer"); //per aggiornare la pagina
 	        Comment comment = this.commentService.findById(commentId);
 	        String username = principal.getName();
