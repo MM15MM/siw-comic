@@ -117,8 +117,7 @@ public class ComicController {
 	
 		this.comicValidator.validate(comic, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			Comic originalComic = this.comicService.findById(id);
-            comic.setId(originalComic.getId());
+			
 			this.comicService.save(comic);
 			model.addAttribute("comic", comic);
 			return "redirect:/admin/comic/"+id;

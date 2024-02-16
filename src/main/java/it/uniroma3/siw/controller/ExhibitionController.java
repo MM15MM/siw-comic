@@ -99,8 +99,7 @@ public class ExhibitionController {
 
 		this.exhibitionValidator.validate(exhibition, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			Exhibition e = this.exhibitionService.findById(id);
-			exhibition.setId(e.getId());
+			
 			this.exhibitionService.save(exhibition);
 			model.addAttribute("exhibition", exhibition);
 			
