@@ -71,31 +71,32 @@
   		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}" th:style="'color:red'">...</p> 
   		</div>
-		
-		<div>
+	<ul>	
+		<li>
 			<label>Titolo:</label> <span><input placeholder="title" type="text" th:field="${comic.title}" /></span>
-		    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-		</div>
+		 </li>
+		 <li>   <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+		</li>
 
-		<div>
+		<li>
 			<label>Anno:</label> <span><input placeholder="year" type="number" th:field="${comic.year}" required /></span>
-		    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
-		</div>
+		  </li><li>  <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+		</li>
 
-		<div>
+		<li>
 			<label>URL immagine:</label> <span><input placeholder="url image" type="url" th:field="${comic.image}" /></span>
-		</div>
+		</li>
 
-			<div>
+			<li>
 			<label>Casa editrice:</label> <span><input placeholder="publisher" type="text" th:field="${comic.publisher}" /></span>
-		</div>
-			<div>
+		</li>
+			<li>
 			<label>Genere:</label> <span><input placeholder="genre" type="text" th:field="${comic.genre}" /></span>
-		</div>
-		<div>
+		</li>
+		<li>
 			<label>Trama:</label> <span><textarea placeholder="resume" type="text" th:field="${comic.resume}" /></textarea></span>
-		</div>
-
+		</li>
+</ul>
 		<div>
 			<span class="update-comic-button" ><button class="btn" type="submit">Conferma Modifica</button></span>
 		</div>
@@ -112,7 +113,7 @@
 		</div>
 		    <div class="authors-update-comic">
         <div><h2 class="authors-up">Autori:</h2></div>
-        <div th:unless="${comic.authors.isEmpty()}">
+        <div th:unless="${comic.authors==null}">
         <div th:each="author: ${comic.authors}">
           <span th:text="${author.name} + ' ' + ${author.surname}"></span>
         </div>

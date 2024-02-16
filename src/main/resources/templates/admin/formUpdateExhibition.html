@@ -71,24 +71,25 @@
   		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}" th:style="'color:red'">...</p> 
   		</div>
-		
-		<div>
+		<ul>
+		<li>
 			<label>Titolo:</label> <span><input placeholder="name" type="text" th:field="${exhibition.name}" /></span>
-		    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-		</div>
+		   </li>
+		   <li> <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+		</li>
 
 	
 
-		<div>
+		<li>
 			<label>Sito Fiera:</label> <span><input placeholder="website" type="url" th:field="${exhibition.website}" /></span>
-		</div>
+		</li>
 
 		
 		
-		<div>
+		<li>
 			<label>Descrizione:</label> <span><textarea placeholder="description" type="text" th:field="${exhibition.description}" /></textarea></span>
-		</div>
-
+		</li>
+</ul>
 		<div>
 			<span class="update-comic-button" ><button class="btn" type="submit">Conferma Modifica</button></span>
 		</div>

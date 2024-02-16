@@ -1,8 +1,6 @@
 package it.uniroma3.siw.controller;
 
 import java.security.Principal;
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,27 +111,22 @@ public class ComicController {
 	}
 
 	@PostMapping(value = "/admin/formUpdateComic/{id}")
-	public String editingComic(@Valid @PathVariable("id") Long id, @ModelAttribute("comic") Comic comic,
-			BindingResult BindingResult, Model model) {
-		Comic originalComic = this.comicService.findById(id);
-		originalComic.setTitle(comic.getTitle());
-		originalComic.setGenre(comic.getGenre());
-		originalComic.setImage(comic.getImage());
-		originalComic.setPublisher(comic.getPublisher());
-		originalComic.setResume(comic.getResume());
-		originalComic.setYear(comic.getYear());
-
-		this.comicValidator.validate(originalComic, BindingResult);
-		if (!BindingResult.hasErrors()) {
-			List<Comic> comics = this.comicService.findAll();
-			model.addAttribute("comics", comics);
-			this.comicService.save(originalComic);
+	public String editingComic( @PathVariable("id") Long id, @Valid @ModelAttribute("comic") Comic comic,
+			BindingResult bindingResult, Model model) {
+		
+	
+		this.comicValidator.validate(comic, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			Comic originalComic = this.comicService.findById(id);
+            comic.setId(originalComic.getId());
+			this.comicService.save(comic);
+			model.addAttribute("comic", comic);
 			return "redirect:/admin/comic/"+id;
 		}
-		model.addAttribute("comic", this.comicService.findById(id));
-		return "redirect:/admin/comic/"+id;
+		else {
+		return "admin/formUpdateComic.html";
+		}
 	}
-	
 	
 	
   /*RICERCA COMICS DA PARTE DELL'ADMIN*/

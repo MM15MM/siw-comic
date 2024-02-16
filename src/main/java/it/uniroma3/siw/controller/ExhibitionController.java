@@ -1,7 +1,5 @@
 package it.uniroma3.siw.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,21 +94,21 @@ public class ExhibitionController {
 
 	@PostMapping(value = "/admin/formUpdateExhibition/{id}")
 	public String editingExhibition(@Valid @PathVariable("id") Long id, @ModelAttribute("exhibition") Exhibition exhibition,
-			BindingResult BindingResult, Model model) {
-		Exhibition e = this.exhibitionService.findById(id);
-		e.setName(exhibition.getName());
-		e.setWebsite(exhibition.getWebsite());
-		e.setDescription(exhibition.getDescription());
+			BindingResult bindingResult, Model model) {
+		
 
-		this.exhibitionValidator.validate(e, BindingResult);
-		if (!BindingResult.hasErrors()) {
-			List<Exhibition> exhibitions = this.exhibitionService.findAll();
-			model.addAttribute("exhibitions", exhibitions);
-			this.exhibitionService.save(e);
+		this.exhibitionValidator.validate(exhibition, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			Exhibition e = this.exhibitionService.findById(id);
+			exhibition.setId(e.getId());
+			this.exhibitionService.save(exhibition);
+			model.addAttribute("exhibition", exhibition);
+			
 			return "redirect:/admin/exhibitions";
 		}
-		model.addAttribute("exhibition", this.exhibitionService.findById(id));
-		return "redirect:/admin/exhibitions";
+		else {
+		return "admin/formUpdateExhibition.html";
+		}
 	}
 	
 	@GetMapping(value = "/exhibitions")
