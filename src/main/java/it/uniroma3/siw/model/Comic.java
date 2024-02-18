@@ -42,6 +42,17 @@ public class Comic {
 	@NotBlank
 	private String resume;
 
+	
+	 private byte[] file;
+
+	 //  getter e setter file
+	 public byte[] getFile() {
+	     return file;
+	 }
+
+	 public void setFile(byte[] file) {
+	      this.file = file;
+	  }
    
 	//setter e getter id
 

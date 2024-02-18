@@ -88,6 +88,14 @@
         <li><strong><span>Casa editrice: </span></strong>
         <span th:text="${comic.publisher}">Casa editrice: publisher</span>
         </li>
+       <li th:if="${comic.authors.size() > 0}">
+                <strong>Autori: </strong>
+                <ul class="list-unstyled">
+                    <li th:each="author : ${comic.authors}">
+                        <span th:text="${author.name + ' ' + author.surname}"></span>
+                    </li>
+                </ul>
+            </li>
                 <li>
                     <strong><span>Trama: </span></strong>
                     <span th:text="${comic.resume}">
@@ -99,6 +107,8 @@
         <button type="submit" class="btn2">Rimuovi dai preferiti</button>
     </form>
      </li>
+     <li th:if="${comic.file}"><a th:href="@{'/comic/' + ${comic.id} + '/pdf'}">Leggi</a></li>
+     <li th:unless="${comic.file}"><strong>Non è ancora disponibile per la lettura online</strong></li>
             </ul>
         </div>
     </div>
@@ -115,7 +125,7 @@
             <span th:text="${comment.comment}"></span>
             <div th:if="${#request.userPrincipal}">
             <div th:if="${#request.userPrincipal.name eq comment.username}">
-                        <a th:href="@{'/admin/deleteCommentUser/' + ${comment.id}}" class="delete">Elimina commento</a>
+                        <a th:href="@{'/deleteComment/' + ${comment.id}}" class="delete">Elimina commento</a>
                     </div></div>
         </li>
     </ul></div></div></div>

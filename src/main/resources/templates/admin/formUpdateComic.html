@@ -95,13 +95,14 @@
 		</li>
 		<li>
 			<label>Trama:</label> <span><textarea placeholder="resume" type="text" th:field="${comic.resume}" /></textarea></span>
-		</li>
+		</li> <li><span th:if="${#fields.hasErrors('resume')}" th:errors="*{resume}" ></span></li>
 </ul>
 		<div>
 			<span class="update-comic-button" ><button class="btn" type="submit">Conferma Modifica</button></span>
 		</div>
 	</form>
-    
+	<div class="mt-3"><a th:href="@{'/admin/comic/' + ${comic.id}}">Torna al fumetto</a></div>
+    <div class="mt-3"><a class="update-author" th:href="@{'/admin/updateAuthors/' + ${comic.id}}">Modifica Autori</a></div>
 
       </div>
       	  <div class="delete-comic">
@@ -111,16 +112,7 @@
 		
 		
 		</div>
-		    <div class="authors-update-comic">
-        <div><h2 class="authors-up">Autori:</h2></div>
-        <div th:unless="${comic.authors==null}">
-        <div th:each="author: ${comic.authors}">
-          <span th:text="${author.name} + ' ' + ${author.surname}"></span>
-        </div>
-              </div>
-        <a class="update-author" th:href="@{'/admin/updateAuthors/' + ${comic.id}}">Modifica</a>
-
-</div> <div th:unless="${comic}">Fumetto inesistente</div>
+		    <div th:unless="${comic}">Fumetto inesistente</div>
 		   </div>
 		
 		

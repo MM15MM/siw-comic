@@ -30,9 +30,7 @@ div.font-effect-anaglyph {
      font-size:60px;
      color: white;
 }
-.no-fumetti {
-	padding-left:40em;
-}
+
 .custom-row{
 	padding-right:8em;
 	padding-left:9em;
@@ -52,7 +50,7 @@ header {
    
 }
 body{
-	cursor: url("../images/pokeball.png"), auto;
+	cursor: url('../images/Pokeball.png'), auto;
 	font-family:cursive;
 	background-image: url("../images/background.jpg");
 	background-position:center;
@@ -103,16 +101,7 @@ textarea{
 .authors{
 	padding-right:2em;
 }
-.authors-update-comic{
-	padding-top:2em;
-}
-.autore{
-	padding-right:2em;
-}
-.autori-up{
-	margin-left:30px;
-	margin-top:20px;
-}
+
 .fumetti{
     text-align: center;
     margin-top: 50px; 

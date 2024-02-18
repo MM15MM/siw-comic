@@ -130,20 +130,20 @@ public class UserController {
 	    }
 
 
-	    @GetMapping(value="/admin/deleteCommentUser/{commentId}")
+	    @GetMapping(value="/admin/deleteComment/{commentId}")
 	    public String deleteCommentAdmin(@PathVariable("commentId") Long commentId, User user,Model model, HttpServletRequest request) {
 	        Comment comment = this.commentService.findById(commentId);
 	        String referer = request.getHeader("Referer");//per aggiornare la pagina
 	    	
 	        if (comment != null) {
-	            this.commentService.delete(comment);
+	        	this.commentService.delete(comment);
 	            return "redirect:" + referer;
 	        }
 
 	        return "redirect:" + referer;
 	    }
 	    
-	    @GetMapping(value="/admin/deleteComment/{commentId}")
+	    @GetMapping(value="/deleteComment/{commentId}")
 	    public String deleteCommentUser(@PathVariable("commentId") Long commentId, Principal principal,Model model, HttpServletRequest request) {
 	        String referer = request.getHeader("Referer"); //per aggiornare la pagina
 	        Comment comment = this.commentService.findById(commentId);

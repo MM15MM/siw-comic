@@ -18,11 +18,15 @@ public class ComicValidator implements Validator {
 		public void validate(Object o, Errors errors) {
 			Comic comic = (Comic)o;
 			String titolo = comic.getTitle().trim();
+			String resume= comic.getResume().trim();
 			if (titolo.isEmpty())
 	            errors.rejectValue("title", "required");
 			else if (comicService.existsByTitleAndYear(titolo,  comic.getYear())) 
 				errors.rejectValue("title","duplicate");
-			
+			if (resume.isEmpty())
+				errors.rejectValue("resume", "required");
+			else if (resume.length()>250) 
+				errors.rejectValue("resume","size");
 		}
 
 		@Override

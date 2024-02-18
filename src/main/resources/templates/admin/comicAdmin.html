@@ -73,8 +73,16 @@
     <strong> <span class ="comic-title" th:text="${comic.title}">Up!</span></strong>
         <span th:text="'('+${comic.year}+ ')'">(2000)</span>
         <a th:href="@{'/admin' +'/formUpdateComic/'+ ${comic.id}}">Modifica</a>
+     
+      <div th:unless="${comic.file}" class="mt-3"> 
+       <form th:action="@{'/admin/uploadPdf/' + ${comic.id}}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".pdf" required>
+    <button class="btn btn-primary btn-sm" type="submit">Carica PDF</button>
+</form>
+</div>
+<div th:if="${comic.file}" class="mt-3"> <a th:href="@{'/admin/removeFile/' + ${comic.id}}"> Rimuovi file</a></div>
         <form th:action="@{'/admin/deleteComic/' + ${comic.id}}" method="post">
-   <div class="elimina-comic" ><button type="submit" class="btn2">Elimina</button></div>
+   <div class="elimina-comic mt-3" ><button type="submit" class="btn2">Elimina</button></div>
 </form>
              
             </div>

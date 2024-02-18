@@ -172,7 +172,7 @@ public class ArtistController {
 	public String searchAdminArtists(Model model, @RequestParam String name) {
 		List<Artist> artists = this.artistService.findByName(name);
 	    model.addAttribute("artists", artists);
-	    return "adminArtistsFound";
+	    return "admin/adminArtistsFound";
 	}
 	
 	

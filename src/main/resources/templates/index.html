@@ -54,13 +54,13 @@
    <div class="index-container my-5 text-center" th:unless="${#request.userPrincipal}">
 	<h1>Benvenuto in Nerdando!</h1>
     <p>Scopri i fumetti che sono disponibili sul sito.</p>
-    <p>Registrati o/e fai il login per mettere tra i preferiti i fumetti che ti piacciono di più</p>
+    <p>Registrati o/e fai il login per mettere tra i preferiti i fumetti che ti piacciono di più e per poterli leggere!</p>
 </div>
 
 
 <div class="index-container my-5 text-center" th:if="${#request.userPrincipal}">
 	<h1>Benvenuto!</h1>
-    <p>Ora puoi aggiungere i fumetti ai preferiti e lasciare un commento.</p>
+    <p>Ora puoi aggiungere i fumetti ai preferiti e leggerli.</p>
 </div>
  <div class="row justify-content-center">
         <div class="col-md-2 mb-3">

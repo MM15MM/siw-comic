@@ -83,17 +83,17 @@
 		<h2>Autori che puoi aggiungere:</h2> 
 		
 		<form th:action="@{'/admin/addAuthorToComic/' + ${comic.id}}" method="post">
-    <label for="authorId">Seleziona un Artista:</label>
+    <label for="authorId">Seleziona un Autore:</label>
     <select id="authorId" name="authorId">
         <option th:each="author : ${authorsToAdd}" th:value="${author.id}" th:text="${author.name} + ' ' + ${author.surname}"></option>
     </select>
-    <button class="btn" type="submit">Aggiungi Artista</button>
+    <button class="btn" type="submit">Aggiungi Autore</button>
 </form>	
 				
 
     </div>
     <div>
-      <a th:href="@{'/admin/formUpdateComic/'+ ${comic.id}}"><button type="button" class="btn2">Conferma</button></a>
+      <a th:href="@{'/admin/comic/'+ ${comic.id}}"><button type="button" class="btn2 mt-3">Torna al fumetto</button></a>
     </div>
   </div>
 

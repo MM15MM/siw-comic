@@ -64,7 +64,7 @@
 		
 		<div>
 			<label>Titolo:</label> <span><input placeholder="title" type="text" th:field="${comic.title}" /></span>
-		    <ul><li><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:style="'color:red;'"></span><li></ul>
+		    <ul><li><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:style="'color:red;'"></span></li></ul>
 		</div>
 
 		<div>
@@ -84,6 +84,7 @@
 		</div>
 		<div>
 			<label>Trama:</label> <span><textarea placeholder="resume" type="text" th:field="${comic.resume}" /></textarea></span>
+		     <ul><li><span th:if="${#fields.hasErrors('resume')}" th:errors="*{resume}" th:style="'color:red;'"></span></li></ul>
 		</div>
 
 		<div>

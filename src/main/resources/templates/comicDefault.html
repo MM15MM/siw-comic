@@ -89,6 +89,14 @@
         <li><strong><span>Casa editrice: </span></strong>
         <span th:text="${comic.publisher}">Casa editrice: publisher</span>
         </li>
+        <li th:if="${comic.authors.size() > 0}">
+                <strong>Autori: </strong>
+                <ul class="list-unstyled">
+                    <li th:each="author : ${comic.authors}">
+                        <span th:text="${author.name + ' ' + author.surname}"></span>
+                    </li>
+                </ul>
+            </li>
                 <li>
                     <strong><span>Trama: </span></strong>
                     <span th:text="${comic.resume}">
