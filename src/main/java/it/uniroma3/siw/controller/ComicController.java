@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.controller.validator.ComicValidator;
+import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Comic;
 import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.ComicService;
 import it.uniroma3.siw.service.CommentService;
 import it.uniroma3.siw.service.CredentialsService;
@@ -42,6 +44,9 @@ public class ComicController {
 	
 	@Autowired
 	private CredentialsService credentialsService;
+
+	@Autowired
+	private ArtistService artistService;
 
 
 /*----------------------------------------------------*/
@@ -109,6 +114,10 @@ public class ComicController {
 	            this.userService.saveUser(u);  // Salva l'utente aggiornato nel database
 	        }
 		}
+		for (Artist artist : comic.getAuthors()) {
+            artist.getWrittenComics().remove(comic); // Rimuovi il fumetto dalla lista degli artisti
+            this.artistService.save(artist); // Salva l'artista con le modifiche
+        }
 		this.comicService.deleteById(comicId);
 		
 

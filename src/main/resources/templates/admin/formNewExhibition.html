@@ -73,6 +73,7 @@
 </div>
 		<div>
 			<label>Descrizione:</label> <span><textarea placeholder="description" type="text" th:field="${exhibition.description}" /></textarea></span>
+		<ul><li><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:style="'color:red;'"></span><li></ul>
 		</div>
 
 		<div>

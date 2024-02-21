@@ -28,10 +28,13 @@ public class ExhibitionValidator implements Validator {
 		  
 		if(nome.isEmpty())
 			errors.rejectValue("name", "required");
+		else if (exhibitionService.existsByName(nome))
+			errors.rejectValue("name","duplicate");
+		
 		if(descr.isEmpty())
 			errors.rejectValue("description", "required");
-		else if (exhibitionService.existsByName(nome)) {
-			errors.rejectValue("name","duplicate");
-		}
+		else if (descr.length()>250) 
+			errors.rejectValue("description","size");
+		
 	}
 }

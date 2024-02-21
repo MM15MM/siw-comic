@@ -124,7 +124,9 @@ public class UserController {
 	            comment.setComment(text);
 	            comment.setUsername(user);
 	            comment.setComic(comic);
+	            comic.getComments().add(comment);
 	            this.commentService.save(comment);
+	            this.comicService.save(comic);
 	        }
 	        return "redirect:" + referer;
 	    }
@@ -136,6 +138,9 @@ public class UserController {
 	        String referer = request.getHeader("Referer");//per aggiornare la pagina
 	    	
 	        if (comment != null) {
+	        	Comic c = comment.getComic();
+	        	c.getComments().remove(comment);
+	        	this.comicService.save(c);
 	        	this.commentService.delete(comment);
 	            return "redirect:" + referer;
 	        }
@@ -150,7 +155,10 @@ public class UserController {
 	        String username = principal.getName();
 
 	        if (comment != null && comment.getUsername().equals(username)) { // se l'utente corrente ha creato il commento
-	            this.commentService.delete(comment);
+	        	Comic c = comment.getComic();
+	        	c.getComments().remove(comment);
+	        	this.comicService.save(c);
+	        	this.commentService.delete(comment);
 	        }
 
 	        return "redirect:" + referer;

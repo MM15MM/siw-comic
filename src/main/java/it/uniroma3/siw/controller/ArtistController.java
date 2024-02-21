@@ -49,6 +49,11 @@ public class ArtistController {
 
 	@GetMapping(value = "/admin/deleteArtist/{id}")
 	public String deleteArtist(@PathVariable("id") Long id, Model model) {
+		if(this.artistService.findById(id).getWrittenComics()!=null) {
+			for(Comic comic: this.artistService.findById(id).getWrittenComics() ) {
+			 comic.getAuthors().remove(this.artistService.findById(id));
+			this.comicService.save(comic);
+		}}
         this.artistService.deleteById(id);
 		return "redirect:/admin/artists";
 	}

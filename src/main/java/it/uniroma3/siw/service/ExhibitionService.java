@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.siw.model.Comic;
 import it.uniroma3.siw.model.Exhibition;
 import it.uniroma3.siw.repository.ExhibitionRepository;
 
